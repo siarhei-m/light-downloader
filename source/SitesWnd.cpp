@@ -344,7 +344,7 @@ void CSitesWnd::OnSitesTemprorary()
 void CSitesWnd::AddSiteToList(fsSiteInfo* pSite)
 {
 	int iItem = AddItem("", GetSysColor(COLOR_WINDOW), GetSysColor(COLOR_WINDOWTEXT));
-	SetItemData(iItem, (DWORD)pSite);
+	SetItemData(iItem, (DWORD_PTR)pSite);
 	UpdateSite(pSite);
 }
 

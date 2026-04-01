@@ -208,7 +208,7 @@ LRESULT CCustomTreeChildCtrl::OwnerDraw(CDC* pDC)
 	nm.nmcd.hdc = pDC->m_hDC;
 	nm.nmcd.rc = rcClient;
 
-	dwFlags = (DWORD)CustomDrawNotify(&nm);
+	dwFlags = (DWORD)(DWORD_PTR)CustomDrawNotify(&nm);
 
 	COLORREF crBkgnd = IsWindowEnabled() ? pDC->GetBkColor() : GetSysColor(COLOR_BTNFACE);
 
@@ -245,7 +245,7 @@ LRESULT CCustomTreeChildCtrl::OwnerDraw(CDC* pDC)
 	if (dwFlags & CDRF_NOTIFYPOSTERASE)
 	{
 		nm.nmcd.dwDrawStage = CDDS_POSTERASE;
-		dwRet = (DWORD)CustomDrawNotify(&nm);
+		dwRet = (DWORD)(DWORD_PTR)CustomDrawNotify(&nm);
 	}
 
 	CFont* pOldFont = pDC->SelectObject(GetFont());
@@ -327,7 +327,7 @@ LRESULT CCustomTreeChildCtrl::OwnerDraw(CDC* pDC)
 		if (dwFlags & CDRF_NOTIFYITEMDRAW)
 		{
 			nm.nmcd.dwDrawStage = CDDS_ITEMPREPAINT;
-			dwRet = (DWORD)CustomDrawNotify(&nm);
+			dwRet = (DWORD)(DWORD_PTR)CustomDrawNotify(&nm);
 		}
 
 		if (!(dwFlags & CDRF_SKIPDEFAULT))
@@ -414,7 +414,7 @@ LRESULT CCustomTreeChildCtrl::OwnerDraw(CDC* pDC)
 		if (dwRet & CDRF_NOTIFYPOSTPAINT)
 		{
 			nm.nmcd.dwDrawStage = CDDS_ITEMPOSTPAINT;
-			dwRet = (DWORD)CustomDrawNotify(&nm);
+			dwRet = (DWORD)(DWORD_PTR)CustomDrawNotify(&nm);
 		}
 
 		pDC->SetBkMode(nOldBkMode);

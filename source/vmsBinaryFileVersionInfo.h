@@ -85,15 +85,15 @@ class vmsBinaryFileVersionInfo
 			if (FALSE == VerQueryValue(pvVer, _T ("\\"), (LPVOID*)&pb, &uLen)) return bOK;
 			// VS_FIXEDFILEINFO *p = (VS_FIXEDFILEINFO*)pb;
 			pb += uLen;
-			while (DWORD(pb - (LPBYTE)pvVer) < dwSize - wcslen(L"StringFileInfo") &&
+			while ((DWORD)(DWORD_PTR)(pb - (LPBYTE)pvVer) < dwSize - wcslen(L"StringFileInfo") &&
 			       wcsncmp((LPWSTR)pb, L"StringFileInfo", wcslen(L"StringFileInfo")))
 				pb++;
-			if (DWORD(pb - (LPBYTE)pvVer) >= dwSize - wcslen(L"StringFileInfo")) return bOK;
+			if ((DWORD)(DWORD_PTR)(pb - (LPBYTE)pvVer) >= dwSize - wcslen(L"StringFileInfo")) return bOK;
 			pb += (wcslen(L"StringFileInfo") + 1) * 2;
 			pb += 3 * sizeof(WORD);
 			do
 			{
-				while (DWORD(pb - (LPBYTE)pvVer) < dwSize - 8 * 2 && (wcslen((LPWSTR)pb) < 8)) pb++;
+				while ((DWORD)(DWORD_PTR)(pb - (LPBYTE)pvVer) < dwSize - 8 * 2 && (wcslen((LPWSTR)pb) < 8)) pb++;
 				LPWSTR pwsz = (LPWSTR)pb;
 				while (*pwsz && (isdigit(*pwsz) || isalpha(*pwsz))) pwsz++;
 				if (*pwsz == 0)
@@ -102,7 +102,7 @@ class vmsBinaryFileVersionInfo
 					tstrLng = W2T((LPWSTR)pb);
 					break;
 				}
-			} while (DWORD(pb - (LPBYTE)pvVer) < dwSize - 8 * 2);
+			} while ((DWORD)(DWORD_PTR)(pb - (LPBYTE)pvVer) < dwSize - 8 * 2);
 		}
 
 		LPCTSTR atszValueName[] = {

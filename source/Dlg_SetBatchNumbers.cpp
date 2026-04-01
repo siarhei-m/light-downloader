@@ -219,7 +219,7 @@ void CDlg_SetBatchNumbers::OnAdd()
 	CString* pstr;
 	pstr = new CString;
 	*pstr = str;
-	m_wndSets.SetItemData(m_wndSets.GetCount() - 1, (DWORD)pstr);
+	m_wndSets.SetItemData(m_wndSets.GetCount() - 1, (DWORD_PTR)pstr);
 	return;
 
 _l0Err:

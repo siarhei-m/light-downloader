@@ -76,7 +76,7 @@ void CDownloads_Deleted::AddDownload(vmsDownloadSmartPtr dld)
 
 	int iItem = AddItem("", GetSysColor(COLOR_WINDOW), GetSysColor(COLOR_WINDOWTEXT), 0, TRUE);
 
-	SetItemData(iItem, (DWORD)(fsDownload*)dld);
+	SetItemData(iItem, (DWORD_PTR)(fsDownload*)dld);
 
 	UpdateDownload(iItem);
 }
@@ -345,7 +345,7 @@ void CDownloads_Deleted::OnSortModeChanged()
 void CDownloads_Deleted::Sort()
 {
 	if (m_sortMode != LCSM_NONE)
-		SortItems(_sortFunc, DWORD(this));
+		SortItems(_sortFunc, (DWORD_PTR)this);
 	else
 	{
 		DeleteAllItems();

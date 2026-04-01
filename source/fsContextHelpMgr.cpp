@@ -65,7 +65,7 @@ void fsContextHelpMgr::OnWT()
 	popup.rcMargins = CRect(-1, -1, -1, -1);
 	popup.pszFont = "MS Sans Serif, 8, DEFAULT_CHARSET";
 
-	HtmlHelp(m_pLastDlg->m_hWnd, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&popup);
+	HtmlHelp(m_pLastDlg->m_hWnd, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD_PTR)&popup);
 
 	m_bInWT = FALSE;
 }

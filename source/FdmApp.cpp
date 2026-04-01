@@ -338,7 +338,7 @@ void CFdmApp::CheckLocked()
 
 DWORD WINAPI CFdmApp::_threadExitProcess(LPVOID lp)
 {
-	Sleep(((DWORD)lp) * 1000);
+	Sleep(((DWORD)(DWORD_PTR)lp) * 1000);
 	ASSERT(LPCSTR("_threadExitProcess is called") == NULL);
 	HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, GetCurrentProcessId());
 	TerminateProcess(hProcess, (DWORD)-1);

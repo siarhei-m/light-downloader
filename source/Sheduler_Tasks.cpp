@@ -75,7 +75,7 @@ void CSheduler_Tasks::AddTask(fsSchedule* task)
 {
 	int iItem = AddItem(fsScheduleMgr::WTSToStr(task), GetSysColor(COLOR_WINDOW), GetSysColor(COLOR_WINDOWTEXT),
 	                    GetTaskImage(task));
-	SetItemData(iItem, DWORD(task));
+	SetItemData(iItem, (DWORD_PTR)task);
 	UpdateTask(task);
 }
 
@@ -89,7 +89,7 @@ int CSheduler_Tasks::FindTask(fsSchedule* task)
 {
 	int cItems = GetItemCount();
 	for (int i = 0; i < cItems; i++)
-		if (GetItemData(i) == (DWORD)task) return i;
+		if (GetItemData(i) == (DWORD_PTR)task) return i;
 	return -1;
 }
 

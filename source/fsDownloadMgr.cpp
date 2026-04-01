@@ -752,7 +752,7 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 		pB += sizeof(int);
 	}
 
-	dw = DWORD(m_dp.pszFileName);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszFileName;
 	CHECK_BOUNDS(int(dw));
 	fsnew(m_dp.pszFileName, CHAR, dw + 1);
 	CopyMemory(m_dp.pszFileName, pB, dw);
@@ -760,7 +760,7 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 	pB += dw;
 	if (m_dwDownloadFileFlags & DFF_USE_PORTABLE_DRIVE) m_dp.pszFileName[0] = vmsGetExeDriveLetter();
 
-	dw = DWORD(m_dp.pszAdditionalExt);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszAdditionalExt;
 	CHECK_BOUNDS(int(dw));
 	fsnew(m_dp.pszAdditionalExt, CHAR, dw + 1);
 	CopyMemory(m_dp.pszAdditionalExt, pB, dw);
@@ -769,7 +769,7 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 
 	if (wVer > 2)
 	{
-		dw = DWORD(m_dp.pszCreateExt);
+		dw = (DWORD)(DWORD_PTR)m_dp.pszCreateExt;
 		CHECK_BOUNDS(int(dw));
 		fsnew(m_dp.pszCreateExt, CHAR, dw + 1);
 		CopyMemory(m_dp.pszCreateExt, pB, dw);
@@ -784,7 +784,7 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 
 	if (wVer > 7)
 	{
-		dw = DWORD(m_dp.pszCheckSum);
+		dw = (DWORD)(DWORD_PTR)m_dp.pszCheckSum;
 		CHECK_BOUNDS(int(dw));
 		fsnew(m_dp.pszCheckSum, CHAR, dw + 1);
 		CopyMemory(m_dp.pszCheckSum, pB, dw);
@@ -819,70 +819,70 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 			pB += sizeof(BOOL);
 		}
 
-		dw = DWORD(dnp->pszAgent);
+		dw = (DWORD)(DWORD_PTR)dnp->pszAgent;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszAgent, CHAR, dw + 1);
 		CopyMemory(dnp->pszAgent, pB, dw);
 		dnp->pszAgent[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszPassword);
+		dw = (DWORD)(DWORD_PTR)dnp->pszPassword;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszPassword, CHAR, dw + 1);
 		CopyMemory(dnp->pszPassword, pB, dw);
 		dnp->pszPassword[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszPathName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszPathName;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszPathName, CHAR, dw + 1);
 		CopyMemory(dnp->pszPathName, pB, dw);
 		dnp->pszPathName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyName;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszProxyName, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyName, pB, dw);
 		dnp->pszProxyName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyPassword);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyPassword;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszProxyPassword, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyPassword, pB, dw);
 		dnp->pszProxyPassword[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyUserName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyUserName;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszProxyUserName, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyUserName, pB, dw);
 		dnp->pszProxyUserName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszReferer);
+		dw = (DWORD)(DWORD_PTR)dnp->pszReferer;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszReferer, CHAR, dw + 1);
 		CopyMemory(dnp->pszReferer, pB, dw);
 		dnp->pszReferer[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszServerName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszServerName;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszServerName, CHAR, dw + 1);
 		CopyMemory(dnp->pszServerName, pB, dw);
 		dnp->pszServerName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszUserName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszUserName;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszUserName, CHAR, dw + 1);
 		CopyMemory(dnp->pszUserName, pB, dw);
 		dnp->pszUserName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszASCIIExts);
+		dw = (DWORD)(DWORD_PTR)dnp->pszASCIIExts;
 		CHECK_BOUNDS(int(dw));
 		fsnew(dnp->pszASCIIExts, CHAR, dw + 1);
 		CopyMemory(dnp->pszASCIIExts, pB, dw);
@@ -891,14 +891,14 @@ BOOL fsDownloadMgr::LoadState(LPVOID lpBuffer, LPDWORD pdwSize, WORD wVer)
 
 		if (wVer > 6)
 		{
-			dw = DWORD(dnp->pszCookies);
+			dw = (DWORD)(DWORD_PTR)dnp->pszCookies;
 			CHECK_BOUNDS(int(dw));
 			fsnew(dnp->pszCookies, CHAR, dw + 1);
 			CopyMemory(dnp->pszCookies, pB, dw);
 			dnp->pszCookies[dw] = 0;
 			pB += dw;
 
-			dw = DWORD(dnp->pszPostData);
+			dw = (DWORD)(DWORD_PTR)dnp->pszPostData;
 			CHECK_BOUNDS(int(dw));
 			fsnew(dnp->pszPostData, CHAR, dw + 1);
 			CopyMemory(dnp->pszPostData, pB, dw);
@@ -2438,16 +2438,16 @@ void fsDownloadMgr::getObjectItselfStateBuffer(LPBYTE pb, LPDWORD pdwSize, bool 
 	dwNeedSize += sizeof(int);
 
 	dp.pszFileName = LPSTR(ToSaveLen[cToSave++] = strlen(ToSave[cToSave] = dp.pszFileName));
-	dwNeedSize += (DWORD)dp.pszFileName;
+	dwNeedSize += (DWORD)(DWORD_PTR)dp.pszFileName;
 
 	dp.pszAdditionalExt = LPSTR(ToSaveLen[cToSave++] = strlen(ToSave[cToSave] = dp.pszAdditionalExt));
-	dwNeedSize += (DWORD)dp.pszAdditionalExt;
+	dwNeedSize += (DWORD)(DWORD_PTR)dp.pszAdditionalExt;
 
 	dp.pszCreateExt = LPSTR(ToSaveLen[cToSave++] = strlen(ToSave[cToSave] = dp.pszCreateExt));
-	dwNeedSize += (DWORD)dp.pszCreateExt;
+	dwNeedSize += (DWORD)(DWORD_PTR)dp.pszCreateExt;
 
 	dp.pszCheckSum = LPSTR(ToSaveLen[cToSave++] = strlen(ToSave[cToSave] = dp.pszCheckSum));
-	dwNeedSize += (DWORD)dp.pszCheckSum;
+	dwNeedSize += (DWORD)(DWORD_PTR)dp.pszCheckSum;
 
 	int cDPStrings = cToSave;
 
@@ -2475,10 +2475,10 @@ void fsDownloadMgr::getObjectItselfStateBuffer(LPBYTE pb, LPDWORD pdwSize, bool 
 
 		vDNPs.add(dnp);
 
-		dwNeedSize += (DWORD)dnp.pszAgent + (DWORD)dnp.pszPassword + (DWORD)dnp.pszPathName + (DWORD)dnp.pszProxyName +
-		              (DWORD)dnp.pszProxyPassword + (DWORD)dnp.pszProxyUserName + (DWORD)dnp.pszReferer +
-		              (DWORD)dnp.pszServerName + (DWORD)dnp.pszUserName + (DWORD)dnp.pszASCIIExts +
-		              (DWORD)dnp.pszCookies + (DWORD)dnp.pszPostData;
+		dwNeedSize += (DWORD)(DWORD_PTR)dnp.pszAgent + (DWORD)(DWORD_PTR)dnp.pszPassword + (DWORD)(DWORD_PTR)dnp.pszPathName + (DWORD)(DWORD_PTR)dnp.pszProxyName +
+		              (DWORD)(DWORD_PTR)dnp.pszProxyPassword + (DWORD)(DWORD_PTR)dnp.pszProxyUserName + (DWORD)(DWORD_PTR)dnp.pszReferer +
+		              (DWORD)(DWORD_PTR)dnp.pszServerName + (DWORD)(DWORD_PTR)dnp.pszUserName + (DWORD)(DWORD_PTR)dnp.pszASCIIExts +
+		              (DWORD)(DWORD_PTR)dnp.pszCookies + (DWORD)(DWORD_PTR)dnp.pszPostData;
 	}
 
 	dwNeedSize += m_dldr.GetMirrorURLCount() * sizeof(BOOL);
@@ -2614,7 +2614,7 @@ bool fsDownloadMgr::loadObjectItselfFromStateBuffer(LPBYTE pb, LPDWORD pdwSize, 
 	CopyMemory(&cMirrs, pB, sizeof(int));
 	pB += sizeof(int);
 
-	dw = DWORD(m_dp.pszFileName);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszFileName;
 	CHECK_BOUNDS2(int(dw));
 	fsnew(m_dp.pszFileName, CHAR, dw + 1);
 	CopyMemory(m_dp.pszFileName, pB, dw);
@@ -2622,21 +2622,21 @@ bool fsDownloadMgr::loadObjectItselfFromStateBuffer(LPBYTE pb, LPDWORD pdwSize, 
 	pB += dw;
 	if (m_dwDownloadFileFlags & DFF_USE_PORTABLE_DRIVE) m_dp.pszFileName[0] = vmsGetExeDriveLetter();
 
-	dw = DWORD(m_dp.pszAdditionalExt);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszAdditionalExt;
 	CHECK_BOUNDS2(int(dw));
 	fsnew(m_dp.pszAdditionalExt, CHAR, dw + 1);
 	CopyMemory(m_dp.pszAdditionalExt, pB, dw);
 	m_dp.pszAdditionalExt[dw] = 0;
 	pB += dw;
 
-	dw = DWORD(m_dp.pszCreateExt);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszCreateExt;
 	CHECK_BOUNDS2(int(dw));
 	fsnew(m_dp.pszCreateExt, CHAR, dw + 1);
 	CopyMemory(m_dp.pszCreateExt, pB, dw);
 	m_dp.pszCreateExt[dw] = 0;
 	pB += dw;
 
-	dw = DWORD(m_dp.pszCheckSum);
+	dw = (DWORD)(DWORD_PTR)m_dp.pszCheckSum;
 	CHECK_BOUNDS2(int(dw));
 	fsnew(m_dp.pszCheckSum, CHAR, dw + 1);
 	CopyMemory(m_dp.pszCheckSum, pB, dw);
@@ -2663,84 +2663,84 @@ bool fsDownloadMgr::loadObjectItselfFromStateBuffer(LPBYTE pb, LPDWORD pdwSize, 
 			pB += sizeof(BOOL);
 		}
 
-		dw = DWORD(dnp->pszAgent);
+		dw = (DWORD)(DWORD_PTR)dnp->pszAgent;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszAgent, CHAR, dw + 1);
 		CopyMemory(dnp->pszAgent, pB, dw);
 		dnp->pszAgent[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszPassword);
+		dw = (DWORD)(DWORD_PTR)dnp->pszPassword;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszPassword, CHAR, dw + 1);
 		CopyMemory(dnp->pszPassword, pB, dw);
 		dnp->pszPassword[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszPathName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszPathName;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszPathName, CHAR, dw + 1);
 		CopyMemory(dnp->pszPathName, pB, dw);
 		dnp->pszPathName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyName;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszProxyName, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyName, pB, dw);
 		dnp->pszProxyName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyPassword);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyPassword;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszProxyPassword, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyPassword, pB, dw);
 		dnp->pszProxyPassword[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszProxyUserName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszProxyUserName;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszProxyUserName, CHAR, dw + 1);
 		CopyMemory(dnp->pszProxyUserName, pB, dw);
 		dnp->pszProxyUserName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszReferer);
+		dw = (DWORD)(DWORD_PTR)dnp->pszReferer;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszReferer, CHAR, dw + 1);
 		CopyMemory(dnp->pszReferer, pB, dw);
 		dnp->pszReferer[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszServerName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszServerName;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszServerName, CHAR, dw + 1);
 		CopyMemory(dnp->pszServerName, pB, dw);
 		dnp->pszServerName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszUserName);
+		dw = (DWORD)(DWORD_PTR)dnp->pszUserName;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszUserName, CHAR, dw + 1);
 		CopyMemory(dnp->pszUserName, pB, dw);
 		dnp->pszUserName[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszASCIIExts);
+		dw = (DWORD)(DWORD_PTR)dnp->pszASCIIExts;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszASCIIExts, CHAR, dw + 1);
 		CopyMemory(dnp->pszASCIIExts, pB, dw);
 		dnp->pszASCIIExts[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszCookies);
+		dw = (DWORD)(DWORD_PTR)dnp->pszCookies;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszCookies, CHAR, dw + 1);
 		CopyMemory(dnp->pszCookies, pB, dw);
 		dnp->pszCookies[dw] = 0;
 		pB += dw;
 
-		dw = DWORD(dnp->pszPostData);
+		dw = (DWORD)(DWORD_PTR)dnp->pszPostData;
 		CHECK_BOUNDS2(int(dw));
 		fsnew(dnp->pszPostData, CHAR, dw + 1);
 		CopyMemory(dnp->pszPostData, pB, dw);

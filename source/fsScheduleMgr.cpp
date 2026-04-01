@@ -1035,7 +1035,7 @@ void fsScheduleMgr::Event(LPCSTR pszEvent, fsScheduleMgrEventType enType)
 
 void fsScheduleMgr::LaunchProgram(fsSchedule* task)
 {
-	DWORD dwRet = (DWORD)ShellExecute(NULL, "open", task->wts.prog.pszName, task->wts.prog.pszArgs, NULL, SW_SHOW);
+	INT_PTR dwRet = (INT_PTR)ShellExecute(NULL, "open", task->wts.prog.pszName, task->wts.prog.pszArgs, NULL, SW_SHOW);
 	if (dwRet > 32)
 	{
 		CString str = '"';

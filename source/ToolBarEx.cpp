@@ -135,7 +135,7 @@ void CToolBarEx::HideGroup(int iGrp)
 		TBBUTTON tb;
 		m_bar->GetButton(cButtons, &tb);
 
-		if (tb.dwData == (DWORD)iGrp) m_bar->DeleteButton(cButtons);
+		if (tb.dwData == (DWORD_PTR)iGrp) m_bar->DeleteButton(cButtons);
 	}
 
 	UpdateSize();
