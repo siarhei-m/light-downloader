@@ -63,9 +63,9 @@ void CDownloadPropertiesSheet::Init(DLDS_LIST* pvDlds, DWORD dwPages)
 BOOL CDownloadPropertiesSheet::OnInitDialog()
 {
 	CPropertySheet::OnInitDialog();
-	DWORD dw = GetWindowLong(m_hWnd, GWL_EXSTYLE);
+	LONG_PTR dw = GetWindowLongPtr(m_hWnd, GWL_EXSTYLE);
 	dw |= WS_EX_CONTEXTHELP;
-	SetWindowLong(m_hWnd, GWL_EXSTYLE, dw);
+	SetWindowLongPtr(m_hWnd, GWL_EXSTYLE, dw);
 	return TRUE;
 }
 

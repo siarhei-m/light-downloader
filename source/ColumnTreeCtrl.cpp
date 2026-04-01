@@ -188,7 +188,7 @@ LRESULT CCustomTreeChildCtrl::CustomDrawNotify(LPNMTVCUSTOMDRAW lpnm)
 {
 	lpnm->nmcd.hdr.hwndFrom = GetSafeHwnd();
 	lpnm->nmcd.hdr.code = NM_CUSTOMDRAW;
-	lpnm->nmcd.hdr.idFrom = GetWindowLong(m_hWnd, GWL_ID);
+	lpnm->nmcd.hdr.idFrom = GetWindowLongPtr(m_hWnd, GWLP_ID);
 	return GetParent()->SendMessage(WM_NOTIFY, (WPARAM)0, (LPARAM)lpnm);
 }
 
@@ -1160,7 +1160,7 @@ BOOL CColumnTreeCtrl::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 	}
 
 	pHdr->hwndFrom = GetSafeHwnd();
-	pHdr->idFrom = GetWindowLong(GetSafeHwnd(), GWL_ID);
+	pHdr->idFrom = GetWindowLongPtr(GetSafeHwnd(), GWLP_ID);
 	return (BOOL)GetParent()->SendMessage(WM_NOTIFY, wParam, lParam);
 }
 
