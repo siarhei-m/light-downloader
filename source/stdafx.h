@@ -56,7 +56,7 @@
 
 #include <comdef.h>
 
-#include "../libs/pugixml/pugixml.hpp"
+#include <pugixml.hpp>
 
 #ifndef LONG_PTR
 #define LONG_PTR LONG

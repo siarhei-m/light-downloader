@@ -8,11 +8,33 @@ Based on [Free Download Manager 3.9.7](https://sourceforge.net/p/freedownload/co
 
 ## Building
 
-Requires Visual Studio 2022 with C++ MFC for v143 build tools.
+Requires:
+- Visual Studio 2022 with C++ MFC for v143 build tools
+- [vcpkg](https://vcpkg.io/) for dependencies (libcurl, pugixml)
 
+### Setup vcpkg (one-time)
+
+```bat
+git clone https://github.com/microsoft/vcpkg C:\vcpkg
+C:\vcpkg\bootstrap-vcpkg.bat
+setx VCPKG_ROOT C:\vcpkg
 ```
+
+### Install dependencies
+
+```bat
+cd C:\src\light-downloader
+C:\vcpkg\vcpkg install --triplet x86-windows-static --x-install-root=vcpkg_installed
+C:\vcpkg\vcpkg install --triplet x64-windows-static --x-install-root=vcpkg_installed
+```
+
+### Build
+
+```bat
 msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=Win32
 ```
+
+Or open `LightDownloader.sln` in Visual Studio 2022.
 
 ## License
 

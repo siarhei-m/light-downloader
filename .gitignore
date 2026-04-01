@@ -28,12 +28,8 @@ ipch/
 *.idb
 *.log
 
-# curl built libraries (build locally)
-libs/curl/lib/
-
-# curl source (download separately if needed)
-libs/curl-8.12.1/
-curl.tar.gz
+# vcpkg installed packages
+vcpkg_installed/
 
 # OS files
 Thumbs.db
