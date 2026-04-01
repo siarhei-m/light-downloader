@@ -20,7 +20,7 @@ jobs:
             vcpkg_triplet: arm64-windows-static
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v3
