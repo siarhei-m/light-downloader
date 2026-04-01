@@ -27,7 +27,7 @@ jobs:
 
     - name: Install vcpkg dependencies
       shell: cmd
-      run: "%VCPKG_INSTALLATION_ROOT%\vcpkg.exe" install --triplet ${{ matrix.vcpkg_triplet }} --x-install-root=vcpkg_installed --vcpkg-root="%VCPKG_INSTALLATION_ROOT%"
+      run: '"%VCPKG_INSTALLATION_ROOT%\vcpkg.exe" install --triplet ${{ matrix.vcpkg_triplet }} --x-install-root=vcpkg_installed --vcpkg-root="%VCPKG_INSTALLATION_ROOT%"'
 
     - name: Build
       run: msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:VcpkgEnableManifest=true /m
