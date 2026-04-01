@@ -127,7 +127,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;WIN32;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
@@ -138,12 +138,11 @@
       <MinimalRebuild>false</MinimalRebuild>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -168,18 +167,17 @@
       </MinimalRebuild>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;WIN32;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions> </AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -201,7 +199,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;_WIN64;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WIN64;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
@@ -212,12 +210,11 @@
       <MinimalRebuild>false</MinimalRebuild>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -240,18 +237,17 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;_WIN64;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WIN64;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions> </AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -273,7 +269,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>NDEBUG;_WIN64;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_WIN64;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
@@ -284,12 +280,11 @@
       <MinimalRebuild>false</MinimalRebuild>
       <WholeProgramOptimization>false</WholeProgramOptimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
@@ -312,18 +307,17 @@
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <AdditionalIncludeDirectories>../source/include/;../libs/curl/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_DEBUG;_WIN64;_LIB;CURL_STATICLIB;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WIN64;_LIB;CURL_STATICLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions> </AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <ProgramDataBaseFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ProgramDataBaseFileName>
       <AssemblerListingLocation>$(ProjectDir)$(Platform)\$(Configuration)\</AssemblerListingLocation>
       <ObjectFileName>$(ProjectDir)$(Platform)\$(Configuration)\</ObjectFileName>
-      <DisableSpecificWarnings>4996</DisableSpecificWarnings>
-      <ExceptionHandling>Async</ExceptionHandling>
+            <ExceptionHandling>Async</ExceptionHandling>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <Culture>0x0419</Culture>
+      <Culture>0x0409</Culture>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Bscmake>
