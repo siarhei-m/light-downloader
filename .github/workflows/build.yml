@@ -26,9 +26,12 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Install dependencies via vcpkg
-      run: vcpkg install --triplet ${{ matrix.vcpkg_triplet }} --x-install-root=vcpkg_installed
-      env:
-        VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
+      run: >
+        "$env:VCPKG_INSTALLATION_ROOT\vcpkg.exe" install
+        curl pugixml
+        --triplet ${{ matrix.vcpkg_triplet }}
+        --x-install-root=vcpkg_installed
+        --vcpkg-root="$env:VCPKG_INSTALLATION_ROOT"
 
     - name: Build
       run: msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }} /m
