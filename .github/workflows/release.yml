@@ -1,0 +1,68 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        include:
+          - platform: Win32
+            vcpkg_triplet: x86-windows-static
+            artifact_name: LightDownloader-x86
+          - platform: x64
+            vcpkg_triplet: x64-windows-static
+            artifact_name: LightDownloader-x64
+          - platform: ARM64
+            vcpkg_triplet: arm64-windows-static
+            artifact_name: LightDownloader-ARM64
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Install vcpkg dependencies
+      shell: cmd
+      run: '"%VCPKG_INSTALLATION_ROOT%\vcpkg.exe" install --triplet ${{ matrix.vcpkg_triplet }} --x-install-root=vcpkg_installed --vcpkg-root="%VCPKG_INSTALLATION_ROOT%"'
+
+    - name: Build
+      run: msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:VcpkgEnableManifest=true /m
+      env:
+        VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.artifact_name }}
+        path: bin/${{ matrix.platform }}/Release/LightDownloader.exe
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+
+    - name: Rename executables per platform
+      run: |
+        mv LightDownloader-x86/LightDownloader.exe LightDownloader-x86.exe
+        mv LightDownloader-x64/LightDownloader.exe LightDownloader-x64.exe
+        mv LightDownloader-ARM64/LightDownloader.exe LightDownloader-ARM64.exe
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        generate_release_notes: true
+        files: |
+          LightDownloader-x86.exe
+          LightDownloader-x64.exe
+          LightDownloader-ARM64.exe
