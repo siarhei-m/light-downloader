@@ -1,0 +1,792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{37611e89-07aa-42b1-8a8e-88951e2982df}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{c9dae535-0deb-4896-aa6f-6dbd9dffea90}</UniqueIdentifier>
+      <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe</Extensions>
+    </Filter>
+    <Filter Include="Source Files\vms">
+      <UniqueIdentifier>{2d0de932-b4c1-4b62-9ae0-847316b476a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\dlg">
+      <UniqueIdentifier>{52ee8190-c153-4898-997f-425bd818013e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\fs">
+      <UniqueIdentifier>{5d49f2f4-b881-4b22-8a58-d7b547ec442e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\webinterface">
+      <UniqueIdentifier>{7c741933-1c92-407c-a995-ee120a1b6158}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\AppStatusBar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ChildView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ClientAreaWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ColumnTreeCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ComboBox_Ex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ComboBoxTreeCtrl.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CreateBatchDownload.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_ConnectionPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_GeneralPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_IntegrityPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_MiscPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_ProtocolPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadProperties_ProxyPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadPropertiesSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Deleted.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Downloads.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Groups.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Info.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_InfoFrame.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Progress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Downloads_Tasks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadsGroupsComboBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\DownloadsWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FdmApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FdmBalloon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FdmBalloon_Content.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FdmBalloon_OnDownloadDone.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FdmBalloonContent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\FolderBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\grutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\inetutil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ListCtrlEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MainFrm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\mfchelp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\misc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MyBalloon.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MyBalloon_Content.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MyMessageBox.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PlugFrame2Tabs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\PluginFrame2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Schedule_AdvancedPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Schedule_HTSPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Scheduler_Log.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ScheduleSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Sheduler_Tasks.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ShedulerWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SiteManager_GeneralPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SiteManager_PasswordsPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SiteManagerSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Sites_AdvancedPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Sites_GeneralPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SitesSheet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\SitesWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StdAfx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\ToolBarEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TrayIconPosition.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\TreeCtrlEx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UIThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\UrlWnd.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Wnd_DownloadProgress.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WndDlDoneNotification.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WndLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WndSplitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\XInfoTip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\MemHandleGuard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\CsvParser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\AlsFolderBrowser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\StateInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CheckFileIntegrity.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CheckFileIntegrity_Progress.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CheckFileIntegrity_Result.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_ChooseGroup.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Download.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Download_OnHide.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Downloads.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Downloads_Network.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Downloads_NewDld.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Downloads_TimeLimit.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_General.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_General_Misc.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Notifications.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Page.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_SiteMgr.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_SavePassword.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_SetBatchNumbers.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_ShutdownType.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_TUMChanged.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsAppSettingsStore.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsAppUtil.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsBatchList.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsCommandLine.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsDialogHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsDownloadMgrEx.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsDownloadsGroupsMgr.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsDownloadsListHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsDrawHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFdmAppMgr.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFile.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFileExtensionInOs.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFileRecentList.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFileUtil.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsInternetSession.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsIpHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsLogger.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsMaximumSpeedMeter.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsMetalinkFile.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsPersistableListOfDownloads.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsPersistObject.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsRenderer.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsSecurity.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsSimpleFileDownloader.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsSkinMgr.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsSpeedTracker.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsStringList.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsStringParser.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsStringRecentList.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsSystem.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsTheme.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsTickCount.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsTrafficUsageModeMgr.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsTreeCtrlHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsWindowsStatusBar.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsXmlHelper.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsAppSettings.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsAutorunMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsClipboardMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsCmdHistoryMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsCommandLineParser.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsContextHelpMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDialogsMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDldFilter.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDownload.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDownloadMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDownloadRegSaver.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsDownloadsMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsEventsMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsFDMCmdLineParser.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsFindDownloadMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsInternetDownloader.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsLangMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsMFCLangMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsMutex.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsODMenu.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsPluginMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsScheduleMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsSitePingMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsSitesMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsSoundsMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsSpeedMeter.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsTicksMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\fsTrayIconMgr.cpp">
+      <Filter>Source Files\fs</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CreateDownloads.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CBD_SeeResults.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_CreateDownload.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_DDR.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_WaitForConfirmation.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_UrlWithLogin.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_DownloadAlrExists.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_ConnectionSpeedInfo.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_DeletedProperties.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_DL.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_ExportDownloads.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Find.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_FindAdvanced.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_ProgramOptions.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Sounds.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_TumSettingsPerDirection.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_SpecifyNetworkSpeedValue.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_AER.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Wait.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_SCR.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Login.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Group.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsCrashReporter.cpp">
+      <Filter>Source Files\vms</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsFdmWebInterfaceServer.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsHttpConnection.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsHttpRequest.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsHttpResourceContainer.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsHttpResponse.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\vmsHttpServer.cpp">
+      <Filter>Source Files\webinterface</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Dlg_Options_Webinterface.cpp">
+      <Filter>Source Files\dlg</Filter>
+    </ClCompile>
+    <ClCompile Include="source\Schedule_WTSPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="res\back.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\back_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\checks.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\choosefolder.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\close.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\closebtn.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\creategr.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\dldsinfo.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\dldsinfo_sel.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\dldtasks_sel.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\download.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\downloadstasks.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\dropbox.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\Fdm.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\manifest.rc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FDM.rgs">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\fdm_getcver_btn.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FdmApp.rgs">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FDMDownload.rgs">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FDMDownloadsStat.rgs">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\filelist.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\filelist_sel.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\go.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\groups.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\groupsmenu_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\grpmenu.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\hand.cur">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\login.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\logo2.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\logstat.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\scheduler_sel.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\setfolderdef.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\settime.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\sheduler.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\sitelist.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\sitelist_sel.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\sortimages.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\test_ok.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool0.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool0_16.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool0_16_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool0_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_dld.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_dld_16.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_dld_16_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sch.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sch_16.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sch_16_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sites.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sites_16.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sites_16_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tool_sites_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tooldlds_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\toolhfe_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\toolschedule_d.bmp">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tosel.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tounsel.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tray.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tray_dow.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tray_err.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="res\tray_unk.ico">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="lang\eng.lng">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FdmUiWindow.rgs">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="fdm.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="resource.h" />
+  </ItemGroup>
+</Project>

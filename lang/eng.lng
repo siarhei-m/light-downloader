@@ -1,0 +1,811 @@
+English
+;
+Save all
+Cut
+Copy
+Paste
+Light mode
+Medium mode
+Heavy mode
+Download options
+About FDM-UL
+Exit
+File
+View
+Options
+Tools
+Help
+Toolbar
+Status Bar
+Default download settings
+General settings
+Shutdown computer when done
+Switch to
+Traffic usage mode
+Downloads
+Scheduler
+Site Manager
+Add download
+Start download
+Stop download
+Schedule download
+Add task
+Task properties
+Stop
+Add site
+Site properties
+Groups of downloads
+Download Info Area
+Scheduler log
+Create new download
+Delete download
+Launch file
+Open folder
+Start download automatically
+Download properties
+Enable task
+Disable task
+Delete task
+Download
+Delete site
+Temporary entry
+Sites
+Show main window
+Start all downloads
+Stop all downloads
+Cancel
+All groups
+Filters
+Complete
+In progress
+Scheduled
+Stopped
+Other
+Create new group
+Delete group
+Delete all downloads
+Delete all completed downloads
+Open group folder
+Group properties
+Group name:
+Default folder:
+File extensions (space separated):
+Default download priority
+Low
+Please enter group name
+Input error
+Please enter folder name
+Choose default group folder
+Enter group name here
+Default folder to save downloads of this group to
+Browse
+File extension for this group. Used to detect the group of download automatically
+Cancel changes and close the dialog
+Apply changes and close the dialog
+Error in download groups
+Error
+Are you sure?
+This will delete all group downloads
+Confirmation
+File name
+Size
+Downloaded
+Time remaining
+Sections
+Speed
+Comment
+Log
+Progress
+Time
+Date
+Information
+Clear
+Auto scroll
+Unknown network error
+Access denied. Invalid user name or password
+Access denied. Invalid password
+Succeeded
+Can't connect to the server
+File not found on the server
+Connection with the server was lost
+Server does not respond
+Unable to resolve the server name
+Server does not support download resuming. Don't stop this download; otherwise you'll have to start it from the beginning
+Proxy user name and password are required
+Extended error
+Bad request. Possibly this is a bad URL
+Unknown server error
+Connection aborted
+Bad URL
+No Internet connection
+Selected HTTP version is not supported by this server
+Unknown error
+Limit of connections to this server is reached
+Limit of connections was reached
+Pause %d sec.
+Section
+Started
+Done
+Download complete
+Connecting...
+Connection succeeded
+Redirecting...
+Redirection succeeded. Opening new URL
+Starting download...
+Stopped
+Creating new section...
+Cancelled
+Restarting download...
+Opening file on the disk...
+File name is too long
+File already exists. Rename to
+Rename to
+Output file was deleted. Impossible to continue
+File already exists. Rewrite
+File already exists. Resuming download
+File already exists
+Failed to open file on the disk
+File size was changed on server!
+Adjusting for new size...
+Can't overwrite file
+File will be renamed
+Can't rename file back to its original name
+Connect
+User name and password are required
+User:
+Password:
+Group:
+Save to folder:
+Save as:
+Start
+Automatically
+Manually
+Schedule
+Advanced
+Address of the file you want to download
+Enter user name here
+Enter password here
+Check this box if the server requires authorization
+Name of the group to place download into. Groups help you to manage your downloads
+Folder to save downloads in
+New name for the downloaded file. Leave this field empty if you want to save file with its original name
+Short description of download
+This download will be started automatically as soon as possible
+FDM will not try to start this download automatically
+Schedule this download
+Configure download schedule
+View advanced settings for this download
+Entered URL is incorrect. Please check it
+Please enter user name
+Choose output folder
+General
+General information
+Download currently saved to the file:
+Name of the downloaded file
+This download is in the progress. Can't change file name
+Can't rename file
+File not found
+Path not found
+Invalid .exe format
+File is being used by another application
+Access denied
+Device is not ready
+Disk is full
+File name is invalid
+Login is required
+Connection
+Network
+Errors
+Pause between the connection attempts (in sec):
+Maximum number of attempts
+Timeout (in sec):
+Minimum size:
+Maximum number:
+Restriction of traffic for this download
+Limit traffic
+Ignore all restrictions
+B
+KB
+MB
+s
+Enter the value greater than %d
+Please select dimension
+Waiting time of server reconnection in case of error
+Check this box if you want to limit the maximum number of unsuccessful downloading attempts
+Waiting time for the server response
+Minimum size of section. Download will not be split into sections of a smaller size
+Maximum number of sections. Download will not be split into a greater number of sections
+Specify how much traffic (maximum) FDM will take for the download
+Ignore traffic restrictions and restriction on the maximum number of connections for this download
+You can specify value in bytes (B), kilobytes (KB) or megabytes (MB) in this field
+Protocol
+Identify on server as:
+Referrer:
+Use HTTP 1.1
+Use cookies
+Use passive mode
+Transfer mode
+Binary
+ASCII for the files with the extensions:
+Specify how FDM will be identified with HTTP server
+This string will be sent as Referrer field to HTTP server. As a rule, it is not required
+Check this box if you want FDM to use HTTP version 1.1
+Check this box if you want FDM to use cookies
+Check this box if you want FDM to use the passive mode for FTP servers. Sometimes it is necessary when working with firewalls
+Use the binary mode for FTP transfers. Set this mode if the file you download is not a text one
+Use the ASCII mode for FTP transfers. Set this mode if the file you download is a text one
+FDM will use the ASCII mode for the files with specified extensions. For other files FDM will use the binary mode
+Proxy
+Proxy settings
+Use HTTP/HTTPS/FTP proxy
+Don't use any proxy
+Settings
+Address:
+Port:
+Please enter proxy address
+Please enter proxy port
+You specify proxy settings yourself
+FDM will not use proxy
+Choose type of servers for which you want to specify the proxy
+Enter address of the proxy you want to use
+Enter proxy port here. As a rule, it is 3128, 1080 or 8080
+Check this box if proxy server requires authorization
+Miscellaneous
+Local file
+If the file already exists:
+Reserve disk space for downloading file
+Additional file extension for uncompleted download:
+Internet server
+Don't restart the download if resuming is not supported by server
+If the file size was changed on server:
+Stop on errors
+Ask
+Rewrite
+Rename
+Resume
+Restart
+Adjust
+Please specify file extension
+Here you may specify what FDM should do if the file already exists on the disk
+Check this box if you want disk space to be reserved for download when one is started
+If it is checked FDM will append specified extension to a file name while downloading. When downloading is finished FDM renames file back to its original name
+FDM will not restart downloading if the remote server does not support resuming
+You may specify here what FDM should do if the file size was changed on server
+Check this box to stop download when the file was not found on server
+Check this box to stop download when user name or password is invalid
+Maximum number of connections:
+Maximum number of connections per one server:
+Restriction of traffic:
+Check this box to limit the maximum number of connections
+All downloads
+List of downloads
+Auto save settings every
+min.
+When deleting an incomplete download
+Automatically remove completed downloads from list
+Don't delete file
+Delete file
+Startup
+Load on startup
+Start minimized
+System
+Minimize to tray
+Close button minimizes window
+Task
+Start time
+Next start time
+Last start time
+Can't load the Scheduler log
+Task "%s" was scheduled. Start it?
+Changing traffic usage mode to "%s"
+Change traffic usage mode to
+Shutdown
+Restart
+Logoff
+Once
+Sun
+Mon
+Tue
+Wed
+Thu
+Fri
+Sat
+On days:
+Every
+days
+hours
+At FDM startup
+When no active downloads
+When speed less than or equal to %d BPS during %d
+When all downloads are in the error state during
+Never
+Unknown
+Launch succeeded
+Out of memory
+Can't launch
+Schedule execution will cause exiting the program at startup. Schedule will be ignored
+Program name:
+Arguments:
+Type of shutdown:
+Force applications to exit
+Launch program
+Change traffic usage mode
+Exit FDM
+Shutdown computer
+Downloads to start
+Downloads to stop
+Applications
+All files
+Sorry, this feature is available only in Windows 2000, XP and above
+Please enter program name
+Please select downloads
+Select traffic usage mode you want to be set at the task start
+Specify required download(s) here
+List of all available downloads
+Add selected download to the task list of downloads
+Remove selected download from the task list of downloads
+Specify program you want to launch here
+Find program on your computer
+Specify program arguments here
+Specify type of your session termination here
+Check this box to force terminating your session. It is useful if hung applications are in the system. But in this case, all unsaved data will be lost
+Specify scheduled action here
+On certain days
+Sunday
+Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+On event
+During
+Low speed:
+min.
+Minutes
+Hours
+Days
+When downloading speed is too low
+When all downloads are in error state
+Please specify days
+Start the task at specified time
+Set the time to start task here
+Start the task at specified date
+Set the date to start task here
+Start the task on certain days of week
+Start the task every Sunday
+Start the task every Monday
+Start the task every Tuesday
+Start the task every Wednesday
+Start the task every Thursday
+Start the task every Friday
+Start the task every Saturday
+Start the task periodically
+This field allows you to specify the time interval in minutes, hours or days
+Start the task when some event happens
+Specify the event type here
+Enter time interval here
+Enter minimum required speed here
+Confirmation is required to execute the task
+Wait for confirmation during
+sec.
+If checked, FDM will ask you to confirm execution of this task
+If checked, FDM will wait for your confirmation during the specified time interval. If you will not react during this time the task will be started
+Site name
+Connections
+Login
+Group
+Maximum number of simultaneous connections:
+Default group for a new download from this site
+Use FTP passive mode
+Please enter site name
+Site with the same name already exists. Please enter another site name
+Maximum number of connections must be greater than 0
+Please select group
+Specify site name here
+Check this box to limit the maximum number of simultaneous connections to this server
+Check this box to add downloads from this server to selected group automatically
+Ask user
+Don't ask me again
+Disk write error
+File "%s" already exists on the disk. What to do?
+Don't ask you about this again. Your choice will be accepted by default
+Overwrite existing file
+Rename this file
+Resume downloading. (Downloading will be started at position equal to the size of existing file)
+Stop this download
+Yes
+No
+Download
+was deleted. Delete file on the disk too?
+Please enter user name and password
+Login to "%s"
+Send the user name and the password you specified to the server
+Don't connect to this server
+The size of "%s" was changed on the server. What to do?
+Restart download from the beginning
+Adjust download for the new file size. Not recommended
+Please wait
+Downloading
+Create downloads
+Select content
+Unselect content
+List of downloads to add
+Check the selected folder items to add them to download list
+Uncheck selected folder items not to add them to download list
+About FDM
+Start downloading
+Stop downloading
+Schedule downloading
+Delete
+Files
+Output folder:
+Export settings
+Server doesn't support download resuming. Restart from the beginning
+Failed to open URL
+Decrease traffic usage on browser activity
+Decrease by one level
+Set the Light mode
+Valid for
+Valid for sub domains
+Check this box to use this record for downloading via HTTP
+Check this box to use this record for downloading via HTTPS
+Check this box to use this record for downloading via FTP
+Check this box to use this record for downloads from sub domain servers. For example, for the site http://site.com it will be http://some.site.com
+Please select one protocol at least
+Maximum number of running downloads
+Restart download
+Create one more section
+Stop one section
+Stopped
+Query size
+Request...
+Query the size of a download from the server
+Yes to all
+No to all
+Detailed log
+Changes will take effect after you restart browser.
+List of tasks
+List of sites
+Deleting downloads
+Create batch download
+From:
+To:
+Step:
+Wildcard bytes:
+Results
+Sample:
+Sequence start number
+Sequence finish number
+Sequence step. For example, if it is 10, then sequence will be 0, 10, 20, ...
+Count of wildcard bytes. For example, if it is 1, then sequence will be 1, 2, 3. If it is 2, then sequence will be 01, 02, 03.
+Click here to look at the generated sequence
+The final sequence number must be greater than the start one
+Please use (*) in the URL to specify template for URL
+Create an extension if a file doesn't have one
+Check this box to create a specified extension for a file which doesn't have it. For example if the file name is "file" and you specify "txt", the result will be "file.txt"
+Show sizes in bytes only
+Disable task after execution
+Delete task after execution
+Check this box to disable task automatically after execution
+Check this box to delete task automatically after execution
+Generate a file name automatically
+Check this box to generate a file name of download automatically
+Click this button to calculate summary size of all downloads
+Download with this URL already exists. What to do?
+Launch
+Launch the downloaded file
+Version
+Starting
+Active downloads
+There are no active downloads currently
+Notifications
+Use tray "balloons"
+Timeout
+Waiting...
+Mirror URL for download
+File size exceeds 2GB. Such downloads are supported via FTP only
+New Download
+Determine group for download automatically
+Customize
+Use sounds
+Customize sounds
+Set sound
+Remove
+Test
+List of FDM's events and appropriate sounds. Here you can adjust FDM to play a sound when some event has occurred
+Download added - play sound when one or more downloads have been added to the list of downloads
+Download completed - play sound when download has been completed successfully.
+Download failed - play sound when an error has occurred while trying to download a file.
+Set sound for selected event
+Don't play sound when selected event has occurred
+Test selected sound
+Event
+Sound file
+No sound
+Download added
+Download completed
+Download failed
+Sound files
+Failed
+Clear history
+Import
+Export
+Import list of downloads
+Export list of downloads
+Can't open a file
+Export all downloads
+Export all downloads on the list
+Export selected downloads
+Don't export completed downloads
+Append if the file already exists
+Invalid group name. Please don't use / or \ symbols.
+Exit when done
+Added
+Recycle Bin
+Properties
+Clear Recycle Bin
+Don't place deleted downloads in Recycle Bin
+Keep maximum
+downloads
+Don't keep completed downloads
+Ask for confirmation when deleting downloads
+Recycle Bin properties
+Check this box if you do not want to store deleted downloads in Recycle Bin
+Check this box if you want to limit the number of deleted downloads stored in Recycle Bin
+Maximum number of downloads to store in Recycle Bin
+Check this box if you do not want completed downloads to be stored in Recycle Bin after deletion
+Check this box if you want FDM to ask for your confirmation when you try to delete a download
+Restore
+Restoring downloads...
+Clear History
+Find
+Find Next
+Find what
+Search in
+Local file name
+Specify what you want to find here
+Search in file part of URL
+Search in whole URL
+Search in comment of download
+Search in the name and path of download's file on the local disk
+Setup advanced search settings
+Search where
+Search in List of Downloads
+Set
+Search in Recycle Bin
+Search with specified file size
+Minimum
+Maximum
+Search in List of Downloads
+Search in Recycle Bin
+Search only for files that satisfy the specified file size range
+Minimum size required
+Maximum size required
+Search in group
+Choose the group where search will be performed
+Searching download...
+There are no items found
+There are no more items found
+Find done
+Pause
+Filter
+Use hidden attribute for uncompleted download
+Append comment to the file name when done
+Start download automatically
+Add
+Use rollback on broken connections
+Size of rollback
+bytes
+Check this option if you want to enable rollback feature. This option helps you to protect your downloads from being damaged.
+Size of rollback. A greater size will allow rollback to work more safely. Recommended size is 3000 bytes. You can increase this value if your download still remains damaged.
+Warning! Recycle Bin is too large. This may slow performance dramatically. It is recommended to clear Recycle Bin. Would you like to do this?
+Don't check this again
+Server can not guarantee its resuming capabilities. Response is invalid.
+Copy to clipboard
+No active downloads
+Play sound file when all downloads are completed
+Import list of URLs from clipboard
+Passwords
+Site Manager options
+Save password?
+Free Download Manager can save password for this server to avoid the necessity to enter it every time you download from this server.
+Save this password?
+Don't suggest saving any passwords
+Use Site Manager to store my passwords
+Ask me whether to save password or not
+Don't suggest saving passwords
+Delete all passwords on exit
+Delete all passwords
+New Style
+Old Style
+The directory name is invalid
+was scheduled to be launched.
+Do you want to launch it?
+Launch download when it is completed
+Please use (*), (*A) or (*a) in the URL to specify template for URL
+Hibernate
+Stand By
+Save file
+Open file
+Save file and open it
+Download type:
+Don't show me this window again
+Hide
+Traffic usage mode has been changed
+You have switched network traffic usage mode.\nFree Download Manager has three modes:
+In this mode Free Download Manager will download at the maximum speed possible. This is the most aggressive mode.
+In this mode Free Download Manager will download at average speed. This mode allows you to browse the Internet and keep the high speed of downloading at the same time.
+In this mode Free Download Manager will download at low speed. This mode allows you to download without the dramatic slowing-down of the network.
+Rename at Restart
+URL List Files
+Downloads Information List Files
+Export options
+Set the date of a file identical to the date specified by the server
+Set the same date of a downloaded file as the one on the server
+Generate description file
+Generate a file with the name "*.dsc.txt" (* - name of a downloaded file) that will contain a small description of a downloaded file (comments + url + date). This file will be generated only for a download that has comments.
+This file has been downloaded from
+Don't retrieve the file date from the server
+This option allows you to increase the speed of starting an FTP download. Free Download Manager will use SIZE command instead of LIST.
+Don't save logs of downloads
+Saved in
+File size
+Resume support
+Close this dialog when download is completed or stopped
+Open
+Yes, but temporarily hide progress window for this download
+No, don't show such progress windows for any download
+Yes, but don't show progress window for this download
+Using the SHIFT key means that this download will be deleted from disk and you will not be able to restore it.\nAre you sure?
+Choose group
+Set groups' root folder
+Select groups' root folder.\nChanges will be applied to new downloads only.
+Pause all downloads
+Show downloading progress window
+Timeouts for confirmations
+Launch download
+Ask for shutdown type
+Don't ask for confirmation
+%d seconds
+Wait for my confirmation
+Type
+Ignore
+Set of numbers
+Assign
+Here you should specify the set of numbers for batch list.\nEx. 1-100, or 1-100s2w3.
+Click this button to assign the set of numbers using the dialog window.
+Single number
+Number
+Assign set of numbers
+Syntax error
+Disable tasks after execution
+Move up
+Move down
+Move selected download(s) up
+Move selected download(s) down
+Check file integrity
+Some web sites provide special checksums for files available to download in order to allow users to make sure that the downloaded file is not damaged. You can enter this checksum here and FDM will check the file integrity.
+Algorithm
+Checksum
+Paste from clipboard
+Check
+Calculating downloaded file's checksum...
+File integrity check succeeded
+File integrity check failed
+File integrity check has been completed successfully.\nThere are no errors found in the downloaded file.
+File integrity check has been completed.\nThere are errors found: the file was damaged during the downloading process. It is required to restart the downloading from the beginning.
+Don't show this window again if check succeeds
+Files' sizes are not equal
+Save as:\n(Sample: file(*)(*A)(*a).txt)
+Invalid save as template specified.\nMake sure it corresponds to the URL template.
+When done
+When done (all completed or in error)
+What's This?
+Close
+Cache the operations of writing the downloaded data to disk
+Move files to folder
+Speed is too low. Restarting section...
+Restart if speed is too low during (in min):
+Restart section if downloading speed decreases dramatically.
+Would you like to see such download progress windows again?
+Move top
+Move bottom
+Place download at the top of the list
+Check this option if you would like the download to be placed at the top of the list of downloads.
+Enable
+Disable
+Switch
+If the Pause all downloads mode is enabled, it will be disabled, otherwise it will be enabled.
+Disable all notifications for batch downloads
+Integrity
+Perform the integrity check when file is downloaded
+In order to perform the integrity check Free Download Manager should know the valid checksum of the file. In most cases you should provide it for each download.
+If the check failed
+Valid checksum of this file
+Do nothing
+Specify here what FDM should do when the integrity check fails.\nAsk - FDM will ask you what to do.\nRestart - FDM will restart this download from the beginning.\nDo nothing - FDM will add the record about fail check to the downloading log file and will not do anything more.
+Performing integrity check...
+Integrity check succeeded.
+Integrity check failed!
+Specify integrity check algorithm.
+Valid checksum
+Result checksum
+Macroes
+name of the server (e.g. "freedownloadmanager.org")
+path to the downloading file on the server
+current year
+current month (number from 1 to 12)
+current day
+equivalent to "%year%-%month%-%day%"
+Start
+Stop
+Schedule download start
+Schedule download stop
+Not completed+Recent
+Parent group
+Set as default for all the groups of downloads
+OK to set this folder as the default output folder for the "%s" group?
+Clean up the list of the downloads
+Folder
+to
+Name
+Metalink info file has been detected. Continue downloading.
+Connecting tracker...
+Grant all bandwidth for this download
+Name of the file should not contain any of \ / : * ? " < > | symbols. Please enter another name.
+Name of the folder should not contain any of : * ? " < > | symbols. Please enter another name.
+Show download progress window
+Always use this group for new downloads
+Always use this group and remember the last output folder each time
+Preparing files on the disk... This may take several minutes
+State
+Preparing files on the disk...
+Group for new download
+Upload speed
+Are you sure?\nThis will restart the download from the beginning.
+Total download speed
+Upload
+Consider download malicious if minimum
+% of users marked it as malicious
+drive letter FDM was started from. E.g. "C:". Is useful for portable version.
+Default download folders of all groups will be set to this folder.\nOK to continue?
+Set default download folder
+Prevent computer from stand by while downloading
+Source
+Save
+You have paused all downloads. This means all downloads will download at a very low speed (1B/s usually).\nThis allows to "pause" even downloads with no resume support.\n\nYou should call this command again or restart FDM in order to return to normal state.
+Check if download with the same URL already exists
+Default settings of BitTorrent downloads
+Restart completed downloads
+Time Limit
+hr.
+Limit time when FDM can start downloads
+Allow to start only from
+Essential
+Show small notification windows on downloads completion
+Automatically hide after
+Error
+Show Tips
+There are no downloads to export.
+after "silent" creation
+%d%% downloaded in total
+%s left to download at
+Path to user profile folder.
+System diagnostics: %s
+Fatal error occurred while loading the list of downloads.\nClick OK to continue (some or all downloads will be lost) or CANCEL to exit.\nThis problem can be caused by incorrect installation of FDM or damaged data file.
+You'll need to provide administrator permission to apply settings.
+Determine automatically
+Choose...
+Connection speed
+Settings for traffic usage modes
+% of connection speed
+Manage automatically
+Set to
+The current connection speed is measured by FDM automatically. If you suspect that the values are incorrect, just let FDM keep on running and you should see the calculated numbers get closer to the real values. Note that FDM measures the speed only when it's downloading/uploading. The greater the number of downloads/uploads, the better FDM detects the actual connection speed.
+Download speed
+Measure again
+Specify value
+The value must be greater than or equal to zero.
+Specify in bits instead of bytes
+Web Interface
