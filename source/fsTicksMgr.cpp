@@ -20,7 +20,7 @@ fsTicksMgr::~fsTicksMgr() {}
 
 void fsTicksMgr::Now()
 {
-	m_dwTicks = GetTickCount();
+	m_dwTicks = GetTickCount64();
 }
 
 DWORD fsTicksMgr::operator-(fsTicksMgr& ticks)

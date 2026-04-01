@@ -283,11 +283,11 @@ void fsInternetURLFile::SetupProxyForFile2()
 			return;
 
 		DWORD dw;
-		if (ERROR_SUCCESS != key.QueryValue(dw, "ProxyEnable")) return;
+		if (ERROR_SUCCESS != key.QueryDWORDValue("ProxyEnable", dw)) return;
 		if (dw == FALSE) return;
 
 		dw = sizeof(szProxy);
-		if (ERROR_SUCCESS != key.QueryValue(szProxy, "ProxyServer", &dw)) return;
+		if (ERROR_SUCCESS != key.QueryStringValue("ProxyServer", szProxy, &dw)) return;
 
 		psz1 = szProxy;
 	}
@@ -515,7 +515,7 @@ void fsInternetURLFile::FormHttpBasicAuthHdr(LPCSTR pszUser, LPCSTR pszPassword)
 	LPSTR pszL;
 	base64_encode(szLogin, lstrlen(szLogin), &pszL);
 
-	sprintf(szHdr, "Authorization: Basic %s\r\n", pszL);
+	sprintf_s(szHdr, sizeof(szHdr), "Authorization: Basic %s\r\n", pszL);
 	delete[] pszL;
 
 	m_httpFile.SetAdditionalHeaders(szHdr);
@@ -610,12 +610,12 @@ bool fsInternetURLFile::isProxySpecified()
 			return false;
 
 		DWORD dw;
-		if (ERROR_SUCCESS != key.QueryValue(dw, "ProxyEnable")) return false;
+		if (ERROR_SUCCESS != key.QueryDWORDValue("ProxyEnable", dw)) return false;
 		if (dw == FALSE) return false;
 
 		char szProxy[1000] = "";
 		dw = sizeof(szProxy);
-		if (ERROR_SUCCESS != key.QueryValue(szProxy, "ProxyServer", &dw)) return false;
+		if (ERROR_SUCCESS != key.QueryStringValue("ProxyServer", szProxy, &dw)) return false;
 
 		if (*szProxy == 0) return false;
 

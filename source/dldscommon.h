@@ -8,9 +8,9 @@ class vmsDownloaderWithNetworkUsageAdjustment
 {
 
   public:
-	virtual UINT64 getSpeed(bool bOfDownload) = NULL;
-	virtual void setSpeedLimit(bool bOfDownload, UINT64 uLimit) = NULL;
-	virtual UINT64 getSpeedLimit(bool bOfDownload) = NULL;
+	virtual UINT64 getSpeed(bool bOfDownload) = 0;
+	virtual void setSpeedLimit(bool bOfDownload, UINT64 uLimit) = 0;
+	virtual UINT64 getSpeedLimit(bool bOfDownload) = 0;
 	virtual bool isResumeSupported(bool bOfDownload)
 	{
 		UNREFERENCED_PARAMETER(bOfDownload);
@@ -26,7 +26,7 @@ class vmsDownloaderWithNetworkUsageAdjustment
 		UNREFERENCED_PARAMETER(bOfDownload);
 		return _UI64_MAX;
 	}
-	virtual bool isRequiresTraffic(bool bForDownload) = NULL;
+	virtual bool isRequiresTraffic(bool bForDownload) = 0;
 	virtual BYTE getPriority() { return m_i8Priority; }
 	virtual void setPriority(BYTE i8Priority) { m_i8Priority = i8Priority; }
 	virtual bool isSpeedCanBeLimitedBySomeInternalReasons(bool bForDownload)

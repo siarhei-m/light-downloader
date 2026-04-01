@@ -22,7 +22,7 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 	// if (lstrcmpi(pszUrl, "https://") == 0 || lstrcmpi(pszUrl, "http://") == 0 || lstrcmpi(pszUrl, "ftp://") == 0)
 	//	return IR_BADURL;
 
-	DWORD urlLen = strlen(pszUrl) * 2;
+	DWORD urlLen = (DWORD)(strlen(pszUrl) * 2);
 	CHAR* pszCanUrl = NULL;
 	fsString strUrl;
 
@@ -47,7 +47,7 @@ fsInternetResult fsURL::Crack(LPCSTR pszUrl, BOOL bCheckScheme)
 	}
 	else
 	{
-		if (strnicmp(pszUrl, "file://", 7))
+		if (_strnicmp(pszUrl, "file://", 7))
 		{
 			if (!InternetCanonicalizeUrl(pszUrl, pszCanUrl, &urlLen, ICU_BROWSER_MODE))
 			{
@@ -198,9 +198,9 @@ fsInternetResult fsURL::Create(INTERNET_SCHEME nScheme, LPCTSTR lpszHostName, IN
 		const char* magnetStart = _tcsstr(strPath, _T("magnet:"));
 		if (magnetStart == 0 || strPath != magnetStart)
 		{
-			strcpy(lpszUrl, "file://");
+			strcpy_s(lpszUrl, *pdwUrlLength, "file://");
 		}
-		strcat(lpszUrl, strPath);
+		strcat_s(lpszUrl, *pdwUrlLength, strPath);
 		return IR_SUCCESS;
 	}
 

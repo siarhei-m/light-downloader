@@ -54,7 +54,7 @@ class CDlg_Options : public CDialog
 	BOOL OptionsTree_Apply(LPOPTIONS_PAGES_TREE ptRoot = NULL, bool* pbBrowserRestartRequired = NULL,
 	                       CString* ptstrFdmElevateArgs = NULL);
 	void FillPagesList(LPOPTIONS_PAGES_TREE ptRoot = NULL, HTREEITEM htRoot = TVI_ROOT);
-	virtual void InitializeData() = NULL;
+	virtual void InitializeData() = 0;
 	CImageList m_imgsPages;
 	CFont m_fntCaption;
 	void CreatePageDialog(CDlg_Options_Page* page);

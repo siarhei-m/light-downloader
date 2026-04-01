@@ -31,12 +31,12 @@ class fsInternetFile : public fsSpeaking
 
 	virtual fsInternetResult QuerySize(LPCSTR pszFilePath);
 
-	virtual fsInternetResult Open(LPCSTR pszFilePath, UINT64 uStartPos) = NULL;
+	virtual fsInternetResult Open(LPCSTR pszFilePath, UINT64 uStartPos) = 0;
 	virtual fsInternetResult OpenEx(LPCSTR pszFilePath, UINT64 uStartPos, UINT64 uUploadPartSize,
-	                                UINT64 uUploadTotalSize) = NULL;
+	                                UINT64 uUploadTotalSize) = 0;
 
-	virtual fsInternetResult Read(LPBYTE pBuffer, DWORD dwSize, DWORD* pdwRead) = NULL;
-	virtual fsInternetResult Write(LPBYTE pBuffer, DWORD dwSize, DWORD* pdwWritten) = NULL;
+	virtual fsInternetResult Read(LPBYTE pBuffer, DWORD dwSize, DWORD* pdwRead) = 0;
+	virtual fsInternetResult Write(LPBYTE pBuffer, DWORD dwSize, DWORD* pdwWritten) = 0;
 
 	LPCSTR GetSuggestedFileName();
 

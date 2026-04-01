@@ -14,7 +14,7 @@
 class vmsHashEvents
 {
   public:
-	virtual bool OnProgressChanged(double fPercentage) = NULL;
+	virtual bool OnProgressChanged(double fPercentage) = 0;
 
 	vmsHashEvents();
 	virtual ~vmsHashEvents();

@@ -114,7 +114,7 @@ class vmsCrashCatcher
 		return m_pPrevFilter ? m_pPrevFilter(info) : EXCEPTION_EXECUTE_HANDLER;
 	}
 
-	virtual void onCrashDumpCreated() = NULL;
+	virtual void onCrashDumpCreated() = 0;
 };
 
 __declspec(selectany) vmsCrashCatcher* vmsCrashCatcher::m_pThis = NULL;

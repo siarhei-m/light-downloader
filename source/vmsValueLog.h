@@ -146,7 +146,7 @@ class vmsMaximumPossibleValueExplorerBase
 	}
 
   protected:
-	virtual bool CheckNeedStopExplore_NeedContinue() = NULL;
+	virtual bool CheckNeedStopExplore_NeedContinue() = 0;
 
   public:
 	void ForceStartExplore()

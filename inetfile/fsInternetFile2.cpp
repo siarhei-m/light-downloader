@@ -225,7 +225,7 @@ _lReadData:
 	if (m_bNeedStop || m_bDownloading == false) return 0;
 
 	int n;
-	n = min(m_ReadReq.nDataLeft, size);
+	n = (int)min(m_ReadReq.nDataLeft, size);
 
 	m_ReadReq.abData.add((LPBYTE)ptr, n);
 

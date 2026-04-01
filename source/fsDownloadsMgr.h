@@ -110,7 +110,7 @@ struct vmsDldErrorStamp
 	vmsDldErrorStamp(vmsBtDownloadErrorState error)
 	{
 		Error = error;
-		TimeStamp = GetTickCount();
+		TimeStamp = GetTickCount64();
 	}
 };
 

@@ -1,5 +1,8 @@
 # Light Downloader
 
+[![Build](https://github.com/siarhei-m/light-downloader/actions/workflows/build.yml/badge.svg)](https://github.com/siarhei-m/light-downloader/actions/workflows/build.yml)
+[![CodeQL](https://github.com/siarhei-m/light-downloader/actions/workflows/codeql.yml/badge.svg)](https://github.com/siarhei-m/light-downloader/actions/workflows/codeql.yml)
+
 A lightweight, portable download manager for Windows with multi-part/segmented downloads.
 
 Based on [Free Download Manager 3.9.7](https://sourceforge.net/p/freedownload/code/HEAD/tree/) via [FDM-UL](https://github.com/59de44955ebd/FDM-UL), modernized to C++20, Visual Studio 2022, [libcurl](https://curl.se/) and [pugixml](https://pugixml.org/).

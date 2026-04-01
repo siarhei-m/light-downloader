@@ -7,13 +7,13 @@
 
 LPCSTR fsStrStrNoCase(LPCSTR pszIn, LPCSTR pszWhat)
 {
-	UINT uLen = strlen(pszWhat);
+	UINT uLen = (UINT)strlen(pszWhat);
 
 	if (pszIn == NULL) return NULL;
 
 	while (*pszIn)
 	{
-		if (strnicmp(pszIn, pszWhat, uLen) == 0)
+		if (_strnicmp(pszIn, pszWhat, uLen) == 0)
 			return pszIn;
 		else
 			pszIn++;
@@ -25,7 +25,7 @@ LPCSTR fsStrStrNoCase(LPCSTR pszIn, LPCSTR pszWhat)
 LPCSTR fsStrGetStrUpToChar(LPCSTR pszFrom, LPCSTR pszCharTo, LPSTR* ppszResult)
 {
 
-	int tolen = strcspn(pszFrom, pszCharTo);
+	int tolen = (int)strcspn(pszFrom, pszCharTo);
 
 	*ppszResult = NULL;
 

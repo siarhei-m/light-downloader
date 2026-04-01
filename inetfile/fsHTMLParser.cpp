@@ -19,7 +19,7 @@ fsHTMLParser::~fsHTMLParser() {}
 void fsHTMLParser::ParseHTML(LPSTR pszHTML)
 {
 	m_pszHTML = pszHTML;
-	m_htmlLen = strlen(m_pszHTML);
+	m_htmlLen = (int)strlen(m_pszHTML);
 
 	m_strBaseURL = "";
 
@@ -61,7 +61,7 @@ LPCSTR fsHTMLParser::ParseTag_A(LPCSTR pszTag, fsHTMLParser* pThis)
 	do
 	{
 
-		if (strnicmp(pszTag, "href", 4) == 0)
+		if (_strnicmp(pszTag, "href", 4) == 0)
 		{
 
 			if (fsStrIsDivider(pszTag[4]) || pszTag[4] == '=')
@@ -91,7 +91,7 @@ LPCSTR fsHTMLParser::ParseTag_Img(LPCSTR pszTag, fsHTMLParser* pThis)
 {
 	do
 	{
-		if (strnicmp(pszTag, "src", 3) == 0)
+		if (_strnicmp(pszTag, "src", 3) == 0)
 		{
 			if (fsStrIsDivider(pszTag[3]) || pszTag[3] == '=')
 			{
@@ -128,7 +128,7 @@ LPCSTR fsHTMLParser::ParseTag(LPCSTR pszTag)
 	if (*pszTag == '/')
 	{
 
-		if (strnicmp(pszTag, "/a>", 3) == 0 || strnicmp(pszTag, "/a ", 3) == 0) m_iTagAOpened = -1;
+		if (_strnicmp(pszTag, "/a>", 3) == 0 || _strnicmp(pszTag, "/a ", 3) == 0) m_iTagAOpened = -1;
 
 		pszTag = strchr(pszTag, '>');
 		if (pszTag) pszTag++;
@@ -138,8 +138,8 @@ LPCSTR fsHTMLParser::ParseTag(LPCSTR pszTag)
 	int i = 0;
 	for (i = 0; i < sizeof(apszTags) / sizeof(LPCSTR); i++)
 	{
-		int taglen = strlen(apszTags[i]);
-		if (strnicmp(pszTag, apszTags[i], taglen) == 0 && fsStrIsDivider(pszTag[taglen]))
+		int taglen = (int)strlen(apszTags[i]);
+		if (_strnicmp(pszTag, apszTags[i], taglen) == 0 && fsStrIsDivider(pszTag[taglen]))
 		{
 
 			pszTag += taglen;
@@ -175,7 +175,7 @@ LPCSTR fsHTMLParser::ParseTag_A_Href(LPCSTR pszTag, LPCSTR pszAddUrlEnds)
 
 			for (int i = 0; i < m_vUrls.size(); i++)
 			{
-				if (stricmp(m_vUrls[i], pszUrl) == 0)
+				if (_stricmp(m_vUrls[i], pszUrl) == 0)
 				{
 					iUrlFound = i;
 					break;
@@ -187,8 +187,8 @@ LPCSTR fsHTMLParser::ParseTag_A_Href(LPCSTR pszTag, LPCSTR pszAddUrlEnds)
 		{
 
 			fsTextRegion rgn;
-			rgn.nStart = pszTag - strlen(pszUrl) - m_pszHTML;
-			rgn.nEnd = pszTag - m_pszHTML;
+			rgn.nStart = (int)(pszTag - strlen(pszUrl) - m_pszHTML);
+			rgn.nEnd = (int)(pszTag - m_pszHTML);
 
 			if (pszTag[-1] == '"' || pszTag[-1] == '\'')
 			{
@@ -256,8 +256,8 @@ LPCSTR fsHTMLParser::ParseTag_Img_Src(LPCSTR pszTag)
 	if (pszUrl)
 	{
 		fsTextRegion rgn;
-		rgn.nStart = pszTag - strlen(pszUrl) - m_pszHTML;
-		rgn.nEnd = pszTag - m_pszHTML;
+		rgn.nStart = (int)(pszTag - strlen(pszUrl) - m_pszHTML);
+		rgn.nEnd = (int)(pszTag - m_pszHTML);
 		if (pszTag[-1] == '"' || pszTag[-1] == '\'')
 		{
 			rgn.nStart--;
@@ -310,7 +310,7 @@ void fsHTMLParser::ReplaceUrl(int iIndex, LPCSTR pszNewUrl)
 
 int fsHTMLParser::ReplaceString(LPCSTR pszNewVal, fsTextRegion& rgn)
 {
-	int newlen = strlen(pszNewVal);
+	int newlen = (int)strlen(pszNewVal);
 
 	if (newlen > rgn.nEnd - rgn.nStart)
 	{
@@ -405,7 +405,7 @@ LPCSTR fsHTMLParser::ParseTag_Link(LPCSTR pszTag, fsHTMLParser* pThis)
 
 	do
 	{
-		if (strnicmp(pszTag, "rel", 3) == 0)
+		if (_strnicmp(pszTag, "rel", 3) == 0)
 		{
 			if (fsStrIsDivider(pszTag[3]) || pszTag[3] == '=')
 			{
@@ -415,7 +415,7 @@ LPCSTR fsHTMLParser::ParseTag_Link(LPCSTR pszTag, fsHTMLParser* pThis)
 			}
 		}
 
-		if (strnicmp(pszTag, "href", 4) == 0 && bLinkAdded == FALSE)
+		if (_strnicmp(pszTag, "href", 4) == 0 && bLinkAdded == FALSE)
 		{
 			if (fsStrIsDivider(pszTag[4]) || pszTag[4] == '=')
 			{
@@ -450,7 +450,7 @@ LPCSTR fsHTMLParser::ParseTag_Link_Rel(LPCSTR pszTag, fsLinkRelType* lrt)
 
 	if (pszType)
 	{
-		if (stricmp(pszType, "stylesheet") == 0) *lrt = LRT_STYLESHEET;
+		if (_stricmp(pszType, "stylesheet") == 0) *lrt = LRT_STYLESHEET;
 
 		delete[] pszType;
 	}
@@ -472,7 +472,7 @@ LPCSTR fsHTMLParser::ParseTag_Link_Href(LPCSTR pszTag)
 		if (m_bKillDupes)
 		{
 			for (int i = 0; i < m_vLinkUrls.size(); i++)
-				if (stricmp(m_vLinkUrls[i], pszUrl) == 0)
+				if (_stricmp(m_vLinkUrls[i], pszUrl) == 0)
 				{
 					iUrlFound = i;
 					break;
@@ -482,8 +482,8 @@ LPCSTR fsHTMLParser::ParseTag_Link_Href(LPCSTR pszTag)
 		if (iUrlFound == -1)
 		{
 			fsTextRegion rgn;
-			rgn.nStart = pszTag - strlen(pszUrl) - m_pszHTML;
-			rgn.nEnd = pszTag - m_pszHTML;
+			rgn.nStart = (int)(pszTag - strlen(pszUrl) - m_pszHTML);
+			rgn.nEnd = (int)(pszTag - m_pszHTML);
 			if (pszTag[-1] == '"' || pszTag[-1] == '\'')
 			{
 				rgn.nStart--;
@@ -532,7 +532,7 @@ LPCSTR fsHTMLParser::ParseTag_Meta(LPCSTR pszTag, fsHTMLParser* pThis)
 
 	do
 	{
-		if (strnicmp(pszTag, "http-equiv", 10) == 0)
+		if (_strnicmp(pszTag, "http-equiv", 10) == 0)
 		{
 			if (fsStrIsDivider(pszTag[10]) || pszTag[10] == '=')
 			{
@@ -542,7 +542,7 @@ LPCSTR fsHTMLParser::ParseTag_Meta(LPCSTR pszTag, fsHTMLParser* pThis)
 			}
 		}
 
-		if (strnicmp(pszTag, "content", 7) == 0)
+		if (_strnicmp(pszTag, "content", 7) == 0)
 		{
 			if (fsStrIsDivider(pszTag[7]) || pszTag[7] == '=')
 			{
@@ -576,7 +576,7 @@ LPCSTR fsHTMLParser::ParseTag_Meta_HttpEquiv(LPCSTR pszTag, fsMetaHttpEquivType*
 
 	if (pszType)
 	{
-		if (stricmp(pszType, "refresh") == 0) *mhet = MHET_REFRESH;
+		if (_stricmp(pszType, "refresh") == 0) *mhet = MHET_REFRESH;
 
 		delete[] pszType;
 	}
@@ -613,7 +613,7 @@ LPCSTR fsHTMLParser::ParseTag_Meta_Content(LPCSTR pszTag, fsMetaHttpEquivType mh
 
 		pszTag = fsStrSkipDividers(pszTag);
 
-		if (strnicmp(pszTag, "url", 3) || (fsStrIsDivider(pszTag[3]) == FALSE && pszTag[3] != '='))
+		if (_strnicmp(pszTag, "url", 3) || (fsStrIsDivider(pszTag[3]) == FALSE && pszTag[3] != '='))
 		{
 
 			return pszTag;
@@ -636,12 +636,12 @@ LPCSTR fsHTMLParser::ParseTag_Meta_Content(LPCSTR pszTag, fsMetaHttpEquivType mh
 
 LPCSTR fsHTMLParser::ParseTag_Base(LPCSTR pszTag, fsHTMLParser* pThis)
 {
-	pThis->m_BaseURLPosition.nStart = pszTag - 4 - 1 - pThis->m_pszHTML;
+	pThis->m_BaseURLPosition.nStart = (int)(pszTag - 4 - 1 - pThis->m_pszHTML);
 
 	do
 	{
 
-		if (strnicmp(pszTag, "href", 4) == 0)
+		if (_strnicmp(pszTag, "href", 4) == 0)
 		{
 
 			if (fsStrIsDivider(pszTag[4]) || pszTag[4] == '=')
@@ -664,7 +664,7 @@ LPCSTR fsHTMLParser::ParseTag_Base(LPCSTR pszTag, fsHTMLParser* pThis)
 		pszTag++;
 	} while (*pszTag);
 
-	pThis->m_BaseURLPosition.nEnd = pszTag - pThis->m_pszHTML;
+	pThis->m_BaseURLPosition.nEnd = (int)(pszTag - pThis->m_pszHTML);
 
 	return pszTag;
 }
@@ -703,7 +703,7 @@ LPCSTR fsHTMLParser::ParseTag_Frame(LPCSTR pszTag, fsHTMLParser* pThis)
 	do
 	{
 
-		if (strnicmp(pszTag, "src", 3) == 0)
+		if (_strnicmp(pszTag, "src", 3) == 0)
 		{
 			if (fsStrIsDivider(pszTag[3]) || pszTag[3] == '=')
 			{
@@ -736,8 +736,8 @@ LPCSTR fsHTMLParser::ParseTag_Frame_Src(LPCSTR pszTag, LPCSTR)
 	if (pszUrl)
 	{
 		fsTextRegion rgn;
-		rgn.nStart = pszTag - lstrlen(pszUrl) - m_pszHTML;
-		rgn.nEnd = pszTag - m_pszHTML;
+		rgn.nStart = (int)(pszTag - lstrlen(pszUrl) - m_pszHTML);
+		rgn.nEnd = (int)(pszTag - m_pszHTML);
 		if (pszTag[-1] == '"' || pszTag[-1] == '\'')
 		{
 			rgn.nStart--;

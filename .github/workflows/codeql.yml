@@ -1,0 +1,36 @@
+name: CodeQL
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1'
+
+jobs:
+  analyze:
+    runs-on: windows-latest
+    permissions:
+      security-events: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: cpp
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Install vcpkg dependencies
+      shell: cmd
+      run: '"%VCPKG_INSTALLATION_ROOT%\vcpkg.exe" install --triplet x64-windows-static --x-install-root=vcpkg_installed --vcpkg-root="%VCPKG_INSTALLATION_ROOT%"'
+
+    - name: Build
+      run: msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=x64 /p:VcpkgEnableManifest=true /m
+      env:
+        VCPKG_ROOT: ${{ env.VCPKG_INSTALLATION_ROOT }}
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3

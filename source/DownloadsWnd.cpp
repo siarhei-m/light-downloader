@@ -348,7 +348,7 @@ LRESULT CDownloadsWnd::OnAppExit(WPARAM, LPARAM)
 
 	_DldsMgr.UnlockList(true);
 
-	DWORD dwTicks = GetTickCount();
+	DWORD dwTicks = GetTickCount64();
 
 	while (_DldsMgr.IsRunning())
 	{
@@ -360,10 +360,10 @@ LRESULT CDownloadsWnd::OnAppExit(WPARAM, LPARAM)
 		}
 #endif
 		Sleep(10);
-		if (GetTickCount() - dwTicks > 10000)
+		if (GetTickCount64() - dwTicks > 10000)
 		{
 			_DldsMgr.StopAllDownloads(FALSE);
-			dwTicks = GetTickCount();
+			dwTicks = GetTickCount64();
 		}
 	}
 

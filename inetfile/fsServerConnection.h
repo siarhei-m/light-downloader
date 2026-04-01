@@ -28,7 +28,7 @@ class fsInternetServerConnection : public fsSpeaking
 
 	LPCSTR GetLastError();
 
-	virtual fsInternetResult Connect(LPCSTR pszServer, LPCSTR pszUser, LPCSTR pszPassword, INTERNET_PORT nPort) = NULL;
+	virtual fsInternetResult Connect(LPCSTR pszServer, LPCSTR pszUser, LPCSTR pszPassword, INTERNET_PORT nPort) = 0;
 
 	fsInternetResult Initialize(class fsInternetSession* pSession);
 

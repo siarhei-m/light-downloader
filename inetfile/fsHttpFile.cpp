@@ -109,7 +109,7 @@ fsInternetResult fsHttpFile::ProcessRangesResponse()
 	BOOL bAcceptRanges = FALSE;
 	if (HttpQueryInfo(m_hFile, HTTP_QUERY_ACCEPT_RANGES, sz, &dw, NULL))
 	{
-		if (stricmp(sz, "bytes") == 0) bAcceptRanges = TRUE;
+		if (_stricmp(sz, "bytes") == 0) bAcceptRanges = TRUE;
 	}
 
 	m_enRST = RST_NONE;
@@ -193,7 +193,7 @@ void fsHttpFile::RetreiveSuggFileName()
 		LPCSTR _psz = strstr(szFile, "''");
 		if (_psz != NULL)
 		{
-			if (strnicmp(szFile, "utf-8", 5) == 0)
+			if (_strnicmp(szFile, "utf-8", 5) == 0)
 			{
 				wchar_t wsz[MAX_PATH];
 				MultiByteToWideChar(CP_UTF8, 0, _psz + 2, -1, wsz, MAX_PATH);
@@ -415,7 +415,7 @@ fsInternetResult fsHttpFile::Open_imp(LPCSTR pszFilePath, UINT64 uStartPos, int 
 
 		if (HttpQueryInfo(m_hFile, HTTP_QUERY_ACCEPT_RANGES, sz, &dw, NULL))
 		{
-			if (stricmp(sz, "bytes") == 0)
+			if (_stricmp(sz, "bytes") == 0)
 				m_enRST = RST_PRESENT;
 			else
 				m_enRST = RST_NONE;

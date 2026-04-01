@@ -12,9 +12,9 @@ class vmsPersistObject;
 class vmsPersistObjectsContainerBase
 {
   public:
-	virtual size_t getPersistObjectCount() = NULL;
-	virtual vmsPersistObject* getPersistObject(size_t nIndex) = NULL;
-	virtual size_t findPersistObjectIndex(vmsPersistObject* pObj) = NULL;
+	virtual size_t getPersistObjectCount() = 0;
+	virtual vmsPersistObject* getPersistObject(size_t nIndex) = 0;
+	virtual size_t findPersistObjectIndex(vmsPersistObject* pObj) = 0;
 
 	virtual void addPersistObject(vmsPersistObject*) { assert(false); }
 	virtual void removePersistObject(vmsPersistObject*) { assert(false); }

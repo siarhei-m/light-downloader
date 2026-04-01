@@ -16,7 +16,7 @@ class CMyBalloon_Content : public CWnd
 	CMyBalloon_Content();
 
   public:
-	virtual CSize getRequiredSize() = NULL;
+	virtual CSize getRequiredSize() = 0;
 
   public:
 	//{{AFX_VIRTUAL(CMyBalloon_Content)

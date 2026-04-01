@@ -16,9 +16,9 @@ class CDlg_Options_Page : public CDialog
 	void setBrowserRestartRequired(bool b) { m_bRestartOfBrowserIsRequired = b; }
 	//	bool isElevateRequired();
 	//	LPCTSTR getFdmElevateArgs () const {return m_tstrFdmElevateArgs;}
-	virtual CString get_PageTitle() = NULL;
-	virtual CString get_PageShortTitle() = NULL;
-	virtual BOOL Apply() = NULL;
+	virtual CString get_PageTitle() = 0;
+	virtual CString get_PageShortTitle() = 0;
+	virtual BOOL Apply() = 0;
 
 	LPCSTR get_Template();
 

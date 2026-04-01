@@ -118,7 +118,7 @@ struct fsString
 	void ncpy(LPCSTR pszStr, int nch)
 	{
 		alloc(nch);
-		strncpy(pszString, pszStr, nch);
+		strncpy_s(pszString, nch + 1, pszStr, nch);
 	}
 
 	void alloc(int nch)
@@ -135,7 +135,7 @@ struct fsString
 	int Length() const
 	{
 		if (pszString)
-			return _tcslen(pszString);
+			return (int)_tcslen(pszString);
 		else
 			return 0;
 	}

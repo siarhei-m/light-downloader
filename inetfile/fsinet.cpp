@@ -234,8 +234,8 @@ BOOL fsUrlToFullUrl(LPCSTR pszUrlParent, LPCSTR pszUrlCurrent, LPSTR* ppszFullUr
 	{
 		if (IR_SUCCESS != url.Crack(pszUrlCurrent, FALSE))
 		{
-			UINT nLenParent = strlen(pszUrlParent);
-			UINT nLenUrl = strlen(pszUrlCurrent);
+			UINT nLenParent = (UINT)strlen(pszUrlParent);
+			UINT nLenUrl = (UINT)strlen(pszUrlCurrent);
 
 			fsnew(*ppszFullUrl, char, nLenParent + nLenUrl + 10);
 
@@ -264,7 +264,7 @@ BOOL fsUrlToFullUrl(LPCSTR pszUrlParent, LPCSTR pszUrlCurrent, LPSTR* ppszFullUr
 
 					while (*pszPath != 0 && *pszPath != '\\' && *pszPath != '/') pszPath++;
 
-					posmin = pszPath - *ppszFullUrl;
+					posmin = (int)(pszPath - *ppszFullUrl);
 
 					if (*pszPath == 0)
 					{
@@ -345,7 +345,7 @@ fsInternetResult fsWSAErrorToIR()
 
 BOOL fsIsUrlRelative(LPCSTR pszUrl)
 {
-	return strnicmp(pszUrl, "http://", 7) && strnicmp(pszUrl, "https://", 8) && strnicmp(pszUrl, "ftp://", 6);
+	return _strnicmp(pszUrl, "http://", 7) && _strnicmp(pszUrl, "https://", 8) && _strnicmp(pszUrl, "ftp://", 6);
 }
 
 void fsRemoveWWW(LPCSTR pszUrl)
@@ -353,7 +353,7 @@ void fsRemoveWWW(LPCSTR pszUrl)
 	char* psz = const_cast<char*>(max(strstr(pszUrl, "://"), strstr(pszUrl, ":\\\\")));
 
 	if (psz)
-		if (strnicmp(psz + 3, "www.", 4) == 0) strcpy(psz + 3, psz + 7);
+		if (_strnicmp(psz + 3, "www.", 4) == 0) memmove(psz + 3, psz + 7, strlen(psz + 7) + 1);
 }
 
 BOOL fsIsServersEqual(LPCSTR pszServ1, LPCSTR pszServ2, BOOL bExcludeSubDomainNameFrom2Site)
@@ -362,21 +362,21 @@ BOOL fsIsServersEqual(LPCSTR pszServ1, LPCSTR pszServ2, BOOL bExcludeSubDomainNa
 
 	UINT n1 = 0, n2 = 0;
 
-	if (strnicmp(pszServ1, "www.", 4) == 0) n1 = 4;
+	if (_strnicmp(pszServ1, "www.", 4) == 0) n1 = 4;
 
-	if (strnicmp(pszServ2, "www.", 4) == 0) n2 = 4;
+	if (_strnicmp(pszServ2, "www.", 4) == 0) n2 = 4;
 
 	if (bExcludeSubDomainNameFrom2Site)
 	{
-		int l1 = strlen(pszServ1);
-		int l2 = strlen(pszServ2);
+		int l1 = (int)strlen(pszServ1);
+		int l2 = (int)strlen(pszServ2);
 		if (l1 - n1 < l2 - n2)
 		{
 			if (pszServ2[l2 - (l1 - n1) - 1] == '.') n2 = l2 - (l1 - n1);
 		}
 	}
 
-	return stricmp(pszServ1 + n1, pszServ2 + n2) == 0;
+	return _stricmp(pszServ1 + n1, pszServ2 + n2) == 0;
 }
 
 fsInternetResult fsDownloadFile(fsInternetURLFile* file, LPBYTE* ppBuf, UINT* puSize, BOOL* pbAbort)

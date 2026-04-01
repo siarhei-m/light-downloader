@@ -149,7 +149,7 @@ BOOL fsFtpFile::ParseSIZE()
 {
 	ReceiveExtError();
 
-	int len = strlen(m_pszLastError);
+	int len = (int)strlen(m_pszLastError);
 	int pos = len - 2;
 
 	while (pos > 0 && m_pszLastError[pos - 1] >= '0' && m_pszLastError[pos - 1] <= '9') pos--;

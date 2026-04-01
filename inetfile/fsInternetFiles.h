@@ -33,16 +33,16 @@ struct fsFileInfo
 class fsInternetFiles
 {
   public:
-	virtual fsInternetResult GetList(LPCSTR pszPath) = NULL;
+	virtual fsInternetResult GetList(LPCSTR pszPath) = 0;
 
-	virtual void Abort() = NULL;
+	virtual void Abort() = 0;
 
 	UINT GetFileCount();
 
 	LPCSTR GetCurrentPath();
 
 	fsFileInfo* GetFileInfo(UINT uIndex);
-	virtual LPCSTR GetLastError() = NULL;
+	virtual LPCSTR GetLastError() = 0;
 	fsInternetFiles();
 	virtual ~fsInternetFiles();
 

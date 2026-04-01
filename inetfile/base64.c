@@ -93,7 +93,7 @@ int base64_encode(const void *data, int size, char **str)
   }
   *p=0;
   *str = s;
-  return strlen(s);
+  return (int)strlen(s);
 }
 
 int base64_decode(const char *str, void *data)

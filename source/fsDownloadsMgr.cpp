@@ -969,7 +969,7 @@ DWORD WINAPI fsDownloadsMgr::_threadDownloadsMgr(LPVOID lp)
 			}
 			if (!pThis->m_dldErrorsMap.empty())
 			{
-				DWORD now = GetTickCount();
+				DWORD now = GetTickCount64();
 				if (now - lastDldsProc.m_dwTicks > 10 * 10000)
 				{
 					bNeedPD = true;
@@ -3160,7 +3160,7 @@ bool fsDownloadsMgr::IsDownloadSuspended(vmsDownloadSmartPtr dld)
 		if (m_errorTimeouts.find(stamp.Error) == m_errorTimeouts.end()) return false;
 		DWORD timeout = m_errorTimeouts[stamp.Error];
 		if (timeout == 0) return true;
-		DWORD now = GetTickCount();
+		DWORD now = GetTickCount64();
 		if (now - stamp.TimeStamp < timeout) return true;
 	}
 	return false;
