@@ -13,14 +13,21 @@ jobs:
       matrix:
         include:
           - platform: Win32
+            vcpkg_triplet: x86-windows-static
           - platform: x64
+            vcpkg_triplet: x64-windows-static
           - platform: ARM64
+            vcpkg_triplet: arm64-windows-static
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
+
+    - name: Install vcpkg dependencies
+      shell: cmd
+      run: "%VCPKG_INSTALLATION_ROOT%\vcpkg.exe" install --triplet ${{ matrix.vcpkg_triplet }} --x-install-root=vcpkg_installed --vcpkg-root="%VCPKG_INSTALLATION_ROOT%"
 
     - name: Build
       run: msbuild LightDownloader.sln /p:Configuration=Release /p:Platform=${{ matrix.platform }} /p:VcpkgEnableManifest=true /m
