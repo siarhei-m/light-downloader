@@ -73,7 +73,7 @@ BOOL CUrlWithLoginDlg::OnInitDialog()
 {
 	CDialog::OnInitDialog();
 
-	ZeroMemory(&m_dnp, sizeof(m_dnp));
+	m_dnp = fsDownload_NetworkProperties();
 
 	if (m_strUrl.GetLength() == 0)
 	{

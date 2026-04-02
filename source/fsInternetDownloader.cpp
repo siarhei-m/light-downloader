@@ -1151,8 +1151,7 @@ fsInternetResult fsInternetDownloader::OpenUrl_imp(UINT64 uStartPos, fsInternetU
 
 			if (dnp->dwFlags & DNPF_DONT_UPDATE_ORIGINAL_URL_AFTER_REDIRECT)
 			{
-				dnpRedirectedUrl = new fsDownload_NetworkProperties;
-				ZeroMemory(dnpRedirectedUrl, sizeof(*dnpRedirectedUrl));
+				dnpRedirectedUrl = new fsDownload_NetworkProperties();
 
 				ir = fsDNP_GetByUrl(dnpRedirectedUrl, pszUrl);
 
@@ -2415,7 +2414,6 @@ fsInternetResult fsInternetDownloader::AddMirrorURL(LPCSTR pszUrl, LPCSTR pszUse
 	fsInternetResult ir;
 
 	fsDownload_NetworkProperties dnp;
-	ZeroMemory(&dnp, sizeof(dnp));
 
 	ir = fsDNP_GetByUrl(&dnp, pszUrl);
 
