@@ -82,3 +82,28 @@ jobs:
           LightDownloader-x86.exe
           LightDownloader-x64.exe
           LightDownloader-ARM64.exe
+
+  winget:
+    needs: release
+    runs-on: windows-latest
+    env:
+      WINGET_PAT: ${{ secrets.WINGET_PAT }}
+
+    steps:
+    - name: Install wingetcreate
+      if: ${{ env.WINGET_PAT != '' }}
+      shell: pwsh
+      run: |
+        Invoke-WebRequest https://aka.ms/wingetcreate/latest -OutFile wingetcreate.exe
+
+    - name: Update WinGet package
+      if: ${{ env.WINGET_PAT != '' }}
+      shell: pwsh
+      run: |
+        $version = '${{ github.ref_name }}' -replace '^v',''
+        $base = 'https://github.com/${{ github.repository }}/releases/download/${{ github.ref_name }}'
+        .\wingetcreate.exe update SiarheiM.LightDownloader `
+          --urls "$base/LightDownloader-x86.exe|x86" "$base/LightDownloader-x64.exe|x64" "$base/LightDownloader-ARM64.exe|arm64" `
+          --version $version `
+          --token $env:WINGET_PAT `
+          --submit
