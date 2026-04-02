@@ -31,40 +31,40 @@ enum fsInternetAccessTypeEx
 
 struct fsDownload_NetworkProperties
 {
-	WORD wRollBackSize;
+	WORD wRollBackSize = 0;
 
 	std::string strAgent;
 
-	fsInternetAccessTypeEx enAccType;
+	fsInternetAccessTypeEx enAccType = IATE_NOPROXY;
 	std::string strProxyName;
 	std::string strProxyUserName;
 	std::string strProxyPassword;
 
-	fsNetworkProtocol enProtocol;
+	fsNetworkProtocol enProtocol = NP_HTTP;
 	std::string strServerName;
-	INTERNET_PORT uServerPort;
+	INTERNET_PORT uServerPort = 0;
 	std::string strUserName;
 	std::string strPassword;
 
 	std::string strPathName;
 
-	BOOL bUseHttp11;
+	BOOL bUseHttp11 = FALSE;
 	std::string strReferer;
-	BOOL bUseCookie;
+	BOOL bUseCookie = FALSE;
 
-	DWORD dwFtpFlags;
-	fsFtpTransferType enFtpTransferType;
+	DWORD dwFtpFlags = 0;
+	fsFtpTransferType enFtpTransferType = FTT_UNKNOWN;
 
 	std::string strASCIIExts;
 
 	std::string strCookies;
 	std::string strPostData;
 
-	DWORD dwFlags;
+	DWORD dwFlags = 0;
 
-	WORD wLowSpeed_Factor;
+	WORD wLowSpeed_Factor = 0;
 
-	WORD wLowSpeed_Duration;
+	WORD wLowSpeed_Duration = 0;
 };
 
 #define DNPF_RESTARTSECTIONWHENSPEEDTOOLOW 1
@@ -131,34 +131,34 @@ enum vmsIntegrityCheckFailedReaction
 
 struct fsDownload_Properties
 {
-	WORD wStructSize;
+	WORD wStructSize = 0;
 
-	UINT uTrafficRestriction;
-	UINT uMaxAttempts;
-	UINT uRetriesTime;
-	UINT uTimeout;
+	UINT uTrafficRestriction = 0;
+	UINT uMaxAttempts = 0;
+	UINT uRetriesTime = 0;
+	UINT uTimeout = 0;
 
-	UINT uSectionMinSize;
-	UINT uMaxSections;
-	BOOL bRestartSpeedLow;
+	UINT uSectionMinSize = 0;
+	UINT uMaxSections = 0;
+	BOOL bRestartSpeedLow = FALSE;
 
 	std::string strFileName;
-	BOOL bReserveDiskSpace;
+	BOOL bReserveDiskSpace = FALSE;
 
-	BOOL bIgnoreRestrictions;
+	BOOL bIgnoreRestrictions = FALSE;
 
-	fsDownloadFileErrorProcessing aEP[DFE_UNKNOWN];
-	fsAlreadyExistReaction enAER;
-	fsSizeChangeReaction enSCR;
+	fsDownloadFileErrorProcessing aEP[DFE_UNKNOWN] = {};
+	fsAlreadyExistReaction enAER = AER_ASKUSER;
+	fsSizeChangeReaction enSCR = SCR_ASKUSER;
 	std::string strAdditionalExt;
-	DWORD dwFlags;
+	DWORD dwFlags = 0;
 	std::string strCreateExt;
 
-	BOOL bCheckIntegrityWhenDone;
-	vmsIntegrityCheckFailedReaction enICFR;
+	BOOL bCheckIntegrityWhenDone = FALSE;
+	vmsIntegrityCheckFailedReaction enICFR = ICFR_ASKUSER;
 	std::string strCheckSum;
 
-	DWORD dwIntegrityCheckAlgorithm;
+	DWORD dwIntegrityCheckAlgorithm = 0;
 };
 
 // fsDP_BuffersInfo removed - no longer needed with std::string
