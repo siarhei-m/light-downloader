@@ -1566,9 +1566,7 @@ void CMainFrame::OnFileImportImportlistofdownloadsfromclipboard()
 			if (dld->pMgr->GetDownloadMgr())
 			{
 				fsDownload_Properties* dp = dld->pMgr->GetDownloadMgr()->GetDP();
-				SAFE_DELETE_ARRAY(dp->pszFileName);
-				dp->pszFileName = new char[pGrp->strOutFolder.Length() + 1];
-				lstrcpy(dp->pszFileName, pGrp->strOutFolder);
+				dp->strFileName = (LPCSTR)pGrp->strOutFolder;
 			}
 
 			v.push_back(dld);
@@ -1633,8 +1631,7 @@ BOOL CMainFrame::ImportListOfDownloads_FromURLListFile(LPCSTR pszFile)
 				dld->pGroup = pGrp;
 				LPSTR psz = new char[pGrp->strOutFolder.Length() + 1];
 				lstrcpy(psz, pGrp->strOutFolder);
-				delete[] dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
-				dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = psz;
+				dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = psz;
 			}
 
 			v.push_back(dld);
@@ -1709,8 +1706,7 @@ BOOL CMainFrame::ImportDownload(pugi::xml_node node, DLDS_LIST_REF v)
 			dld->pGroup = params.pGroup;
 			LPSTR psz = new char[params.pGroup->strOutFolder.Length() + 1];
 			lstrcpy(psz, params.pGroup->strOutFolder);
-			delete[] dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
-			dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = psz;
+			dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = psz;
 		}
 	}
 

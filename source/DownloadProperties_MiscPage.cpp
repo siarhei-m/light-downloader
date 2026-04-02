@@ -97,18 +97,18 @@ BOOL CDownloadProperties_MiscPage::OnInitDialog()
 	else
 		CheckDlgButton(IDC_RESERVESPACE, BST_INDETERMINATE);
 
-	if (DP_EQ(pszAdditionalExt, TRUE))
+	if (DP_EQ(strAdditionalExt, TRUE))
 	{
-		CheckDlgButton(IDC_USEEXT, *dp0->pszAdditionalExt ? BST_CHECKED : BST_UNCHECKED);
-		SetDlgItemText(IDC_EXT, dp0->pszAdditionalExt);
+		CheckDlgButton(IDC_USEEXT, !dp0->strAdditionalExt.empty() ? BST_CHECKED : BST_UNCHECKED);
+		SetDlgItemText(IDC_EXT, dp0->strAdditionalExt.c_str());
 	}
 	else
 	{
-		BOOL bUse = *dp0->pszAdditionalExt != 0;
+		BOOL bUse = !dp0->strAdditionalExt.empty();
 		int i;
 		for (i = m_pvDlds->size() - 1; i; i--)
 		{
-			BOOL bU = *m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDP()->pszAdditionalExt != 0;
+			BOOL bU = !m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDP()->strAdditionalExt.empty();
 			if (bUse != bU) break;
 		}
 
@@ -118,18 +118,18 @@ BOOL CDownloadProperties_MiscPage::OnInitDialog()
 			CheckDlgButton(IDC_USEEXT, bUse ? BST_CHECKED : BST_UNCHECKED);
 	}
 
-	if (DP_EQ(pszCreateExt, TRUE))
+	if (DP_EQ(strCreateExt, TRUE))
 	{
-		CheckDlgButton(IDC_USECREATEEXT, *dp0->pszCreateExt ? BST_CHECKED : BST_UNCHECKED);
-		SetDlgItemText(IDC_CREATEEXT, dp0->pszCreateExt);
+		CheckDlgButton(IDC_USECREATEEXT, !dp0->strCreateExt.empty() ? BST_CHECKED : BST_UNCHECKED);
+		SetDlgItemText(IDC_CREATEEXT, dp0->strCreateExt.c_str());
 	}
 	else
 	{
-		BOOL bUse = *dp0->pszCreateExt != 0;
+		BOOL bUse = !dp0->strCreateExt.empty();
 		int i;
 		for (i = m_pvDlds->size() - 1; i; i--)
 		{
-			BOOL bU = *m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDP()->pszCreateExt != 0;
+			BOOL bU = !m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDP()->strCreateExt.empty();
 			if (bUse != bU) break;
 		}
 
@@ -303,11 +303,11 @@ BOOL CDownloadProperties_MiscPage::OnApply()
 				return FALSE;
 			}
 
-			DP_SET(pszAdditionalExt, TRUE, str);
+			DP_SET(strAdditionalExt, TRUE, str);
 		}
 	}
 	else if (uChecked == BST_UNCHECKED)
-		DP_SET(pszAdditionalExt, TRUE, "");
+		DP_SET(strAdditionalExt, TRUE, "");
 
 	uChecked = IsDlgButtonChecked(IDC_USECREATEEXT);
 	if (uChecked == BST_CHECKED)
@@ -323,11 +323,11 @@ BOOL CDownloadProperties_MiscPage::OnApply()
 				return FALSE;
 			}
 
-			DP_SET(pszCreateExt, TRUE, str);
+			DP_SET(strCreateExt, TRUE, str);
 		}
 	}
 	else if (uChecked == BST_UNCHECKED)
-		DP_SET(pszCreateExt, TRUE, "");
+		DP_SET(strCreateExt, TRUE, "");
 
 	uChecked = IsDlgButtonChecked(IDC_USEHIDDENFLAG);
 	if (uChecked != BST_INDETERMINATE)
@@ -335,7 +335,7 @@ BOOL CDownloadProperties_MiscPage::OnApply()
 		for (size_t i = 0; i < m_pvDlds->size(); i++)
 		{
 			vmsDownloadSmartPtr dld = m_pvDlds->at(i);
-			LPCSTR pszFile = dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
+			LPCSTR pszFile = dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str();
 			DWORD dw = DWORD(-1);
 			if (pszFile) dw = GetFileAttributes(pszFile);
 

@@ -1,0 +1,14 @@
+name: "Light Downloader CodeQL Config"
+
+query-filters:
+  - exclude:
+      id: cpp/use-after-free
+      # False positives: SAFE_DELETE_ARRAY macro frees the old buffer,
+      # then fsnew macro allocates a new buffer into the same pointer variable.
+      # CodeQL cannot track through these macros and reports use-after-free
+      # on the subsequent use of the newly allocated buffer.
+      # TODO: Refactor LPSTR members to std::string to eliminate this pattern.
+
+  - exclude:
+      id: cpp/redundant-null-check-param
+      # Defensive null checks on function parameters — intentional safety.

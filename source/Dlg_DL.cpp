@@ -44,20 +44,14 @@ BOOL CDlgDL::OnInitDialog()
 
 	fsDownload_Properties* dp = m_dldr.GetDP();
 	fsDownload_NetworkProperties* dnp = m_dldr.GetDNP();
-
-	SAFE_DELETE_ARRAY(dp->pszFileName);
-	fsnew(dp->pszFileName, char, m_strFile.GetLength() + 1);
-	strcpy(dp->pszFileName, m_strFile);
+	dp->strFileName = m_strFile;
 	dp->uMaxSections = 1;
 	dp->uMaxAttempts = 1;
 	dp->dwFlags |= DPF_DONTRESTARTIFNORESUME;
 	dp->enSCR = SCR_STOP;
 	dp->enAER = AER_REWRITE;
-	*dp->pszAdditionalExt = 0;
-
-	SAFE_DELETE_ARRAY(dnp->pszReferer);
-	fsnew(dnp->pszReferer, char, 1);
-	*dnp->pszReferer = 0;
+	dp->strAdditionalExt.clear();
+	dnp->strReferer.clear();
 
 	m_dldr.StartDownloading();
 

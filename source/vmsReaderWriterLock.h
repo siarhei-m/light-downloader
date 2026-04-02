@@ -15,7 +15,7 @@ class vmsReaderWriterLock
 	{
 		DWORD dwThreadId = GetCurrentThreadId();
 		if (dwThreadId == m_dwWritingThreadId) return;
-		DWORD cLocks = (DWORD)(DWORD_PTR)m_cTlsReadLocks.getValue();
+		DWORD_PTR cLocks = (DWORD_PTR)m_cTlsReadLocks.getValue();
 		if (!cLocks)
 		{
 			vmsAUTOLOCKSECTION(m_csWrite);
@@ -28,7 +28,7 @@ class vmsReaderWriterLock
 	{
 		DWORD dwThreadId = GetCurrentThreadId();
 		if (dwThreadId == m_dwWritingThreadId) return;
-		DWORD cLocks = (DWORD)(DWORD_PTR)m_cTlsReadLocks.getValue();
+		DWORD_PTR cLocks = (DWORD_PTR)m_cTlsReadLocks.getValue();
 		assert(cLocks != 0);
 		if (!cLocks) return;
 		cLocks--;

@@ -19,6 +19,7 @@ jobs:
       uses: github/codeql-action/init@v4
       with:
         languages: cpp
+        config-file: .github/codeql/codeql-config.yml
 
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v3

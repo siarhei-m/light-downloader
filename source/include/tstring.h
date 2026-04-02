@@ -39,11 +39,11 @@ inline std::string _t2utf8(LPCTSTR ptsz)
 	if (!iLen) return strResult;
 	std::wstring wstr;
 	wstr.resize(iLen);
-	MultiByteToWideChar(CP_ACP, 0, ptsz, -1, &wstr[0], wstr.size());
+	MultiByteToWideChar(CP_ACP, 0, ptsz, -1, &wstr[0], (int)wstr.size());
 	iLen = WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, NULL, 0, NULL, NULL);
 	if (!iLen) return strResult;
 	strResult.resize(iLen);
-	WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &strResult[0], strResult.size(), NULL, NULL);
+	WideCharToMultiByte(CP_UTF8, 0, wstr.c_str(), -1, &strResult[0], (int)strResult.size(), NULL, NULL);
 #endif
 	return strResult;
 }

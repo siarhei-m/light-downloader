@@ -220,7 +220,7 @@ void CCreateBatchDownload::Update_User_Password()
 	BOOL b = m_bAuthChanged;
 
 	fsDownload_NetworkProperties* dnp = m_dld->pMgr->GetDownloadMgr()->GetDNP();
-	if (*dnp->pszUserName)
+	if (!dnp->strUserName.empty())
 	{
 		CheckDlgButton(IDC_USELOGIN, BST_CHECKED);
 		m_bAuthorization = TRUE;
@@ -231,8 +231,8 @@ void CCreateBatchDownload::Update_User_Password()
 		m_bAuthorization = FALSE;
 	}
 
-	SetDlgItemText(IDC_USER, dnp->pszUserName);
-	SetDlgItemText(IDC_PASSWORD, dnp->pszPassword);
+	SetDlgItemText(IDC_USER, dnp->strUserName.c_str());
+	SetDlgItemText(IDC_PASSWORD, dnp->strPassword.c_str());
 
 	UpdateEnabled();
 
@@ -683,8 +683,7 @@ void CCreateBatchDownload::OnOK()
 		}
 	}
 
-	fsnew(m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, CHAR, strOutFolder.GetLength() + 1);
-	strcpy(m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, strOutFolder);
+	m_dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = strOutFolder;
 
 	m_dld->pGroup = m_wndGroups.GetSelectedGroup();
 
@@ -700,7 +699,7 @@ void CCreateBatchDownload::OnOK()
 	_App.CreateBD_LastNumbers(str);
 	_App.CreateBD_SaveAs_Template(strSaveAs);
 
-	if (m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszUserName && *m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszUserName)
+	if (!m_dld->pMgr->GetDownloadMgr()->GetDNP()->strUserName.empty())
 	{
 		fsURL url;
 		url.Crack(m_strUrl);
@@ -708,8 +707,8 @@ void CCreateBatchDownload::OnOK()
 		if (strstr(pszServer, "(*)") == NULL && strstr(pszServer, "(*a)") == NULL && strstr(pszServer, "(*A)") == NULL)
 		{
 			CCreateDownloadDlg::_SavePassword(pszServer, fsSchemeToNP(url.GetInternetScheme()),
-			                                  m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszUserName,
-			                                  m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszPassword);
+			                                  m_dld->pMgr->GetDownloadMgr()->GetDNP()->strUserName.c_str(),
+			                                  m_dld->pMgr->GetDownloadMgr()->GetDNP()->strPassword.c_str());
 		}
 	}
 
@@ -745,14 +744,8 @@ BOOL CCreateBatchDownload::ReadAuth()
 	if (strUser != "")
 	{
 		fsDownload_NetworkProperties* dnp = m_dld->pMgr->GetDownloadMgr()->GetDNP();
-
-		SAFE_DELETE_ARRAY(dnp->pszUserName);
-		SAFE_DELETE_ARRAY(dnp->pszPassword);
-
-		fsnew(dnp->pszUserName, CHAR, strUser.GetLength() + 1);
-		fsnew(dnp->pszPassword, CHAR, strPassword.GetLength() + 1);
-		strcpy(dnp->pszUserName, strUser);
-		strcpy(dnp->pszPassword, strPassword);
+		dnp->strUserName = strUser;
+		dnp->strPassword = strPassword;
 	}
 
 	return TRUE;
@@ -764,7 +757,7 @@ void CCreateBatchDownload::GenerateAndAddDownloads()
 	if (m_pvDownloads == NULL) m_pvDownloads = GenerateDownloads();
 
 	ASSERT(m_blSaveAs.get_ResultCount() == 0 || m_blSaveAs.get_ResultCount() == (int)m_pvDownloads->size());
-	LPCSTR psz = m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
+	LPCSTR psz = m_dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str();
 	int len = lstrlen(psz);
 	size_t i = 0;
 	for (i = 0; i < (size_t)m_blSaveAs.get_ResultCount(); i++)
@@ -772,11 +765,8 @@ void CCreateBatchDownload::GenerateAndAddDownloads()
 		fsDownload_Properties* dp = m_pvDownloads->at(i)->pMgr->GetDownloadMgr()->GetDP();
 		LPCSTR pszAs = m_blSaveAs.get_Result(i);
 
-		if (dp->pszFileName) delete[] dp->pszFileName;
-
-		dp->pszFileName = new char[len + lstrlen(pszAs) + 1];
-		lstrcpy(dp->pszFileName, psz);
-		lstrcat(dp->pszFileName, pszAs);
+		dp->strFileName = psz;
+		dp->strFileName += pszAs;
 	}
 
 	for (i = 0; i < m_pvDownloads->size(); i++) fsDownloadsMgr::Download_CloneSettings(m_pvDownloads->at(i), m_dld);

@@ -45,7 +45,7 @@ fsDownloadMgr* vmsDownloadMgrEx::GetDownloadMgr()
 
 fsString vmsDownloadMgrEx::get_OutputFilePathName()
 {
-	return m_pMgr->GetDP()->pszFileName;
+	return m_pMgr->GetDP()->strFileName.c_str();
 }
 
 float vmsDownloadMgrEx::GetPercentDone()

@@ -6,31 +6,12 @@
 #include "DownloadProperties.h"
 #include "../hash/vmsHash.h"
 
-BOOL fsFillBuffer(LPSTR* ppszBuffer, UINT* pnSize, LPCSTR pszFrom, BOOL bAllocate)
+void fsDNP_GetDefaults(fsDownload_NetworkProperties* pDNP)
 {
-	if (pszFrom == NULL) return FALSE;
-
-	UINT len = strlen(pszFrom);
-
-	if (len >= *pnSize && !bAllocate) return FALSE;
-
-	*pnSize = len + 1;
-
-	if (bAllocate) fsnew(*ppszBuffer, CHAR, len + 1);
-
-	if (*ppszBuffer) strcpy_s(*ppszBuffer, *pnSize, pszFrom);
-
-	return TRUE;
-}
-
-BOOL fsDNP_GetDefaults(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate)
-{
-	BOOL bResult = TRUE;
-
-	if (pDNP == NULL || pBuffs == NULL)
+	if (pDNP == NULL)
 	{
 		SetLastError(ERROR_INVALID_PARAMETER);
-		return FALSE;
+		return;
 	}
 
 	pDNP->wRollBackSize = _App.RollBackSize();
@@ -43,45 +24,21 @@ BOOL fsDNP_GetDefaults(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pB
 	pDNP->wLowSpeed_Duration = _App.LowSpeed_Duration();
 	pDNP->wLowSpeed_Factor = _App.LowSpeed_Factor();
 
-	bResult &= fsFillBuffer(&pDNP->pszAgent, &pBuffs->nAgentSize, _App.Agent(), bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszPassword, &pBuffs->nPasswordSize, _App.UserPassword(), bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszReferer, &pBuffs->nRefferSize, _App.Referer(), bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszUserName, &pBuffs->nUserNameSize, _App.UserName(), bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszASCIIExts, &pBuffs->nTransferTypeExtsSize, _App.ASCIIExts(), bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszCookies, &pBuffs->nCookiesSize, "", bAllocate);
-	bResult &= fsFillBuffer(&pDNP->pszPostData, &pBuffs->nPostDataSize, "", bAllocate);
-
-	if (!bResult) SetLastError(ERROR_INSUFFICIENT_BUFFER);
-
-	return bResult;
+	pDNP->strAgent = _App.Agent();
+	pDNP->strPassword = _App.UserPassword();
+	pDNP->strReferer = _App.Referer();
+	pDNP->strUserName = _App.UserName();
+	pDNP->strASCIIExts = _App.ASCIIExts();
+	pDNP->strCookies = "";
+	pDNP->strPostData = "";
 }
 
-void fsDNP_GetDefaults_Free(fsDownload_NetworkProperties* pDNP)
-{
-	SAFE_DELETE_ARRAY(pDNP->pszPassword);
-	SAFE_DELETE_ARRAY(pDNP->pszProxyName);
-	SAFE_DELETE_ARRAY(pDNP->pszProxyPassword);
-	SAFE_DELETE_ARRAY(pDNP->pszProxyUserName);
-	SAFE_DELETE_ARRAY(pDNP->pszReferer);
-	SAFE_DELETE_ARRAY(pDNP->pszUserName);
-	SAFE_DELETE_ARRAY(pDNP->pszAgent);
-	SAFE_DELETE_ARRAY(pDNP->pszASCIIExts);
-	SAFE_DELETE_ARRAY(pDNP->pszCookies);
-	SAFE_DELETE_ARRAY(pDNP->pszPostData);
-}
-
-BOOL fsDP_GetDefaults(fsDownload_Properties* pDP, fsDP_BuffersInfo* pBuffs, BOOL bAllocate)
+void fsDP_GetDefaults(fsDownload_Properties* pDP)
 {
 	if (pDP == NULL)
 	{
 		SetLastError(ERROR_INVALID_PARAMETER);
-		return FALSE;
-	}
-
-	if (pDP->wStructSize != sizeof(fsDownload_Properties))
-	{
-		SetLastError(ERROR_INVALID_DATA);
-		return FALSE;
+		return;
 	}
 
 	pDP->bIgnoreRestrictions = _App.IgnoreRestrictions();
@@ -102,90 +59,57 @@ BOOL fsDP_GetDefaults(fsDownload_Properties* pDP, fsDP_BuffersInfo* pBuffs, BOOL
 
 	pDP->dwFlags = _App.DownloadFlags();
 
-	// if (_App.UseZipPreview ())
-	//	pDP->dwFlags |= DPF_USEZIPPREVIEW;
-	// else
-	//		pDP->dwFlags &= ~DPF_USEZIPPREVIEW;
-
 	pDP->bCheckIntegrityWhenDone = _App.Download_CheckIntegrityWhenDone();
 	pDP->dwIntegrityCheckAlgorithm = HA_MD5;
 	pDP->enICFR = (vmsIntegrityCheckFailedReaction)_App.Download_IntegrityCheckFailedReaction();
-	pDP->pszCheckSum = new char[1];
-	*pDP->pszCheckSum = 0;
+	pDP->strCheckSum = "";
 
-	if (bAllocate) pDP->pszCheckSum = new char[1];
-	*pDP->pszCheckSum = 0;
-
-	BOOL bResult = TRUE;
-
-	bResult &= fsFillBuffer(&pDP->pszAdditionalExt, &pBuffs->nAdditionalExtSize, _App.AdditionalExtension(), bAllocate);
-	bResult &= fsFillBuffer(&pDP->pszCreateExt, &pBuffs->nAdditionalExtSize, _App.Download_CreateExt(), bAllocate);
-
-	return bResult ? IR_SUCCESS : IR_ERROR;
+	pDP->strAdditionalExt = _App.AdditionalExtension();
+	pDP->strCreateExt = _App.Download_CreateExt();
 }
 
-fsInternetResult fsDNP_GetByUrl(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate,
-                                LPCSTR pszUrl)
+fsInternetResult fsDNP_GetByUrl(fsDownload_NetworkProperties* pDNP, LPCSTR pszUrl)
 {
-	if (!fsDNP_GetDefaults(pDNP, pBuffs, bAllocate)) return IR_ERROR;
+	fsDNP_GetDefaults(pDNP);
 
 	fsURL url;
-	BOOL bOk = TRUE;
 
 	fsInternetResult ir = url.Crack(pszUrl);
 	if (ir != IR_SUCCESS)
-	{
-		fsDNP_GetDefaults_Free(pDNP);
 		return ir;
-	}
 
 	pDNP->enProtocol = fsSchemeToNP(url.GetInternetScheme());
 
-	fsGetProxyByNP(pDNP, pBuffs, bAllocate);
+	fsGetProxyByNP(pDNP);
 
 	pDNP->uServerPort = url.GetPort();
 
-	bOk &= fsFillBuffer(&pDNP->pszServerName, &pBuffs->nServerNameSize, url.GetHostName(), bAllocate);
-	bOk &= fsFillBuffer(&pDNP->pszPathName, &pBuffs->nPathNameSize, url.GetPath(), bAllocate);
+	pDNP->strServerName = url.GetHostName();
+	pDNP->strPathName = url.GetPath();
 
 	LPCSTR pszUser = url.GetUserName();
 	LPCSTR pszPass = url.GetPassword();
 
 	if (*pszUser)
-	{
-		if (bAllocate) SAFE_DELETE_ARRAY(pDNP->pszUserName);
-
-		bOk &= fsFillBuffer(&pDNP->pszUserName, &pBuffs->nUserNameSize, pszUser, bAllocate);
-	}
+		pDNP->strUserName = pszUser;
 
 	if (*pszPass)
-	{
-		if (bAllocate) SAFE_DELETE_ARRAY(pDNP->pszPassword);
-
-		bOk &= fsFillBuffer(&pDNP->pszPassword, &pBuffs->nPasswordSize, pszPass, bAllocate);
-	}
+		pDNP->strPassword = pszPass;
 
 	return IR_SUCCESS;
 }
 
 void fsDNP_SetAuth(fsDownload_NetworkProperties* dnp, LPCSTR pszUser, LPCSTR pszPassword)
 {
-	SAFE_DELETE_ARRAY(dnp->pszUserName);
-	SAFE_DELETE_ARRAY(dnp->pszPassword);
-
 	if (pszUser)
-	{
-		size_t len = strlen(pszUser) + 1;
-		dnp->pszUserName = new char[len];
-		strcpy_s(dnp->pszUserName, len, pszUser);
-	}
+		dnp->strUserName = pszUser;
+	else
+		dnp->strUserName.clear();
 
 	if (pszPassword)
-	{
-		size_t len = strlen(pszPassword) + 1;
-		dnp->pszPassword = new char[len];
-		strcpy_s(dnp->pszPassword, len, pszPassword);
-	}
+		dnp->strPassword = pszPassword;
+	else
+		dnp->strPassword.clear();
 }
 
 fsInternetResult fsDNP_ApplyUrl(fsDownload_NetworkProperties* dnp, LPCSTR pszUrl)
@@ -200,59 +124,32 @@ fsInternetResult fsDNP_ApplyUrl(fsDownload_NetworkProperties* dnp, LPCSTR pszUrl
 
 	if (dnp->enProtocol != np)
 	{
-		fsDNP_BuffersInfo buffs;
-
-		SAFE_DELETE_ARRAY(dnp->pszProxyName);
-		SAFE_DELETE_ARRAY(dnp->pszProxyUserName);
-		SAFE_DELETE_ARRAY(dnp->pszProxyPassword);
+		dnp->strProxyName.clear();
+		dnp->strProxyUserName.clear();
+		dnp->strProxyPassword.clear();
 
 		dnp->enProtocol = np;
 
-		fsGetProxyByNP(dnp, &buffs, TRUE);
+		fsGetProxyByNP(dnp);
 	}
 
 	dnp->uServerPort = url.GetPort();
 
-	SAFE_DELETE_ARRAY(dnp->pszPathName);
-	{
-		size_t len = strlen(url.GetPath()) + 1;
-		fsnew(dnp->pszPathName, char, len);
-		strcpy_s(dnp->pszPathName, len, url.GetPath());
-	}
-
-	SAFE_DELETE_ARRAY(dnp->pszServerName);
-	{
-		size_t len = strlen(url.GetHostName()) + 1;
-		fsnew(dnp->pszServerName, char, len);
-		strcpy_s(dnp->pszServerName, len, url.GetHostName());
-	}
+	dnp->strPathName = url.GetPath();
+	dnp->strServerName = url.GetHostName();
 
 	if (*url.GetUserName())
 	{
-		SAFE_DELETE_ARRAY(dnp->pszUserName);
-		size_t len = strlen(url.GetUserName()) + 1;
-		fsnew(dnp->pszUserName, char, len);
-		strcpy_s(dnp->pszUserName, len, url.GetUserName());
-
-		SAFE_DELETE_ARRAY(dnp->pszPassword);
-		len = strlen(url.GetPassword()) + 1;
-		fsnew(dnp->pszPassword, char, len);
-		strcpy_s(dnp->pszPassword, len, url.GetPassword());
+		dnp->strUserName = url.GetUserName();
+		dnp->strPassword = url.GetPassword();
 	}
 	else
 	{
-		*dnp->pszUserName = 0;
-		*dnp->pszPassword = 0;
+		dnp->strUserName.clear();
+		dnp->strPassword.clear();
 	}
 
 	return IR_SUCCESS;
-}
-
-void fsDNP_GetByUrl_Free(fsDownload_NetworkProperties* pDNP)
-{
-	fsDNP_GetDefaults_Free(pDNP);
-	SAFE_DELETE_ARRAY(pDNP->pszPathName);
-	SAFE_DELETE_ARRAY(pDNP->pszServerName);
 }
 
 fsNetworkProtocol fsSchemeToNP(INTERNET_SCHEME scheme)
@@ -298,43 +195,39 @@ INTERNET_SCHEME fsNPToScheme(fsNetworkProtocol np)
 	}
 }
 
-fsInternetResult fsGetProxyByNP(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate)
+fsInternetResult fsGetProxyByNP(fsDownload_NetworkProperties* pDNP)
 {
-	BOOL bOk = TRUE;
-
 	switch (pDNP->enProtocol)
 	{
 	case NP_FTP:
-		bOk &= fsFillBuffer(&pDNP->pszProxyName, &pBuffs->nProxyNameSize, _App.FtpProxy_Name(), bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyPassword, &pBuffs->nProxyPasswordSize, _App.FtpProxy_Password(), bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyUserName, &pBuffs->nProxyUserNameSize, _App.FtpProxy_UserName(), bAllocate);
+		pDNP->strProxyName = _App.FtpProxy_Name();
+		pDNP->strProxyPassword = _App.FtpProxy_Password();
+		pDNP->strProxyUserName = _App.FtpProxy_UserName();
 		break;
 
 	case NP_HTTP:
-		bOk &= fsFillBuffer(&pDNP->pszProxyName, &pBuffs->nProxyNameSize, _App.HttpProxy_Name(), bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyPassword, &pBuffs->nProxyPasswordSize, _App.HttpProxy_Password(), bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyUserName, &pBuffs->nProxyUserNameSize, _App.HttpProxy_UserName(), bAllocate);
+		pDNP->strProxyName = _App.HttpProxy_Name();
+		pDNP->strProxyPassword = _App.HttpProxy_Password();
+		pDNP->strProxyUserName = _App.HttpProxy_UserName();
 		break;
 
 	case NP_HTTPS:
-		bOk &= fsFillBuffer(&pDNP->pszProxyName, &pBuffs->nProxyNameSize, _App.HttpsProxy_Name(), bAllocate);
-		bOk &=
-		    fsFillBuffer(&pDNP->pszProxyPassword, &pBuffs->nProxyPasswordSize, _App.HttpsProxy_Password(), bAllocate);
-		bOk &=
-		    fsFillBuffer(&pDNP->pszProxyUserName, &pBuffs->nProxyUserNameSize, _App.HttpsProxy_UserName(), bAllocate);
+		pDNP->strProxyName = _App.HttpsProxy_Name();
+		pDNP->strProxyPassword = _App.HttpsProxy_Password();
+		pDNP->strProxyUserName = _App.HttpsProxy_UserName();
 		break;
 
 	case NP_FILE:
-		bOk &= fsFillBuffer(&pDNP->pszProxyName, &pBuffs->nProxyNameSize, "", bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyPassword, &pBuffs->nProxyPasswordSize, "", bAllocate);
-		bOk &= fsFillBuffer(&pDNP->pszProxyUserName, &pBuffs->nProxyUserNameSize, "", bAllocate);
+		pDNP->strProxyName.clear();
+		pDNP->strProxyPassword.clear();
+		pDNP->strProxyUserName.clear();
 		break;
 
 	default:
 		return IR_BADURL;
 	}
 
-	return bOk ? IR_SUCCESS : IR_ERROR;
+	return IR_SUCCESS;
 }
 
 BOOL fsGetProxy(fsNetworkProtocol np, CString& strProxy, CString& strUser, CString& strPassword)
@@ -388,21 +281,12 @@ BOOL fsDNP_CloneSettings(fsDownload_NetworkProperties* dst, fsDownload_NetworkPr
 	dst->enFtpTransferType = src->enFtpTransferType;
 	dst->bUseCookie = src->bUseCookie;
 
-	UINT u;
+	dst->strAgent = src->strAgent;
+	dst->strASCIIExts = src->strASCIIExts;
 
-	SAFE_DELETE_ARRAY(dst->pszAgent);
-	SAFE_DELETE_ARRAY(dst->pszASCIIExts);
-
-	fsFillBuffer(&dst->pszAgent, &u, src->pszAgent, TRUE);
-	fsFillBuffer(&dst->pszASCIIExts, &u, src->pszASCIIExts, TRUE);
-
-	SAFE_DELETE_ARRAY(dst->pszProxyName);
-	SAFE_DELETE_ARRAY(dst->pszProxyUserName);
-	SAFE_DELETE_ARRAY(dst->pszProxyPassword);
-
-	fsFillBuffer(&dst->pszProxyName, &u, src->pszProxyName, TRUE);
-	fsFillBuffer(&dst->pszProxyUserName, &u, src->pszProxyUserName, TRUE);
-	fsFillBuffer(&dst->pszProxyPassword, &u, src->pszProxyPassword, TRUE);
+	dst->strProxyName = src->strProxyName;
+	dst->strProxyUserName = src->strProxyUserName;
+	dst->strProxyPassword = src->strProxyPassword;
 
 	dst->dwFlags = src->dwFlags;
 
@@ -414,7 +298,7 @@ void fsDNP_GetURL(fsDownload_NetworkProperties* dnp, LPSTR pszURL)
 	DWORD dw = 10000;
 	fsURL url;
 
-	if (IR_SUCCESS != url.Create(fsNPToScheme(dnp->enProtocol), dnp->pszServerName, dnp->uServerPort, dnp->pszUserName,
-	                             dnp->pszPassword, dnp->pszPathName, pszURL, &dw))
+	if (IR_SUCCESS != url.Create(fsNPToScheme(dnp->enProtocol), dnp->strServerName.c_str(), dnp->uServerPort, dnp->strUserName.c_str(),
+	                             dnp->strPassword.c_str(), dnp->strPathName.c_str(), pszURL, &dw))
 		*pszURL = 0;
 }

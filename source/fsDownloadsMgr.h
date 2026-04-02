@@ -97,7 +97,7 @@ struct vmsDldErrorStamp
 	vmsBtDownloadErrorState Error;
 	// DWORD Error;
 
-	DWORD TimeStamp;
+	ULONGLONG TimeStamp;
 
 	vmsDldErrorStamp() {}
 

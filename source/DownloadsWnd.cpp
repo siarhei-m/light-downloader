@@ -348,7 +348,7 @@ LRESULT CDownloadsWnd::OnAppExit(WPARAM, LPARAM)
 
 	_DldsMgr.UnlockList(true);
 
-	DWORD dwTicks = GetTickCount64();
+	ULONGLONG dwTicks = GetTickCount64();
 
 	while (_DldsMgr.IsRunning())
 	{
@@ -470,12 +470,12 @@ void CDownloadsWnd::OnDownloadDefProperties()
 		fsDownload_NetworkProperties* dnp = http->pMgr->GetDownloadMgr()->GetDNP();
 
 		_App.AccDeniedReaction(dp->aEP[DFE_ACCDENIED]);
-		_App.AdditionalExtension(dp->pszAdditionalExt);
-		_App.Download_CreateExt(dp->pszCreateExt);
-		_App.Agent(dnp->pszAgent);
+		_App.AdditionalExtension(dp->strAdditionalExt.c_str());
+		_App.Download_CreateExt(dp->strCreateExt.c_str());
+		_App.Agent(dnp->strAgent.c_str());
 		_App.AlreadyExistReaction(dp->enAER);
 		_App.FtpTransferType(dnp->enFtpTransferType);
-		_App.ASCIIExts(dnp->pszASCIIExts);
+		_App.ASCIIExts(dnp->strASCIIExts.c_str());
 		_App.DownloadFlags(dp->dwFlags);
 		_App.IgnoreRestrictions(dp->bIgnoreRestrictions);
 		_App.InternetAccessType(dnp->enAccType);
@@ -483,7 +483,7 @@ void CDownloadsWnd::OnDownloadDefProperties()
 		_App.MaxSections(dp->uMaxSections);
 		_App.NotFoundReaction(dp->aEP[DFE_NOTFOUND]);
 		_App.FtpFlags(dnp->dwFtpFlags);
-		_App.Referer(dnp->pszReferer);
+		_App.Referer(dnp->strReferer.c_str());
 		_App.ReserveDiskSpace(dp->bReserveDiskSpace);
 		_App.RestartSpeedLow(dp->bRestartSpeedLow);
 		_App.RetriesTime(dp->uRetriesTime);
@@ -493,8 +493,8 @@ void CDownloadsWnd::OnDownloadDefProperties()
 		_App.TrafficRestriction(dp->uTrafficRestriction);
 		_App.UseCookie(dnp->bUseCookie);
 		_App.UseHttp11(dnp->bUseHttp11);
-		_App.UserName(dnp->pszUserName);
-		_App.UserPassword(dnp->pszPassword);
+		_App.UserName(dnp->strUserName.c_str());
+		_App.UserPassword(dnp->strPassword.c_str());
 		_App.RollBackSize(dnp->wRollBackSize);
 		_App.DNPFlags(dnp->dwFlags);
 		_App.LowSpeed_Duration(dnp->wLowSpeed_Duration);
@@ -502,17 +502,17 @@ void CDownloadsWnd::OnDownloadDefProperties()
 		_App.Download_CheckIntegrityWhenDone(dp->bCheckIntegrityWhenDone);
 		_App.Download_IntegrityCheckFailedReaction(dp->enICFR);
 
-		_App.HttpProxy_Name(dnp->pszProxyName);
-		_App.HttpProxy_Password(dnp->pszProxyPassword);
-		_App.HttpProxy_UserName(dnp->pszProxyUserName);
+		_App.HttpProxy_Name(dnp->strProxyName.c_str());
+		_App.HttpProxy_Password(dnp->strProxyPassword.c_str());
+		_App.HttpProxy_UserName(dnp->strProxyUserName.c_str());
 
-		_App.HttpsProxy_Name(https->pMgr->GetDownloadMgr()->GetDNP()->pszProxyName);
-		_App.HttpsProxy_Password(https->pMgr->GetDownloadMgr()->GetDNP()->pszProxyPassword);
-		_App.HttpsProxy_UserName(https->pMgr->GetDownloadMgr()->GetDNP()->pszProxyUserName);
+		_App.HttpsProxy_Name(https->pMgr->GetDownloadMgr()->GetDNP()->strProxyName.c_str());
+		_App.HttpsProxy_Password(https->pMgr->GetDownloadMgr()->GetDNP()->strProxyPassword.c_str());
+		_App.HttpsProxy_UserName(https->pMgr->GetDownloadMgr()->GetDNP()->strProxyUserName.c_str());
 
-		_App.FtpProxy_Name(ftp->pMgr->GetDownloadMgr()->GetDNP()->pszProxyName);
-		_App.FtpProxy_Password(ftp->pMgr->GetDownloadMgr()->GetDNP()->pszProxyPassword);
-		_App.FtpProxy_UserName(ftp->pMgr->GetDownloadMgr()->GetDNP()->pszProxyUserName);
+		_App.FtpProxy_Name(ftp->pMgr->GetDownloadMgr()->GetDNP()->strProxyName.c_str());
+		_App.FtpProxy_Password(ftp->pMgr->GetDownloadMgr()->GetDNP()->strProxyPassword.c_str());
+		_App.FtpProxy_UserName(ftp->pMgr->GetDownloadMgr()->GetDNP()->strProxyUserName.c_str());
 	}
 
 	_DlgMgr.OnEndDialog(&sheet);
@@ -619,9 +619,7 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 
 	if (pszReferer)
 	{
-		SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDNP()->pszReferer);
-		dld->pMgr->GetDownloadMgr()->GetDNP()->pszReferer = new char[strlen(pszReferer) + 1];
-		strcpy(dld->pMgr->GetDownloadMgr()->GetDNP()->pszReferer, pszReferer);
+		dld->pMgr->GetDownloadMgr()->GetDNP()->strReferer = pszReferer;
 	}
 
 	if (pszComment) dld->strComment = pszComment;
@@ -681,17 +679,13 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 		if (dld->pMgr->GetDownloadMgr() != NULL)
 		{
 			fsDownload_NetworkProperties* dnp = dld->pMgr->GetDownloadMgr()->GetDNP();
-			if (!dnp->pszUserName || !*dnp->pszUserName)
+			if (dnp->strUserName.empty() || dnp->strUserName.empty())
 			{
-				fsSiteInfo* site = _SitesMgr.FindSite(dnp->pszServerName, fsNPToSiteValidFor(dnp->enProtocol));
+				fsSiteInfo* site = _SitesMgr.FindSite(dnp->strServerName.c_str(), fsNPToSiteValidFor(dnp->enProtocol));
 				if (site != NULL && !site->strUser.IsEmpty())
 				{
-					SAFE_DELETE_ARRAY(dnp->pszUserName);
-					SAFE_DELETE_ARRAY(dnp->pszPassword);
-					fsnew(dnp->pszUserName, CHAR, site->strUser.GetLength() + 1);
-					fsnew(dnp->pszPassword, CHAR, site->strPassword.GetLength() + 1);
-					strcpy(dnp->pszUserName, site->strUser);
-					strcpy(dnp->pszPassword, site->strPassword);
+					dnp->strUserName = site->strUser;
+					dnp->strPassword = site->strPassword;
 				}
 			}
 		}
@@ -754,24 +748,18 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 		if (strDstFolder.IsEmpty() == FALSE)
 		{
 			LPCSTR pszFolder = strDstFolder;
-			delete[] dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
-			dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = new char[lstrlen(pszFolder) + 2];
-			lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, pszFolder);
+			dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = pszFolder;
 			if (pszFolder[lstrlen(pszFolder) - 1] != '\\')
-				lstrcat(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, "\\");
+				dld->pMgr->GetDownloadMgr()->GetDP()->strFileName += "\\";
 		}
 
 		if (pParams->dwMask & DWCDAP_FILENAME)
 		{
 			fsDownload_Properties* dp = dld->pMgr->GetDownloadMgr()->GetDP();
-			if (dp->pszFileName[lstrlen(dp->pszFileName) - 1] == '\\' ||
-			    dp->pszFileName[lstrlen(dp->pszFileName) - 1] == '/')
+			if (!dp->strFileName.empty() &&
+			    (dp->strFileName.back() == '\\' || dp->strFileName.back() == '/'))
 			{
-				LPSTR psz = new char[lstrlen(dp->pszFileName) + pParams->strFileName.GetLength() + 1];
-				lstrcpy(psz, dp->pszFileName);
-				lstrcat(psz, pParams->strFileName);
-				delete[] dp->pszFileName;
-				dp->pszFileName = psz;
+				dp->strFileName += (LPCSTR)pParams->strFileName;
 			}
 		}
 
@@ -784,18 +772,14 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 				SHGetSpecialFolderLocation(NULL, CSIDL_DESKTOP, &pidl);
 				SHGetPathFromIDList(pidl, szDesktop);
 				if (szDesktop[lstrlen(szDesktop) - 1] != '\\') lstrcat(szDesktop, "\\");
-				delete[] dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
-				dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = new char[lstrlen(szDesktop) + 1];
-				lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, szDesktop);
+				dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = szDesktop;
 			}
 			else if (pParams->dwFlags & DWDCDAP_F_SAVETOTEMPFLDR)
 			{
 				char szTmpFolder[MY_MAX_PATH];
 				GetTempPath(MY_MAX_PATH, szTmpFolder);
 				if (szTmpFolder[lstrlen(szTmpFolder) - 1] != '\\') lstrcat(szTmpFolder, "\\");
-				delete[] dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
-				dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = new char[lstrlen(szTmpFolder) + 1];
-				lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, szTmpFolder);
+				dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = szTmpFolder;
 			}
 
 			if (pParams->dwFlags & DWDCDAP_F_DELWHENDONE) dld->dwFlags |= DLD_DELETEWHENDONE | DLD_DELETEFILEATRESTART;
@@ -812,16 +796,12 @@ UINT CDownloadsWnd::CreateDownload(LPCSTR pszStartUrl, BOOL bReqTopMostDialog, L
 
 		if (pParams->dwMask & DWCDAP_COOKIES)
 		{
-			SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies);
-			dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies = new char[pParams->strCookies.GetLength() + 1];
-			lstrcpy(dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies, pParams->strCookies);
+			dld->pMgr->GetDownloadMgr()->GetDNP()->strCookies = pParams->strCookies;
 		}
 
 		if (pParams->dwMask & DWCDAP_POSTDATA)
 		{
-			SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData);
-			dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData = new char[pParams->strPostData.GetLength() + 1];
-			lstrcpy(dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData, pParams->strPostData);
+			dld->pMgr->GetDownloadMgr()->GetDNP()->strPostData = pParams->strPostData;
 		}
 	}
 
@@ -1406,8 +1386,8 @@ BOOL CDownloadsWnd::CreateDownloadWithDefSettings(vmsDownloadSmartPtr dld, LPCST
 
 	fsDownload_NetworkProperties* dnp = dld->pMgr->GetDownloadMgr()->GetDNP();
 
-	fsSiteInfo* site = _SitesMgr.FindSite(dnp->pszServerName, fsNPToSiteValidFor(dnp->enProtocol));
-	if (site && site->strUser != NULL && *dnp->pszUserName == 0) fsDNP_SetAuth(dnp, site->strUser, site->strPassword);
+	fsSiteInfo* site = _SitesMgr.FindSite(dnp->strServerName.c_str(), fsNPToSiteValidFor(dnp->enProtocol));
+	if (site && site->strUser != NULL && dnp->strUserName.empty()) fsDNP_SetAuth(dnp, site->strUser, site->strPassword);
 
 	CString strFolder;
 
@@ -1424,7 +1404,7 @@ BOOL CDownloadsWnd::CreateDownloadWithDefSettings(vmsDownloadSmartPtr dld, LPCST
 			CHAR szFile[10000];
 			*szFile = 0;
 
-			fsFileNameFromUrlPath(dnp->pszPathName, dnp->enProtocol == NP_FTP, TRUE, szFile, sizeof(szFile));
+			fsFileNameFromUrlPath(dnp->strPathName.c_str(), dnp->enProtocol == NP_FTP, TRUE, szFile, sizeof(szFile));
 
 			int len = strlen(szFile);
 
@@ -1454,9 +1434,7 @@ BOOL CDownloadsWnd::CreateDownloadWithDefSettings(vmsDownloadSmartPtr dld, LPCST
 	if (strFolder.GetLength() == 0) strFolder = (LPCSTR)pGroup->strOutFolder;
 	if (strFolder.Right(1) != '\\' && strFolder.Right(1) != '/') strFolder += '\\';
 
-	SAFE_DELETE(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName);
-	dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = new char[strFolder.GetLength() + 1];
-	strcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, strFolder);
+	dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = (LPCSTR)strFolder;
 
 	return TRUE;
 }

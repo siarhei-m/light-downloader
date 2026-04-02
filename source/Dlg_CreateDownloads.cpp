@@ -350,8 +350,7 @@ void CCreateDownloadsDlg::CreateDownloads(HTREEITEM hTree, LPCSTR pszRootDir, BO
 				dld->pGroup = m_pGroup;
 				dld->bAutoStart = m_bAutoStart;
 				fsDownload_Properties* dp = dld->pMgr->GetDownloadMgr()->GetDP();
-				fsnew(dp->pszFileName, char, strDir.GetLength() + 1);
-				strcpy(dp->pszFileName, strDir);
+				dp->strFileName = strDir;
 
 				m_vpDldsToStart.push_back(dld);
 			}

@@ -94,7 +94,7 @@ UINT fsDownloadsMgr::Add(vmsDownloadSmartPtr dld, BOOL bKeepIDAsIs, bool bPlaceT
 
 	if (dld->pMgr->GetDownloadMgr() != NULL)
 	{
-		fsSiteInfo* site = _SitesMgr.FindSite(dld->pMgr->GetDownloadMgr()->GetDNP()->pszServerName,
+		fsSiteInfo* site = _SitesMgr.FindSite(dld->pMgr->GetDownloadMgr()->GetDNP()->strServerName.c_str(),
 		                                      fsNPToSiteValidFor(dld->pMgr->GetDownloadMgr()->GetDNP()->enProtocol));
 		if (site) dld->pMgr->GetDownloadMgr()->GetDNP()->dwFtpFlags = site->dwFtpFlags;
 	}
@@ -320,7 +320,7 @@ void fsDownloadsMgr::ProcessDownloads()
 			BOOL bAccept = FALSE, bAcceptAdditionalConnections = FALSE, bNeedCloseSomeConnections = FALSE;
 
 			fsDownloadMgr* pMgr = dld->pMgr->GetDownloadMgr();
-			LPCSTR pszSiteName = pMgr ? pMgr->GetDNP()->pszServerName : NULL;
+			LPCSTR pszSiteName = pMgr ? pMgr->GetDNP()->strServerName.c_str() : NULL;
 			fsNetworkProtocol enNP = pMgr ? pMgr->GetDNP()->enProtocol : (fsNetworkProtocol)-1;
 
 			if (cDlds && cConns)
@@ -345,7 +345,7 @@ void fsDownloadsMgr::ProcessDownloads()
 								fsDownload_NetworkProperties* mirrDNP = pMgr->GetDownloader()->MirrorDNP(j);
 
 								fsSiteInfo* mirrSite =
-								    _SitesMgr.FindSite(mirrDNP->pszServerName, fsNPToSiteValidFor(mirrDNP->enProtocol));
+								    _SitesMgr.FindSite(mirrDNP->strServerName.c_str(), fsNPToSiteValidFor(mirrDNP->enProtocol));
 								assert(mirrSite != NULL);
 
 								if (mirrSite)
@@ -969,7 +969,7 @@ DWORD WINAPI fsDownloadsMgr::_threadDownloadsMgr(LPVOID lp)
 			}
 			if (!pThis->m_dldErrorsMap.empty())
 			{
-				DWORD now = GetTickCount64();
+				ULONGLONG now = GetTickCount64();
 				if (now - lastDldsProc.m_dwTicks > 10 * 10000)
 				{
 					bNeedPD = true;
@@ -1035,7 +1035,7 @@ void fsDownloadsMgr::RebuildServerList(BOOL bUpdateSiteList)
 
 				fsDownload_NetworkProperties* dnp = pMgr->GetDownloader()->DNP(uSect);
 
-				LPCSTR pszServer = dnp->pszServerName;
+				LPCSTR pszServer = dnp->strServerName.c_str();
 				fsNetworkProtocol np = dnp->enProtocol;
 
 				fsSiteInfo* site = _SitesMgr.FindSite(pszServer, fsNPToSiteValidFor(np));
@@ -1064,8 +1064,8 @@ void fsDownloadsMgr::RebuildServerList(BOOL bUpdateSiteList)
 					_site->pGroup = dld->pGroup;
 					if (_App.SM_KeepPasswords())
 					{
-						_site->strUser = *dnp->pszUserName ? dnp->pszUserName : NULL;
-						_site->strPassword = *dnp->pszPassword ? dnp->pszPassword : NULL;
+						_site->strUser = !dnp->strUserName.empty() ? dnp->strUserName.c_str() : "";
+						_site->strPassword = !dnp->strPassword.empty() ? dnp->strPassword.c_str() : "";
 					}
 					_site->dwValidFor = fsNPToSiteValidFor(np) | SITE_VALIDFOR_SUBDOMAINS;
 					_SitesMgr.AddSite(_site);
@@ -1125,7 +1125,7 @@ BOOL fsDownloadsMgr::OnQueryNewSection(vmsDownloadSmartPtr dld, UINT nUsingMirro
 	else
 		dnp = dld->pMgr->GetDownloadMgr()->GetDNP();
 
-	if (IsServerFilled(dnp->pszServerName, fsNPToSiteValidFor(dnp->enProtocol)))
+	if (IsServerFilled(dnp->strServerName.c_str(), fsNPToSiteValidFor(dnp->enProtocol)))
 	{
 		Event(dld, LS(L_LIMITREACHED), EDT_WARNING);
 		b = FALSE;
@@ -1180,7 +1180,7 @@ void fsDownloadsMgr::OnSectionStop(vmsDownloadSmartPtr dld)
 {
 	ASSERT(dld->pMgr->GetDownloadMgr() != NULL);
 
-	fsSiteInfo* site = _SitesMgr.FindSite(dld->pMgr->GetDownloadMgr()->GetDNP()->pszServerName,
+	fsSiteInfo* site = _SitesMgr.FindSite(dld->pMgr->GetDownloadMgr()->GetDNP()->strServerName.c_str(),
 	                                      fsNPToSiteValidFor(dld->pMgr->GetDownloadMgr()->GetDNP()->enProtocol));
 
 	if (site)
@@ -2484,8 +2484,7 @@ DWORD WINAPI fsDownloadsMgr::_threadIntegrityCheckAndVirCheckAndLaunch(LPVOID lp
 
 	bool bNeedLaunchDld = (dld->dwFlags & DLD_NOAUTOLAUNCH) == 0 && dld->pMgr->IsLaunchWhenDone();
 	bool bNeedIntegrityCheck = dld->pMgr->GetDownloadMgr() != NULL &&
-	                           dld->pMgr->GetDownloadMgr()->GetDP()->bCheckIntegrityWhenDone &&
-	                           *dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum;
+	                           dld->pMgr->GetDownloadMgr()->GetDP()->bCheckIntegrityWhenDone && !dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum.empty();
 
 	if (bNeedIntegrityCheck)
 	{
@@ -2496,8 +2495,8 @@ DWORD WINAPI fsDownloadsMgr::_threadIntegrityCheckAndVirCheckAndLaunch(LPVOID lp
 		vmsHash hash;
 		hash.set_SHA2Strength((vmsHash_SHA2Strength)HIWORD(dp->dwIntegrityCheckAlgorithm));
 		fsString strHashResult =
-		    hash.Hash(dp->pszFileName, (vmsHashAlgorithm)LOWORD(dp->dwIntegrityCheckAlgorithm)).c_str();
-		if (strHashResult == (LPCTSTR)dp->pszCheckSum)
+		    hash.Hash(dp->strFileName.c_str(), (vmsHashAlgorithm)LOWORD(dp->dwIntegrityCheckAlgorithm)).c_str();
+		if (strHashResult == dp->strCheckSum.c_str())
 		{
 			_DldsMgr.Event(dld, LS(L_INTEGRITYCHECKSUCCEEDED), EDT_RESPONSE_S);
 		}
@@ -2512,10 +2511,10 @@ DWORD WINAPI fsDownloadsMgr::_threadIntegrityCheckAndVirCheckAndLaunch(LPVOID lp
 				CDlg_CheckFileIntegrity_Result dlg;
 				dlg.m_bResultOK = FALSE;
 				char sz[MY_MAX_PATH];
-				fsGetFileName(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, sz);
+				fsGetFileName(dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str(), sz);
 				dlg.m_strFileName = sz;
 				dlg.m_strUrl = dld->pMgr->get_URL();
-				dlg.m_strValidHash = dp->pszCheckSum;
+				dlg.m_strValidHash = dp->strCheckSum.c_str();
 				dlg.m_strResultHash = strHashResult;
 				if (IDC_RESTARTDOWNLOAD == _DlgMgr.DoModal(&dlg))
 				{
@@ -2667,26 +2666,24 @@ BOOL fsDownloadsMgr::OnDldDone_CheckDownloadIsMetaLink(vmsDownloadSmartPtr dld)
 				continue;
 
 			dld->pMgr->GetDownloadMgr()->GetDP()->dwIntegrityCheckAlgorithm = dwAlg;
-			SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum);
-			dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum = new char[hash->strChecksum.GetLength() + 1];
-			lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum, hash->strChecksum);
+			dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum = hash->strChecksum;
 			dld->pMgr->GetDownloadMgr()->setDirty();
 		}
 
-		if (iFile == 0) DeleteFile(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName);
-		LPSTR psz = strrchr(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, '\\');
-		if (psz == NULL) psz = strrchr(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, '/');
-		if (psz) *psz = 0;
+		if (iFile == 0) DeleteFile(dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str());
+		{
+			std::string& fn = dld->pMgr->GetDownloadMgr()->GetDP()->strFileName;
+			auto pos = fn.find_last_of("\\/");
+			if (pos != std::string::npos) fn.resize(pos);
+		}
 
 		fsString strNewFile;
-		strNewFile = dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
+		strNewFile = dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str();
 		strNewFile += "\\";
 		if (file->strName.pszString != NULL && strstr(file->strName, "..\\") == NULL &&
 		    strstr(file->strName, "../") == NULL)
 			strNewFile += file->strName;
-		SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName);
-		dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName = new char[strNewFile.Length() + 1];
-		lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, strNewFile);
+		dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = (LPCSTR)strNewFile;
 
 		dld->pMgr->GetDownloadMgr()->setDirty();
 
@@ -2886,8 +2883,7 @@ BOOL fsDownloadsMgr::OnDownloadStoppedOrDone(vmsDownloadSmartPtr dld)
 
 		bool bNeedLaunchDld = (dld->dwFlags & DLD_NOAUTOLAUNCH) == 0 && dld->pMgr->IsLaunchWhenDone();
 		bool bNeedIntegrityCheck = dld->pMgr->GetDownloadMgr() != NULL &&
-		                           dld->pMgr->GetDownloadMgr()->GetDP()->bCheckIntegrityWhenDone &&
-		                           *dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum;
+		                           dld->pMgr->GetDownloadMgr()->GetDP()->bCheckIntegrityWhenDone && !dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum.empty();
 		bool bNeedThread = bNeedLaunchDld || bNeedIntegrityCheck; // m_bVirCheck ||
 
 		if (bNeedThread)
@@ -2990,8 +2986,8 @@ int fsDownloadsMgr::IsSuchUrlExistsAlready(vmsDownloadSmartPtr dld)
 		fsDownload_NetworkProperties* dnp = d->pMgr->GetDownloadMgr()->GetDNP();
 
 		if (dnp0->enProtocol == dnp->enProtocol && dnp0->uServerPort == dnp->uServerPort &&
-		    fsIsServersEqual(dnp0->pszServerName, dnp->pszServerName, FALSE) &&
-		    lstrcmp(dnp0->pszPathName, dnp->pszPathName) == 0 && lstrcmp(dnp0->pszUserName, dnp->pszUserName) == 0)
+		    fsIsServersEqual(dnp0->strServerName.c_str(), dnp->strServerName.c_str(), FALSE) &&
+		    lstrcmp(dnp0->strPathName.c_str(), dnp->strPathName.c_str()) == 0 && lstrcmp(dnp0->strUserName.c_str(), dnp->strUserName.c_str()) == 0)
 		{
 			return i;
 		}
@@ -3160,7 +3156,7 @@ bool fsDownloadsMgr::IsDownloadSuspended(vmsDownloadSmartPtr dld)
 		if (m_errorTimeouts.find(stamp.Error) == m_errorTimeouts.end()) return false;
 		DWORD timeout = m_errorTimeouts[stamp.Error];
 		if (timeout == 0) return true;
-		DWORD now = GetTickCount64();
+		ULONGLONG now = GetTickCount64();
 		if (now - stamp.TimeStamp < timeout) return true;
 	}
 	return false;

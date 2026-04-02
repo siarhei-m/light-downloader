@@ -3,6 +3,7 @@
 */
 
 #include "stdafx.h"
+#include <string>
 #include "list.h"
 
 #include "DownloadsWnd.h"
@@ -291,10 +292,9 @@ BOOL DPEntry_IsAllEqual(DLDS_LIST* pv, int offset, int size, BOOL bString)
 
 		if (bString)
 		{
-			LPCSTR psz1 = *((LPCSTR*)dp0);
-			LPCSTR psz2 = *((LPCSTR*)dpn);
-
-			if (strcmp(psz1, psz2)) return FALSE;
+			const std::string& s1 = *((const std::string*)dp0);
+			const std::string& s2 = *((const std::string*)dpn);
+			if (s1 != s2) return FALSE;
 		}
 		else
 		{
@@ -320,10 +320,9 @@ BOOL DNPEntry_IsAllEqual(DLDS_LIST* pv, int offset, int size, BOOL bString)
 
 		if (bString)
 		{
-			LPCSTR psz1 = *((LPCSTR*)dp0);
-			LPCSTR psz2 = *((LPCSTR*)dpn);
-
-			if (strcmp(psz1, psz2)) return FALSE;
+			const std::string& s1 = *((const std::string*)dp0);
+			const std::string& s2 = *((const std::string*)dpn);
+			if (s1 != s2) return FALSE;
 		}
 		else
 		{
@@ -355,23 +354,14 @@ BOOL DPEntry_IsAllEqual_BitMask(DLDS_LIST* pv, int offset, DWORD dwBitMask)
 
 void DPEntry_SetValue(DLDS_LIST* pv, int offset, int size, BOOL bString, const void* lpNewVal)
 {
-	LPCSTR pszNewVal = (LPCSTR)lpNewVal;
-	int len = 0;
-
-	if (bString) len = strlen(pszNewVal);
-
 	for (int i = pv->size() - 1; i >= 0; i--)
 	{
 		LPVOID dp = LPBYTE(pv->at(i)->pMgr->GetDownloadMgr()->GetDP()) + offset;
 
 		if (bString)
 		{
-			LPSTR* ppszVal = (LPSTR*)dp;
-
-			SAFE_DELETE_ARRAY(*ppszVal);
-
-			fsnew(*ppszVal, CHAR, len + 1);
-			strcpy(*ppszVal, pszNewVal);
+			std::string* pStr = (std::string*)dp;
+			*pStr = (LPCSTR)lpNewVal;
 		}
 		else
 		{
@@ -403,23 +393,14 @@ void DPEntry_UnsetValue_BitMask(DLDS_LIST* pv, int offset, DWORD dwMask)
 
 void DNPEntry_SetValue(DLDS_LIST* pv, int offset, int size, BOOL bString, const void* lpNewVal)
 {
-	LPCSTR pszNewVal = (LPCSTR)lpNewVal;
-	int len = 0;
-
-	if (bString) len = strlen(pszNewVal);
-
 	for (int i = pv->size() - 1; i >= 0; i--)
 	{
 		LPVOID dnp = LPBYTE(pv->at(i)->pMgr->GetDownloadMgr()->GetDNP()) + offset;
 
 		if (bString)
 		{
-			LPSTR* ppszVal = (LPSTR*)dnp;
-
-			SAFE_DELETE_ARRAY(*ppszVal);
-
-			fsnew(*ppszVal, CHAR, len + 1);
-			strcpy(*ppszVal, pszNewVal);
+			std::string* pStr = (std::string*)dnp;
+			*pStr = (LPCSTR)lpNewVal;
 		}
 		else
 		{

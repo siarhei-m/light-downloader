@@ -80,9 +80,9 @@ BOOL CDownloadProperties_ProtocolPage::OnInitDialog()
 
 	for (int i = 0; i < sizeof(_ppszAgentNames) / sizeof(LPCSTR); i++) m_wndUserAgent.AddString(_ppszAgentNames[i]);
 
-	if (DNPEntry_IsAllEqual(m_pvDlds, DNP_OFFSET(pszAgent), 0, TRUE))
+	if (DNPEntry_IsAllEqual(m_pvDlds, DNP_OFFSET(strAgent), 0, TRUE))
 	{
-		LPCSTR pszAgent = dnp0->pszAgent;
+		LPCSTR pszAgent = dnp0->strAgent.c_str();
 		BOOL bSelected = FALSE;
 
 		for (int i = 0; i < sizeof(_ppszAgentValues) / sizeof(LPCSTR); i++)
@@ -97,7 +97,7 @@ BOOL CDownloadProperties_ProtocolPage::OnInitDialog()
 		if (bSelected == FALSE) m_wndUserAgent.SetWindowText(pszAgent);
 	}
 
-	if (DNPEntry_IsAllEqual(m_pvDlds, DNP_OFFSET(pszReferer), 0, TRUE)) SetDlgItemText(IDC_REFERER, dnp0->pszReferer);
+	if (DNPEntry_IsAllEqual(m_pvDlds, DNP_OFFSET(strReferer), 0, TRUE)) SetDlgItemText(IDC_REFERER, dnp0->strReferer.c_str());
 
 	if (DNP_EQ(bUseHttp11, FALSE))
 		CheckDlgButton(IDC_USEHTTP11, dnp0->bUseHttp11 ? BST_CHECKED : BST_UNCHECKED);
@@ -141,7 +141,7 @@ BOOL CDownloadProperties_ProtocolPage::OnInitDialog()
 		CheckRadioButton(IDC_BINARY, IDC_ASCIIFOREXTS, nChecked);
 	}
 
-	if (DNP_EQ(pszASCIIExts, TRUE)) SetDlgItemText(IDC_ASCIIEXTS, dnp0->pszASCIIExts);
+	if (DNP_EQ(strASCIIExts, TRUE)) SetDlgItemText(IDC_ASCIIEXTS, dnp0->strASCIIExts.c_str());
 
 	m_bRefererModified = FALSE;
 
@@ -232,16 +232,16 @@ BOOL CDownloadProperties_ProtocolPage::OnApply()
 		{
 			if (str == _ppszAgentNames[i])
 			{
-				DNP_SET(pszAgent, TRUE, _ppszAgentValues[i]);
+				DNP_SET(strAgent, TRUE, _ppszAgentValues[i]);
 				bFind = TRUE;
 			}
 		}
 
-		if (bFind == FALSE) DNP_SET(pszAgent, TRUE, str);
+		if (bFind == FALSE) DNP_SET(strAgent, TRUE, str);
 	}
 
 	GetDlgItemText(IDC_REFERER, str);
-	if (str.GetLength() || m_bRefererModified) DNP_SET(pszReferer, TRUE, str);
+	if (str.GetLength() || m_bRefererModified) DNP_SET(strReferer, TRUE, str);
 
 	UINT uChecked = IsDlgButtonChecked(IDC_USEHTTP11);
 	if (uChecked != BST_INDETERMINATE)
@@ -294,7 +294,7 @@ BOOL CDownloadProperties_ProtocolPage::OnApply()
 
 		GetDlgItemText(IDC_ASCIIEXTS, str);
 
-		if (str.GetLength()) DNP_SET(pszASCIIExts, TRUE, str);
+		if (str.GetLength()) DNP_SET(strASCIIExts, TRUE, str);
 	}
 
 	return CPropertyPage::OnApply();

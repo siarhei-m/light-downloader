@@ -6,6 +6,7 @@
 #define __DOWNLOADPROPERTIES_H_
 
 #include "../inetfile/InetFile.h"
+#include <string>
 
 enum fsNetworkProtocol
 {
@@ -32,32 +33,32 @@ struct fsDownload_NetworkProperties
 {
 	WORD wRollBackSize;
 
-	LPSTR pszAgent;
+	std::string strAgent;
 
 	fsInternetAccessTypeEx enAccType;
-	LPSTR pszProxyName;
-	LPSTR pszProxyUserName;
-	LPSTR pszProxyPassword;
+	std::string strProxyName;
+	std::string strProxyUserName;
+	std::string strProxyPassword;
 
 	fsNetworkProtocol enProtocol;
-	LPSTR pszServerName;
+	std::string strServerName;
 	INTERNET_PORT uServerPort;
-	LPSTR pszUserName;
-	LPSTR pszPassword;
+	std::string strUserName;
+	std::string strPassword;
 
-	LPSTR pszPathName;
+	std::string strPathName;
 
 	BOOL bUseHttp11;
-	LPSTR pszReferer;
+	std::string strReferer;
 	BOOL bUseCookie;
 
 	DWORD dwFtpFlags;
 	fsFtpTransferType enFtpTransferType;
 
-	LPSTR pszASCIIExts;
+	std::string strASCIIExts;
 
-	LPSTR pszCookies;
-	LPSTR pszPostData;
+	std::string strCookies;
+	std::string strPostData;
 
 	DWORD dwFlags;
 
@@ -72,21 +73,7 @@ struct fsDownload_NetworkProperties
 
 #define DNPF_DONT_UPDATE_ORIGINAL_URL_AFTER_REDIRECT (1 << 2)
 
-struct fsDNP_BuffersInfo
-{
-	UINT nAgentSize;
-	UINT nProxyNameSize;
-	UINT nProxyUserNameSize;
-	UINT nProxyPasswordSize;
-	UINT nServerNameSize;
-	UINT nUserNameSize;
-	UINT nPasswordSize;
-	UINT nPathNameSize;
-	UINT nRefferSize;
-	UINT nTransferTypeExtsSize;
-	UINT nCookiesSize;
-	UINT nPostDataSize;
-};
+// fsDNP_BuffersInfo removed - no longer needed with std::string
 
 enum fsDownloadFileError
 {
@@ -155,7 +142,7 @@ struct fsDownload_Properties
 	UINT uMaxSections;
 	BOOL bRestartSpeedLow;
 
-	LPSTR pszFileName;
+	std::string strFileName;
 	BOOL bReserveDiskSpace;
 
 	BOOL bIgnoreRestrictions;
@@ -163,36 +150,32 @@ struct fsDownload_Properties
 	fsDownloadFileErrorProcessing aEP[DFE_UNKNOWN];
 	fsAlreadyExistReaction enAER;
 	fsSizeChangeReaction enSCR;
-	LPSTR pszAdditionalExt;
+	std::string strAdditionalExt;
 	DWORD dwFlags;
-	LPSTR pszCreateExt;
+	std::string strCreateExt;
 
 	BOOL bCheckIntegrityWhenDone;
 	vmsIntegrityCheckFailedReaction enICFR;
-	LPSTR pszCheckSum;
+	std::string strCheckSum;
 
 	DWORD dwIntegrityCheckAlgorithm;
 };
 
-struct fsDP_BuffersInfo
-{
-	UINT nAdditionalExtSize;
-};
+// fsDP_BuffersInfo removed - no longer needed with std::string
 
 extern void fsDNP_SetAuth(fsDownload_NetworkProperties* dnp, LPCSTR pszUser, LPCSTR pszPassword);
 
-extern BOOL fsDNP_GetDefaults(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate);
+extern void fsDNP_GetDefaults(fsDownload_NetworkProperties* pDNP);
 
-extern void fsDNP_GetDefaults_Free(fsDownload_NetworkProperties* pDNP);
+// fsDNP_GetDefaults_Free removed - std::string auto-manages memory
 
 extern fsInternetResult fsDNP_ApplyUrl(fsDownload_NetworkProperties* dnp, LPCSTR pszUrl);
 
-extern BOOL fsDP_GetDefaults(fsDownload_Properties* pDP, fsDP_BuffersInfo* pBuffs, BOOL bAllocate);
+extern void fsDP_GetDefaults(fsDownload_Properties* pDP);
 
-extern fsInternetResult fsDNP_GetByUrl(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate,
-                                       LPCSTR pszUrl);
+extern fsInternetResult fsDNP_GetByUrl(fsDownload_NetworkProperties* pDNP, LPCSTR pszUrl);
 
-extern void fsDNP_GetByUrl_Free(fsDownload_NetworkProperties* pDNP);
+// fsDNP_GetByUrl_Free removed - std::string auto-manages memory
 
 // TEST
 // extern fsInternetResult fsDNP_GetSocks(fsDownload_NetworkProperties *pDNP, fsDNP_BuffersInfo* pBuffs, BOOL
@@ -201,7 +184,7 @@ extern void fsDNP_GetByUrl_Free(fsDownload_NetworkProperties* pDNP);
 extern fsNetworkProtocol fsSchemeToNP(INTERNET_SCHEME scheme);
 extern INTERNET_SCHEME fsNPToScheme(fsNetworkProtocol np);
 
-extern fsInternetResult fsGetProxyByNP(fsDownload_NetworkProperties* pDNP, fsDNP_BuffersInfo* pBuffs, BOOL bAllocate);
+extern fsInternetResult fsGetProxyByNP(fsDownload_NetworkProperties* pDNP);
 
 extern BOOL fsGetProxy(fsNetworkProtocol np, CString& strProxy, CString& strUser, CString& strPassword);
 

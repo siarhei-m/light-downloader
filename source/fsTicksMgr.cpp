@@ -23,11 +23,7 @@ void fsTicksMgr::Now()
 	m_dwTicks = GetTickCount64();
 }
 
-DWORD fsTicksMgr::operator-(fsTicksMgr& ticks)
+ULONGLONG fsTicksMgr::operator-(fsTicksMgr& ticks)
 {
-
-	if (m_dwTicks >= ticks.m_dwTicks)
-		return m_dwTicks - ticks.m_dwTicks;
-	else
-		return (0xffffffff - ticks.m_dwTicks + m_dwTicks);
+	return m_dwTicks - ticks.m_dwTicks;
 }

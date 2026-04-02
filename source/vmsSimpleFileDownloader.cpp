@@ -32,16 +32,13 @@ fsInternetResult vmsSimpleFileDownloader::Download(LPCSTR pszUrl, LPCSTR pszFile
 	if (ir != IR_SUCCESS) return ir;
 
 	fsDownload_Properties* dp = m_dldr->GetDP();
-
-	SAFE_DELETE_ARRAY(dp->pszFileName);
-	fsnew(dp->pszFileName, char, lstrlen(pszFileName) + 1);
-	strcpy(dp->pszFileName, pszFileName);
+	dp->strFileName = pszFileName;
 	dp->uMaxSections = 1;
 	dp->uMaxAttempts = 1;
 	dp->dwFlags |= DPF_DONTRESTARTIFNORESUME;
 	dp->enSCR = SCR_STOP;
 	dp->enAER = AER_REWRITE;
-	*dp->pszAdditionalExt = 0;
+	dp->strAdditionalExt.clear();
 
 	ir = m_dldr->StartDownloading();
 	if (ir != IR_SUCCESS) return ir;

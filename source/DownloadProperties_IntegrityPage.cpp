@@ -96,7 +96,7 @@ BOOL CDownloadProperties_IntegrityPage::OnInitDialog()
 
 	if (m_pvDlds->size() == 1)
 	{
-		SetDlgItemText(IDC_CHECKSUM, dp0->pszCheckSum);
+		SetDlgItemText(IDC_CHECKSUM, dp0->strCheckSum.c_str());
 	}
 	else
 	{
@@ -217,13 +217,10 @@ BOOL CDownloadProperties_IntegrityPage::OnApply()
 	if (m_pvDlds->size() == 1)
 	{
 		fsDownload_Properties* dp0 = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDP();
-
-		SAFE_DELETE_ARRAY(dp0->pszCheckSum);
 		CString str;
 		GetDlgItemText(IDC_CHECKSUM, str);
 		MakeChecksumValid(str);
-		dp0->pszCheckSum = new char[str.GetLength() + 1];
-		lstrcpy(dp0->pszCheckSum, str);
+		dp0->strCheckSum = (LPCSTR)str;
 
 		dp0->dwIntegrityCheckAlgorithm = m_wndAlgorithm.GetItemData(m_wndAlgorithm.GetCurSel());
 		m_pvDlds->at(0)->pMgr->GetDownloadMgr()->setDirty();

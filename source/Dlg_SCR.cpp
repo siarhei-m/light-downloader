@@ -73,8 +73,8 @@ BOOL CSCRDlg::OnInitDialog()
 	DWORD dwLen = 10000;
 	fsURL url;
 
-	url.Create(fsNPToScheme(m_dnp->enProtocol), m_dnp->pszServerName, m_dnp->uServerPort, NULL, NULL,
-	           m_dnp->pszPathName, szUrl, &dwLen);
+	url.Create(fsNPToScheme(m_dnp->enProtocol), m_dnp->strServerName.c_str(), m_dnp->uServerPort, NULL, NULL,
+	           m_dnp->strPathName.c_str(), szUrl, &dwLen);
 
 	str.Format(LS(L_SIZECHANGEDWTD), szUrl);
 	SetDlgItemText(IDC_MESSAGE, str);

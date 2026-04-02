@@ -146,15 +146,13 @@ void CCreateDownloadDlg::OnOK()
 	}
 
 	CString strFile = strOutFolder + strFileName;
-	fsnew(m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, CHAR, strFile.GetLength() + 1);
-	lstrcpy(m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, strFile);
+	m_dld->pMgr->GetDownloadMgr()->GetDP()->strFileName = strFile;
 
 	if (_App.CheckIfDownloadWithSameUrlExists())
 	{
 		int ret = _CheckDownloadAlrExists(m_dld, 0, 1, this);
 		if (ret)
 		{
-			SAFE_DELETE_ARRAY(m_dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName);
 			if (ret == 1) EndDialog(ID_DLNOTADDED);
 			return;
 		}
@@ -446,14 +444,8 @@ BOOL CCreateDownloadDlg::ReadDNP()
 		}
 
 		// fsDownload_NetworkProperties *dnp = m_dld->pMgr->GetDownloadMgr ()->GetDNP ();
-
-		SAFE_DELETE_ARRAY(dnp->pszUserName);
-		SAFE_DELETE_ARRAY(dnp->pszPassword);
-
-		fsnew(dnp->pszUserName, CHAR, strUser.GetLength() + 1);
-		fsnew(dnp->pszPassword, CHAR, strPassword.GetLength() + 1);
-		strcpy(dnp->pszUserName, strUser);
-		strcpy(dnp->pszPassword, strPassword);
+		dnp->strUserName = strUser;
+		dnp->strPassword = strPassword;
 	}
 
 	m_bUrlChanged = FALSE;
@@ -504,10 +496,10 @@ void CCreateDownloadDlg::Update_User_Password()
 	ASSERT(dnp != NULL);
 	if (!dnp) return;
 
-	ASSERT(dnp->pszUserName != NULL);
-	if (!dnp->pszUserName) return;
+	ASSERT(!dnp->strUserName.empty());
+	if (dnp->strUserName.empty()) return;
 
-	if (*dnp->pszUserName)
+	if (!dnp->strUserName.empty())
 	{
 		CheckDlgButton(IDC_USELOGIN, BST_CHECKED);
 		m_bAuthorization = TRUE;
@@ -518,8 +510,8 @@ void CCreateDownloadDlg::Update_User_Password()
 		m_bAuthorization = FALSE;
 	}
 
-	SetDlgItemText(IDC_USER, dnp->pszUserName);
-	SetDlgItemText(IDC_PASSWORD, dnp->pszPassword);
+	SetDlgItemText(IDC_USER, dnp->strUserName.c_str());
+	SetDlgItemText(IDC_PASSWORD, dnp->strPassword.c_str());
 
 	UpdateEnabled();
 
@@ -593,8 +585,8 @@ void CCreateDownloadDlg::UrlChanged()
 	//		{
 	//			CheckDlgButton (IDC_USELOGIN, BST_CHECKED);
 	//			SetDlgItemText (IDC_USER, site->strUser);
-	//			if (site->strPassword)
-	//				SetDlgItemText (IDC_PASSWORD, site->strPassword);
+	//			if (!site->strPassword.empty())
+	//				SetDlgItemText (IDC_PASSWORD, site->strPassword.c_str());
 	//			m_bAuthorization = TRUE;
 	//			UpdateEnabled ();
 	//		}
@@ -754,16 +746,12 @@ DWORD WINAPI CCreateDownloadDlg::_threadQSize(LPVOID lp)
 	{
 		if (pThis->m_pszCookies)
 		{
-			SAFE_DELETE_ARRAY(pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies);
-			pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies = new char[lstrlen(pThis->m_pszCookies) + 1];
-			lstrcpy(pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszCookies, pThis->m_pszCookies);
+			pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->strCookies = pThis->m_pszCookies;
 		}
 
 		if (pThis->m_pszPostData)
 		{
-			SAFE_DELETE_ARRAY(pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData);
-			pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData = new char[lstrlen(pThis->m_pszPostData) + 1];
-			lstrcpy(pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->pszPostData, pThis->m_pszPostData);
+			pThis->m_dld->pMgr->GetDownloadMgr()->GetDNP()->strPostData = pThis->m_pszPostData;
 		}
 
 		fsInternetResult ir = pThis->m_dld->pMgr->GetDownloadMgr()->QuerySize();
@@ -876,8 +864,8 @@ int CCreateDownloadDlg::_CheckDownloadAlrExists(vmsDownloadSmartPtr dld, BOOL bN
 		fsDownload_NetworkProperties* dnp = d->pMgr->GetDownloadMgr()->GetDNP();
 
 		if (dnp0->enProtocol == dnp->enProtocol && dnp0->uServerPort == dnp->uServerPort &&
-		    fsIsServersEqual(dnp0->pszServerName, dnp->pszServerName, FALSE) &&
-		    lstrcmp(dnp0->pszPathName, dnp->pszPathName) == 0 && lstrcmp(dnp0->pszUserName, dnp->pszUserName) == 0)
+		    fsIsServersEqual(dnp0->strServerName.c_str(), dnp->strServerName.c_str(), FALSE) &&
+		    lstrcmp(dnp0->strPathName.c_str(), dnp->strPathName.c_str()) == 0 && lstrcmp(dnp0->strUserName.c_str(), dnp->strUserName.c_str()) == 0)
 		{
 			dldSame = d;
 			break;
@@ -922,14 +910,12 @@ int CCreateDownloadDlg::_CheckDownloadAlrExists(vmsDownloadSmartPtr dld, BOOL bN
 
 				if (cddlg->m_pszCookies != NULL)
 				{
-					props->pszCookies = new char[strlen(cddlg->m_pszCookies) + 1];
-					strcpy(props->pszCookies, cddlg->m_pszCookies);
+					props->strCookies = cddlg->m_pszCookies;
 				}
 
 				if (cddlg->m_pszPostData != NULL)
 				{
-					props->pszPostData = new char[strlen(cddlg->m_pszPostData) + 1];
-					strcpy(props->pszPostData, cddlg->m_pszPostData);
+					props->strPostData = cddlg->m_pszPostData;
 				}
 			}
 
@@ -938,7 +924,7 @@ int CCreateDownloadDlg::_CheckDownloadAlrExists(vmsDownloadSmartPtr dld, BOOL bN
 		}
 		case IDC_LAUNCH:
 			if (dldSame->pMgr->GetDownloadMgr()->IsDone())
-				ShellExecute(::GetDesktopWindow(), "open", dldSame->pMgr->GetDownloadMgr()->GetDP()->pszFileName, NULL,
+				ShellExecute(::GetDesktopWindow(), "open", dldSame->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str(), NULL,
 				             NULL, SW_SHOW);
 			break;
 
@@ -1004,7 +990,7 @@ void CCreateDownloadDlg::OnSelchangeDldtype()
 fsSiteInfo* CCreateDownloadDlg::_SavePassword(vmsDownloadSmartPtr dld)
 {
 	fsDownload_NetworkProperties* dnp = dld->pMgr->GetDownloadMgr()->GetDNP();
-	fsSiteInfo* site = _SavePassword(dnp->pszServerName, dnp->enProtocol, dnp->pszUserName, dnp->pszPassword);
+	fsSiteInfo* site = _SavePassword(dnp->strServerName.c_str(), dnp->enProtocol, dnp->strUserName.c_str(), dnp->strPassword.c_str());
 	if (site)
 	{
 		site->dwFtpFlags = dnp->dwFtpFlags;

@@ -1183,7 +1183,7 @@ std::string CDownloads_Tasks::GetFileName(vmsDownloadSmartPtr dld)
 			{
 				char sz[10000] = "";
 
-				fsFileNameFromUrlPath(pMgr->GetDNP()->pszPathName, pMgr->GetDNP()->enProtocol == NP_FTP, TRUE, sz,
+				fsFileNameFromUrlPath(pMgr->GetDNP()->strPathName.c_str(), pMgr->GetDNP()->enProtocol == NP_FTP, TRUE, sz,
 				                      10000);
 				strResult = sz;
 			}
@@ -1193,15 +1193,15 @@ std::string CDownloads_Tasks::GetFileName(vmsDownloadSmartPtr dld)
 			char sz[10000] = "";
 
 			fsGetFileName(strFile, sz);
-			if (pMgr->GetDP()->pszAdditionalExt && *pMgr->GetDP()->pszAdditionalExt)
+			if (!pMgr->GetDP()->strAdditionalExt.empty())
 			{
 				char* pszAddExt = sz;
 				while (TRUE)
 				{
-					pszAddExt = strstr(pszAddExt, pMgr->GetDP()->pszAdditionalExt);
+					pszAddExt = strstr(pszAddExt, pMgr->GetDP()->strAdditionalExt.c_str());
 					if (pszAddExt == NULL) break;
 
-					if (*(pszAddExt - 1) == '.' && *(pszAddExt + strlen(pMgr->GetDP()->pszAdditionalExt)) == 0) break;
+					if (*(pszAddExt - 1) == '.' && *(pszAddExt + pMgr->GetDP()->strAdditionalExt.length()) == 0) break;
 
 					pszAddExt++;
 				}
@@ -1609,22 +1609,20 @@ void CDownloads_Tasks::OnDldcheckintegrity()
 	ASSERT(dld->pMgr->GetDownloadMgr() != NULL);
 	if (dld->pMgr->GetDownloadMgr() == NULL) return;
 
-	LPCSTR pszFile = dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName;
+	LPCSTR pszFile = dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str();
 
 	if (GetFileAttributes(pszFile) == DWORD(-1)) return;
 
 	CDlg_CheckFileIntegrity dlg;
-	if (*dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum)
+	if (!dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum.empty())
 	{
-		dlg.m_strChecksum = dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum;
+		dlg.m_strChecksum = dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum.c_str();
 		dlg.m_nAlgorithm = LOWORD(dld->pMgr->GetDownloadMgr()->GetDP()->dwIntegrityCheckAlgorithm);
 		dlg.m_nSHA2Strength = HIWORD(dld->pMgr->GetDownloadMgr()->GetDP()->dwIntegrityCheckAlgorithm);
 	}
 	if (IDCANCEL == _DlgMgr.DoModal(&dlg)) return;
 
-	SAFE_DELETE_ARRAY(dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum);
-	dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum = new char[dlg.m_strChecksum.GetLength() + 1];
-	lstrcpy(dld->pMgr->GetDownloadMgr()->GetDP()->pszCheckSum, dlg.m_strChecksum);
+	dld->pMgr->GetDownloadMgr()->GetDP()->strCheckSum = dlg.m_strChecksum;
 	dld->pMgr->GetDownloadMgr()->GetDP()->dwIntegrityCheckAlgorithm = MAKELONG(dlg.m_nAlgorithm, dlg.m_nSHA2Strength);
 	dld->pMgr->GetDownloadMgr()->setDirty();
 
@@ -1640,7 +1638,7 @@ void CDownloads_Tasks::OnDldcheckintegrity()
 		CDlg_CheckFileIntegrity_Result dlg3;
 		dlg3.m_bResultOK = dlg2.is_CheckingSucceeded();
 		char sz[MY_MAX_PATH];
-		fsGetFileName(dld->pMgr->GetDownloadMgr()->GetDP()->pszFileName, sz);
+		fsGetFileName(dld->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str(), sz);
 		dlg3.m_strFileName = sz;
 		dlg3.m_strUrl = dld->pMgr->GetDownloadMgr()->GetDownloader()->get_URL();
 		dlg3.m_strValidHash = dlg.m_strChecksum;

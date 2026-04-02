@@ -12,23 +12,16 @@
 class fsTicksMgr
 {
   public:
-	DWORD operator-(fsTicksMgr& ticks);
+	ULONGLONG operator-(fsTicksMgr& ticks);
 
 	void Now();
 
 	fsTicksMgr();
 	virtual ~fsTicksMgr();
 
-	DWORD m_dwTicks;
+	ULONGLONG m_dwTicks;
 
-	void operator+=(DWORD dwTicks)
-	{
-		DWORD dwLeft = _UI32_MAX - m_dwTicks;
-		if (dwLeft >= dwTicks)
-			m_dwTicks += dwTicks;
-		else
-			m_dwTicks = dwTicks - dwLeft;
-	}
+	void operator+=(ULONGLONG dwTicks) { m_dwTicks += dwTicks; }
 
 	bool operator<(const fsTicksMgr& obj) const { return m_dwTicks < obj.m_dwTicks; }
 	bool operator<=(const fsTicksMgr& obj) const { return m_dwTicks <= obj.m_dwTicks; }

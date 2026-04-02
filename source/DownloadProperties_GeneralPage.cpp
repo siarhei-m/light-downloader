@@ -84,11 +84,11 @@ BOOL CDownloadProperties_GeneralPage::OnInitDialog()
 		CHAR szUrl[10000];
 		DWORD dwLen = sizeof(szUrl);
 
-		url.Create(fsNPToScheme(dnp0->enProtocol), dnp0->pszServerName, dnp0->uServerPort, NULL, NULL,
-		           dnp0->pszPathName, szUrl, &dwLen);
+		url.Create(fsNPToScheme(dnp0->enProtocol), dnp0->strServerName.c_str(), dnp0->uServerPort, NULL, NULL,
+		           dnp0->strPathName.c_str(), szUrl, &dwLen);
 
 		SetDlgItemText(IDC_URL, szUrl);
-		SetDlgItemText(IDC_SAVEAS, m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDP()->pszFileName);
+		SetDlgItemText(IDC_SAVEAS, m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDP()->strFileName.c_str());
 
 		m_strUrl = szUrl;
 	}
@@ -172,13 +172,13 @@ BOOL CDownloadProperties_GeneralPage::OnApply()
 
 				m_pvDlds->at(0)->pMgr->GetDownloadMgr()->CreateByUrl(strNewUrl, TRUE);
 				m_pvDlds->at(0)->pMgr->GetDownloadMgr()->setDirty();
-				if (*m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP()->pszUserName) ReadAuthorization();
+				if (!m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP()->strUserName.empty()) ReadAuthorization();
 			}
 		}
 
 		fsDownload_Properties* dp = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDP();
 
-		if (strNewFile != dp->pszFileName)
+		if (strNewFile != dp->strFileName.c_str())
 		{
 			if (FALSE == m_pvDlds->at(0)->pMgr->GetDownloadMgr()->MoveFile(strNewFile))
 			{
@@ -282,15 +282,15 @@ void CDownloadProperties_GeneralPage::ReadAuthorization()
 	fsDownload_NetworkProperties dnp;
 	fsDownload_NetworkProperties* dnp0 = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP();
 
-	if (DNP_EQ(pszUserName, TRUE)) SetDlgItemText(IDC_USER, dnp0->pszUserName);
+	if (DNP_EQ(strUserName, TRUE)) SetDlgItemText(IDC_USER, dnp0->strUserName.c_str());
 
-	if (DNP_EQ(pszPassword, TRUE)) SetDlgItemText(IDC_PASSWORD, dnp0->pszPassword);
+	if (DNP_EQ(strPassword, TRUE)) SetDlgItemText(IDC_PASSWORD, dnp0->strPassword.c_str());
 
-	BOOL bUse = dnp0->pszUserName[0] != 0;
+	BOOL bUse = !dnp0->strUserName.empty();
 	CheckDlgButton(IDC_USELOGIN, bUse ? BST_CHECKED : BST_UNCHECKED);
 	for (int i = m_pvDlds->size() - 1; i > 0; i--)
 	{
-		BOOL bU = m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->pszUserName[0] != 0;
+		BOOL bU = m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->strUserName[0] != 0;
 
 		if (bU != bUse)
 		{
@@ -346,19 +346,19 @@ void CDownloadProperties_GeneralPage::WriteAuthorization()
 		GetDlgItemText(IDC_USER, str);
 		if (m_bUserChanged || str.GetLength())
 		{
-			DNP_SET(pszUserName, TRUE, str);
+			DNP_SET(strUserName, TRUE, str);
 		}
 
 		GetDlgItemText(IDC_PASSWORD, str);
 		if (m_bPasswordChanged || str.GetLength())
 		{
-			DNP_SET(pszPassword, TRUE, str);
+			DNP_SET(strPassword, TRUE, str);
 		}
 		break;
 
 	case BST_UNCHECKED:
-		DNP_SET(pszUserName, TRUE, "");
-		DNP_SET(pszPassword, TRUE, "");
+		DNP_SET(strUserName, TRUE, "");
+		DNP_SET(strPassword, TRUE, "");
 		break;
 	}
 }

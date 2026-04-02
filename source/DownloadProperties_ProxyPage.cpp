@@ -126,15 +126,15 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		m_pvDlds = &m_vHttp;
 		dnp0 = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP();
 
-		if (DNP_EQ(pszProxyName, TRUE))
+		if (DNP_EQ(strProxyName, TRUE))
 		{
-			pi.strName = dnp0->pszProxyName;
+			pi.strName = dnp0->strProxyName.c_str();
 			pi.bNameModified = TRUE;
 		}
 
-		if (DNP_EQ(pszProxyUserName, TRUE))
+		if (DNP_EQ(strProxyUserName, TRUE))
 		{
-			pi.strUser = dnp0->pszProxyUserName;
+			pi.strUser = dnp0->strProxyUserName.c_str();
 			if (pi.strUser.GetLength() == 0)
 				pi.uAuthorization = BST_UNCHECKED;
 			else
@@ -142,10 +142,10 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		}
 		else
 		{
-			pi.uAuthorization = *dnp0->pszProxyUserName ? BST_CHECKED : BST_UNCHECKED;
+			pi.uAuthorization = !dnp0->strProxyUserName.empty() ? BST_CHECKED : BST_UNCHECKED;
 			for (int i = m_pvDlds->size() - 1; i; i--)
 			{
-				UINT u = *(m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->pszProxyUserName) ? BST_CHECKED
+				UINT u = !m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->strProxyUserName.empty() ? BST_CHECKED
 				                                                                                : BST_UNCHECKED;
 				if (u != pi.uAuthorization)
 				{
@@ -158,7 +158,7 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		if (pi.uAuthorization == BST_CHECKED || pi.uAuthorization == BST_UNCHECKED)
 			pi.bUserModified = pi.bPasswordModified = TRUE;
 
-		if (DNP_EQ(pszProxyPassword, TRUE)) pi.strPassword = dnp0->pszProxyPassword;
+		if (DNP_EQ(strProxyPassword, TRUE)) pi.strPassword = dnp0->strProxyPassword.c_str();
 
 		m_pvDlds = pvDlds;
 		m_vProxies.add(pi);
@@ -172,15 +172,15 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		m_pvDlds = &m_vHttps;
 		dnp0 = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP();
 
-		if (DNP_EQ(pszProxyName, TRUE))
+		if (DNP_EQ(strProxyName, TRUE))
 		{
-			pi.strName = dnp0->pszProxyName;
+			pi.strName = dnp0->strProxyName.c_str();
 			pi.bNameModified = TRUE;
 		}
 
-		if (DNP_EQ(pszProxyUserName, TRUE))
+		if (DNP_EQ(strProxyUserName, TRUE))
 		{
-			pi.strUser = dnp0->pszProxyUserName;
+			pi.strUser = dnp0->strProxyUserName.c_str();
 			if (pi.strUser.GetLength() == 0)
 				pi.uAuthorization = BST_UNCHECKED;
 			else
@@ -188,10 +188,10 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		}
 		else
 		{
-			pi.uAuthorization = *dnp0->pszProxyUserName ? BST_CHECKED : BST_UNCHECKED;
+			pi.uAuthorization = !dnp0->strProxyUserName.empty() ? BST_CHECKED : BST_UNCHECKED;
 			for (int i = m_pvDlds->size() - 1; i; i--)
 			{
-				UINT u = *(m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->pszProxyUserName) ? BST_CHECKED
+				UINT u = !m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->strProxyUserName.empty() ? BST_CHECKED
 				                                                                                : BST_UNCHECKED;
 				if (u != pi.uAuthorization)
 				{
@@ -201,7 +201,7 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 			}
 		}
 
-		if (DNP_EQ(pszProxyPassword, TRUE)) pi.strPassword = dnp0->pszProxyPassword;
+		if (DNP_EQ(strProxyPassword, TRUE)) pi.strPassword = dnp0->strProxyPassword.c_str();
 
 		if (pi.uAuthorization == BST_CHECKED || pi.uAuthorization == BST_UNCHECKED)
 			pi.bUserModified = pi.bPasswordModified = TRUE;
@@ -218,15 +218,15 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		m_pvDlds = &m_vFtp;
 		dnp0 = m_pvDlds->at(0)->pMgr->GetDownloadMgr()->GetDNP();
 
-		if (DNP_EQ(pszProxyName, TRUE))
+		if (DNP_EQ(strProxyName, TRUE))
 		{
-			pi.strName = dnp0->pszProxyName;
+			pi.strName = dnp0->strProxyName.c_str();
 			pi.bNameModified = TRUE;
 		}
 
-		if (DNP_EQ(pszProxyUserName, TRUE))
+		if (DNP_EQ(strProxyUserName, TRUE))
 		{
-			pi.strUser = dnp0->pszProxyUserName;
+			pi.strUser = dnp0->strProxyUserName.c_str();
 			if (pi.strUser.GetLength() == 0)
 				pi.uAuthorization = BST_UNCHECKED;
 			else
@@ -234,10 +234,10 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 		}
 		else
 		{
-			pi.uAuthorization = *dnp0->pszProxyUserName ? BST_CHECKED : BST_UNCHECKED;
+			pi.uAuthorization = !dnp0->strProxyUserName.empty() ? BST_CHECKED : BST_UNCHECKED;
 			for (int i = m_pvDlds->size() - 1; i; i--)
 			{
-				UINT u = *(m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->pszProxyUserName) ? BST_CHECKED
+				UINT u = !m_pvDlds->at(i)->pMgr->GetDownloadMgr()->GetDNP()->strProxyUserName.empty() ? BST_CHECKED
 				                                                                                : BST_UNCHECKED;
 				if (u != pi.uAuthorization)
 				{
@@ -247,7 +247,7 @@ BOOL CDownloadProperties_ProxyPage::OnInitDialog()
 			}
 		}
 
-		if (DNP_EQ(pszProxyPassword, TRUE)) pi.strPassword = dnp0->pszProxyPassword;
+		if (DNP_EQ(strProxyPassword, TRUE)) pi.strPassword = dnp0->strProxyPassword.c_str();
 
 		if (pi.uAuthorization == BST_CHECKED || pi.uAuthorization == BST_UNCHECKED)
 			pi.bUserModified = pi.bPasswordModified = TRUE;
@@ -453,9 +453,9 @@ BOOL CDownloadProperties_ProxyPage::OnApply()
 	{
 		fsInternetAccessTypeEx type = IATE_NOPROXY;
 		DNP_SET(enAccType, FALSE, &type);
-		DNP_SET(pszProxyName, TRUE, "");
-		DNP_SET(pszProxyUserName, TRUE, "");
-		DNP_SET(pszProxyPassword, TRUE, "");
+		DNP_SET(strProxyName, TRUE, "");
+		DNP_SET(strProxyUserName, TRUE, "");
+		DNP_SET(strProxyPassword, TRUE, "");
 	}
 
 	else if (IsDlgButtonChecked(IDC_MANUALLY) == BST_CHECKED)
@@ -641,18 +641,18 @@ void CDownloadProperties_ProxyPage::ApplyPS(DLDS_LIST* pvDlds, ProxyInfo* pi)
 
 	m_pvDlds = pvDlds;
 
-	if (pi->bNameModified) DNP_SET(pszProxyName, TRUE, pi->strName);
+	if (pi->bNameModified) DNP_SET(strProxyName, TRUE, pi->strName);
 
 	if (pi->uAuthorization == BST_UNCHECKED)
 	{
-		DNP_SET(pszProxyUserName, TRUE, "");
-		DNP_SET(pszProxyPassword, TRUE, "");
+		DNP_SET(strProxyUserName, TRUE, "");
+		DNP_SET(strProxyPassword, TRUE, "");
 	}
 	else
 	{
-		if (pi->bUserModified) DNP_SET(pszProxyUserName, TRUE, pi->strUser);
+		if (pi->bUserModified) DNP_SET(strProxyUserName, TRUE, pi->strUser);
 
-		if (pi->bPasswordModified) DNP_SET(pszProxyPassword, TRUE, pi->strPassword);
+		if (pi->bPasswordModified) DNP_SET(strProxyPassword, TRUE, pi->strPassword);
 	}
 
 	m_pvDlds = pvOld;
