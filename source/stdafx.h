@@ -58,10 +58,7 @@
 
 #include <pugixml.hpp>
 
-#ifndef LONG_PTR
-#define LONG_PTR LONG
-#define DWORD_PTR DWORD
-#endif
+// LONG_PTR and DWORD_PTR are properly defined in <basetsd.h> for all modern targets.
 
 #define MY_MAX_PATH 10000
 #define MY_CLASSNAME "LightDownloader Main Window"

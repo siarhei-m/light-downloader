@@ -422,7 +422,7 @@ void CListCtrlEx::OnParentNotify(UINT message, LPARAM lParam)
 		CMenu menu, m;
 		menu.CreateMenu();
 		m.CreateMenu();
-		m.AppendMenu(MF_POPUP, (UINT)menu.m_hMenu, "-");
+		m.AppendMenu(MF_POPUP, (UINT_PTR)menu.m_hMenu, "-");
 
 		int cCols = GetHeaderCtrl()->GetItemCount();
 

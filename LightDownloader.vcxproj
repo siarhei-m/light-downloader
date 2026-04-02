@@ -144,7 +144,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;WIN32;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -180,7 +180,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;Mswsock.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>
@@ -201,7 +201,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -237,8 +237,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\debug\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl-d.lib;pugixml.lib;zlibd.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TypeLibraryFile>
       </TypeLibraryFile>
       <AdditionalManifestDependencies>type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='X86' publicKeyToken='6595b64144ccf1df' language='*';%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
@@ -256,7 +256,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_WIN64;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -292,7 +292,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;Mswsock.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>
@@ -312,7 +312,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_WIN64;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -347,8 +347,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\debug\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl-d.lib;pugixml.lib;zlibd.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TypeLibraryFile>
       </TypeLibraryFile>
       <AdditionalManifestDependencies>type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='AMD64' publicKeyToken='6595b64144ccf1df' language='*';%(AdditionalManifestDependencies)</AdditionalManifestDependencies>
@@ -365,7 +365,7 @@
       <WarningLevel>Level4</WarningLevel>
       <TreatWarningAsError>false</TreatWarningAsError>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>NDEBUG;_WIN64;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -400,7 +400,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;Mswsock.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalOptions>
@@ -420,7 +420,7 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <WarningLevel>Level4</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>.\source\include\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\source\include\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_DEBUG;_WIN64;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <PrecompiledHeaderOutputFile>$(IntDir)FDM.pch</PrecompiledHeaderOutputFile>
@@ -454,8 +454,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(SolutionDir)vcpkg_installed/$(VcpkgTriplet)/lib/;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl.lib;pugixml.lib;zlib.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Platform)\$(Configuration)\;$(MSBuildThisFileDirectory)vcpkg_installed\$(VcpkgTriplet)\debug\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Hash.lib;InetFile.lib;libcurl-d.lib;pugixml.lib;zlibd.lib;Secur32.lib;wininet.lib;Ws2_32.lib;Wldap32.lib;Crypt32.lib;Normaliz.lib;htmlhelp.lib;winmm.lib;Version.lib;Iphlpapi.lib;Msimg32.lib;bcrypt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <TypeLibraryFile>
       </TypeLibraryFile>
       <AdditionalManifestDependencies>type='Win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='ARM64' publicKeyToken='6595b64144ccf1df' language='*';%(AdditionalManifestDependencies)</AdditionalManifestDependencies>

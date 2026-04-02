@@ -209,7 +209,7 @@ enum fsDownloaderEvent : int
 	DE_SPEEDISTOOLOW,
 };
 
-typedef DWORD (*fsDownloaderEventFunc)(fsDownloaderEvent ev, UINT uParam, LPVOID lpAppParam);
+typedef DWORD (*fsDownloaderEventFunc)(fsDownloaderEvent ev, UINT_PTR uParam, LPVOID lpAppParam);
 
 struct fsDlgWithServerInfo
 {
@@ -482,7 +482,7 @@ class fsInternetDownloader
 	BOOL SleepInterval();
 	vmsCriticalSection m_csAddSection;
 
-	DWORD Event(fsDownloaderEvent enEvent, UINT uDesc = 0);
+	DWORD Event(fsDownloaderEvent enEvent, UINT_PTR uDesc = 0);
 	UINT m_uTrafficLimit;
 
 	volatile UINT m_cThreads, m_cRunningThreads;

@@ -80,7 +80,7 @@ fsODMenuItemData* fsODMenu::AttachMenuItem(CMenu* pMenu, UINT iPos, BOOL bByPos)
 	UINT nID;
 
 	if (uState & MF_POPUP)
-		nID = (UINT)pMenu->GetSubMenu(iPos)->m_hMenu;
+		nID = (UINT)(UINT_PTR)pMenu->GetSubMenu(iPos)->m_hMenu;
 	else if (bByPos)
 		nID = pMenu->GetMenuItemID(iPos);
 	else
@@ -133,7 +133,7 @@ void fsODMenu::DetachMenuItem(CMenu* pMenu, UINT iPos, BOOL bByPos)
 	info.fMask = MIIM_DATA | MIIM_STATE | MIIM_ID | MIIM_SUBMENU;
 	pMenu->GetMenuItemInfo(iPos, &info, bByPos);
 
-	UINT uID = info.fState & MF_POPUP ? (UINT)info.hSubMenu : info.wID;
+	UINT uID = info.fState & MF_POPUP ? (UINT)(UINT_PTR)info.hSubMenu : info.wID;
 
 	fsODMenuItemData* pData = (fsODMenuItemData*)info.dwItemData;
 
@@ -420,7 +420,7 @@ HMENU fsODMenu::CopyMenu(HMENU hMenu)
 
 		if (uState & MF_POPUP)
 		{
-			nID = (UINT)CopyMenu(GetSubMenu(hMenu, i));
+			nID = (UINT)(UINT_PTR)CopyMenu(GetSubMenu(hMenu, i));
 			uState = MF_POPUP | MF_STRING;
 		}
 		else

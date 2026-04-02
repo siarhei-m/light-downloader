@@ -19,6 +19,7 @@ class CDownloads_Groups : public CTreeCtrl
 
   public:
 	CDownloads_Groups();
+	bool m_bInitialized = false;
 
   public:
   public:

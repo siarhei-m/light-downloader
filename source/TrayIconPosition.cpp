@@ -182,7 +182,7 @@ BOOL CTrayIconPosition::FindOutPositionOfIconDirectly(const HWND a_hWndOwner, co
 			continue;
 		}
 
-		HWND hWndOfIconOwner = (HWND)dwExtraData[0];
+		HWND hWndOfIconOwner = (HWND)(ULONG_PTR)dwExtraData[0];
 		int iIconId = (int)dwExtraData[1];
 
 		if (hWndOfIconOwner != a_hWndOwner || iIconId != a_iButtonID)

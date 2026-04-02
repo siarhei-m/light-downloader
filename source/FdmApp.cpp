@@ -348,7 +348,7 @@ DWORD WINAPI CFdmApp::_threadExitProcess(LPVOID lp)
 void CFdmApp::ScheduleExitProcess(DWORD dwSeconds)
 {
 	DWORD dw;
-	CloseHandle(::CreateThread(NULL, 0, _threadExitProcess, (LPVOID)dwSeconds, 0, &dw));
+	CloseHandle(::CreateThread(NULL, 0, _threadExitProcess, (LPVOID)(DWORD_PTR)dwSeconds, 0, &dw));
 }
 
 AFX_MODULE_STATE* CFdmApp::GetModuleState()

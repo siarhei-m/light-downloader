@@ -51,7 +51,7 @@ void vmsSimpleFileDownloader::_DownloadMgrDescEvents(fsDownloadMgr*, fsDownloadM
 {
 }
 
-DWORD vmsSimpleFileDownloader::_DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent ev, UINT uInfo, LPVOID lp)
+DWORD vmsSimpleFileDownloader::_DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent ev, UINT_PTR uInfo, LPVOID lp)
 {
 	vmsSimpleFileDownloader* pthis = (vmsSimpleFileDownloader*)lp;
 

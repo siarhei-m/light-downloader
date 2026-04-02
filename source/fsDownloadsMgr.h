@@ -381,7 +381,7 @@ class fsDownloadsMgr
 
 	static void _DownloadMgrEventDesc(fsDownloadMgr* pMgr, fsDownloadMgr_EventDescType enType, LPCSTR pszEvent,
 	                                  LPVOID lp);
-	static DWORD _DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent enEvent, UINT uInfo, LPVOID lp);
+	static DWORD _DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent enEvent, UINT_PTR uInfo, LPVOID lp);
 	vmsDownloadList m_vDownloads;
 	vmsReaderWriterLock m_rwlDownloads;
 

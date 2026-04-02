@@ -52,6 +52,8 @@ BOOL CWndSplitter::Create(HINSTANCE hInst, HWND hWndParent, WndSplitterType enTy
 LRESULT CALLBACK CWndSplitter::_wndProc(HWND hWnd, UINT uMsg, WPARAM wp, LPARAM lp)
 {
 	CWndSplitter* pThis = (CWndSplitter*)GetWindowLongPtr(hWnd, GWLP_USERDATA);
+	if (!pThis || (LONG_PTR)pThis < 0)
+		return DefWindowProc(hWnd, uMsg, wp, lp);
 
 	switch (uMsg)
 	{

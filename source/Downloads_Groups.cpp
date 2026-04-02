@@ -86,7 +86,7 @@ BOOL CDownloads_Groups::Create(CWnd* pParent)
 	m_hAllGroups = InsertItem(TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_STATE | TVIF_TEXT, "", 0, 0,
 	                          TVIS_BOLD | TVIS_EXPANDED, TVIS_BOLD | TVIS_EXPANDED, 0, TVI_ROOT, TVI_LAST);
 
-	SetItemData(m_hAllGroups, (ULONG)&m_filterAll);
+	SetItemData(m_hAllGroups, (DWORD_PTR)&m_filterAll);
 
 	InsertGroups();
 	InsertFilters();
@@ -138,6 +138,8 @@ BOOL CDownloads_Groups::Create(CWnd* pParent)
 
 	ApplyLanguage();
 
+	m_bInitialized = true;
+
 	ShowWindow(SW_SHOW);
 
 	SetTimer(1, 1000, NULL);
@@ -156,8 +158,14 @@ void CDownloads_Groups::InsertGroups()
 
 void CDownloads_Groups::OnSelchanged(NMHDR*, LRESULT* pResult)
 {
+	*pResult = 0;
 
 	HTREEITEM hItem = GetSelectedItem();
+	if (!hItem)
+		return;
+
+	if (!m_bInitialized)
+		return;
 
 	if (hItem == m_hDeleted)
 	{
@@ -166,6 +174,10 @@ void CDownloads_Groups::OnSelchanged(NMHDR*, LRESULT* pResult)
 	else
 	{
 		fsDldFilter* filter = (fsDldFilter*)GetItemData(hItem);
+		if (!filter || (DWORD_PTR)filter < 0x10000)
+		{
+			return;
+		}
 		_pwndDownloads->Set_DWWN(DWWN_LISTOFDOWNLOADS);
 
 		if (filter->GetType() == DFT_GROUP)
@@ -308,30 +320,30 @@ void CDownloads_Groups::InsertFilters()
 	m_hFilters = InsertItem(TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_STATE | TVIF_TEXT, LS(L_FILTERS), 0, 0,
 	                        TVIS_BOLD | TVIS_EXPANDED, TVIS_BOLD | TVIS_EXPANDED, 0, TVI_ROOT, TVI_LAST);
 
-	SetItemData(m_hFilters, (ULONG)&m_filterAll);
+	SetItemData(m_hFilters, (DWORD_PTR)&m_filterAll);
 
 	m_hTasks = InsertItem(LS(L_TASKS), 1, 1, TVI_ROOT, TVI_FIRST);
-	SetItemData(m_hTasks, (ULONG)&m_filterTasks);
+	SetItemData(m_hTasks, (DWORD_PTR)&m_filterTasks);
 
 	m_hCompleted = InsertItem(LS(L_COMPLETED), 2, 2, m_hFilters, TVI_LAST);
 	fsDldDoneFilter* f1 = new fsDldDoneFilter;
 	m_vStateFilters.push_back(f1);
-	SetItemData(m_hCompleted, (ULONG)m_vStateFilters[m_vStateFilters.size() - 1]);
+	SetItemData(m_hCompleted, (DWORD_PTR)m_vStateFilters[m_vStateFilters.size() - 1]);
 
 	m_hInProgress = InsertItem(LS(L_INPROGRESS), 3, 3, m_hFilters, TVI_LAST);
 	fsDldRunningFilter* f2 = new fsDldRunningFilter;
 	m_vStateFilters.push_back(f2);
-	SetItemData(m_hInProgress, (ULONG)m_vStateFilters[m_vStateFilters.size() - 1]);
+	SetItemData(m_hInProgress, (DWORD_PTR)m_vStateFilters[m_vStateFilters.size() - 1]);
 
 	m_hStopped = InsertItem(LS(L_STOPPED), 4, 4, m_hFilters, TVI_LAST);
 	fsDldStoppedFilter* f3 = new fsDldStoppedFilter;
 	m_vStateFilters.push_back(f3);
-	SetItemData(m_hStopped, (ULONG)m_vStateFilters[m_vStateFilters.size() - 1]);
+	SetItemData(m_hStopped, (DWORD_PTR)m_vStateFilters[m_vStateFilters.size() - 1]);
 
 	m_hScheduled = InsertItem(LS(L_SCHEDULED), 5, 5, m_hFilters, TVI_LAST);
 	fsDldScheduledFilter* f4 = new fsDldScheduledFilter;
 	m_vStateFilters.push_back(f4);
-	SetItemData(m_hScheduled, (ULONG)m_vStateFilters[m_vStateFilters.size() - 1]);
+	SetItemData(m_hScheduled, (DWORD_PTR)m_vStateFilters[m_vStateFilters.size() - 1]);
 }
 
 void CDownloads_Groups::ApplyNotGroupFilterForDownload(vmsDownloadSmartPtr dld)
@@ -814,7 +826,7 @@ HTREEITEM CDownloads_Groups::InsertGroup(vmsDownloadsGroupSmartPtr pGroup, HTREE
 	grpItem.pGroupFilter->SetGroup(pGroup);
 	grpItem.cDownloads = pGroup->cDownloads;
 	m_vGroups.push_back(grpItem);
-	SetItemData(grpItem.hGroup, (ULONG)grpItem.pGroupFilter);
+	SetItemData(grpItem.hGroup, (DWORD_PTR)grpItem.pGroupFilter);
 
 	return grpItem.hGroup;
 }

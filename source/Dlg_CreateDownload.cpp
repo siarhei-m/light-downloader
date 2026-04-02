@@ -493,11 +493,7 @@ void CCreateDownloadDlg::Update_User_Password()
 
 	fsDownload_NetworkProperties* dnp = m_dld->pMgr->GetDownloadMgr()->GetDNP();
 
-	ASSERT(dnp != NULL);
 	if (!dnp) return;
-
-	ASSERT(!dnp->strUserName.empty());
-	if (dnp->strUserName.empty()) return;
 
 	if (!dnp->strUserName.empty())
 	{

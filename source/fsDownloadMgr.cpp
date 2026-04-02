@@ -510,7 +510,7 @@ DWORD WINAPI fsDownloadMgr::_threadDownloadMgr(LPVOID lp)
 	return 0;
 }
 
-DWORD fsDownloadMgr::_DownloaderEvents(fsDownloaderEvent enEvent, UINT uInfo, LPVOID lp)
+DWORD fsDownloadMgr::_DownloaderEvents(fsDownloaderEvent enEvent, UINT_PTR uInfo, LPVOID lp)
 {
 	fsDownloadMgr* pThis = (fsDownloadMgr*)lp;
 	fsTicksMgr curTicks;
@@ -1269,7 +1269,7 @@ BOOL fsDownloadMgr::ApplyAER(fsAlreadyExistReaction enAER, bool bFirstCheck)
 	}
 }
 
-DWORD fsDownloadMgr::Event(fsDownloaderEvent ev, UINT uInfo)
+DWORD fsDownloadMgr::Event(fsDownloaderEvent ev, UINT_PTR uInfo)
 {
 	if (m_pfnEvents) return m_pfnEvents(this, ev, uInfo, m_lpParamEvents);
 

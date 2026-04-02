@@ -231,13 +231,13 @@ void fsOpenUrlInBrowser(LPCSTR pszUrl)
 	pszExe[4] = 0;
 
 	if (32 >=
-	    (int)ShellExecute(HWND_DESKTOP, "open", szBrowser[0] == '"' ? szBrowser + 1 : szBrowser, pszUrl, NULL, SW_SHOW))
+	    (INT_PTR)ShellExecute(HWND_DESKTOP, "open", szBrowser[0] == '"' ? szBrowser + 1 : szBrowser, pszUrl, NULL, SW_SHOW))
 		goto _lErr;
 
 	return;
 
 _lErr:
-	if (32 >= (int)ShellExecute(HWND_DESKTOP, "open", pszUrl, NULL, NULL, SW_SHOW))
+	if (32 >= (INT_PTR)ShellExecute(HWND_DESKTOP, "open", pszUrl, NULL, NULL, SW_SHOW))
 		MessageBox(NULL, pszUrl, LS(L_ERROPENURL), MB_ICONERROR);
 }
 

@@ -559,7 +559,7 @@ DWORD WINAPI fsInternetDownloader::_threadDownload(LPVOID lp)
 
 	if (sect->file)
 	{
-		sect->file->SetDialogFunc(_InetFileDialogFunc, sect->pThis, LPVOID(sect->iSection));
+		sect->file->SetDialogFunc(_InetFileDialogFunc, sect->pThis, (LPVOID)(INT_PTR)(sect->iSection));
 		sect->state = SS_DOWNLOADING;
 		sect->pThis->setDirty();
 		sect->pThis->Event(DE_SECTDOWNLOADING, sect->iSection);
@@ -979,7 +979,7 @@ fsInternetResult fsInternetDownloader::OpenUrl_imp(UINT64 uStartPos, fsInternetU
 
 	ASSERT(m_pOpeningFile == NULL);
 	fsnew1(m_pOpeningFile, fsInternetURLFile);
-	m_pOpeningFile->SetDialogFunc(_InetFileDialogFunc, this, LPVOID(iSectIndex));
+	m_pOpeningFile->SetDialogFunc(_InetFileDialogFunc, this, (LPVOID)(INT_PTR)(iSectIndex));
 
 	// TRACE1("enAccType: %d", dnp->enAccType); // IATE_SOCKS5PROXY = 2
 
@@ -1208,7 +1208,7 @@ fsInternetResult fsInternetDownloader::OpenUrl_imp(UINT64 uStartPos, fsInternetU
 		}
 		else
 		{
-			if (ir == IR_EXTERROR) Event(DE_ERRFROMSERVER, (UINT)m_pOpeningFile->GetLastError());
+			if (ir == IR_EXTERROR) Event(DE_ERRFROMSERVER, (UINT_PTR)m_pOpeningFile->GetLastError());
 
 			/*		UINT nMirr = nMirror;
 			        if (nMirr == UINT_MAX && iSectIndex != -1)
@@ -1867,7 +1867,7 @@ void fsInternetDownloader::SetEventFunc(fsDownloaderEventFunc pfn, LPVOID lpPara
 	m_lpEvent = lpParam;
 }
 
-DWORD fsInternetDownloader::Event(fsDownloaderEvent enEvent, UINT uDesc)
+DWORD fsInternetDownloader::Event(fsDownloaderEvent enEvent, UINT_PTR uDesc)
 {
 	if (m_pfnEvents) return m_pfnEvents(enEvent, uDesc, m_lpEvent);
 
@@ -2381,7 +2381,7 @@ fsInternetResult fsInternetDownloader::LaunchOneMoreSection()
 void fsInternetDownloader::_InetFileDialogFunc(fsInetFileDialogDirection dir, LPCSTR pszMsg, LPVOID lp1, LPVOID lp2)
 {
 	fsInternetDownloader* pThis = (fsInternetDownloader*)lp1;
-	int sect = (int)lp2;
+	int sect = (int)(INT_PTR)lp2;
 
 	if (pThis->m_bDetLog)
 	{
@@ -2389,7 +2389,7 @@ void fsInternetDownloader::_InetFileDialogFunc(fsInetFileDialogDirection dir, LP
 		info.dir = dir;
 		info.pszMsg = pszMsg;
 		info.iSection = sect;
-		pThis->Event(DE_DIALOGWITHSERVER, UINT(&info));
+		pThis->Event(DE_DIALOGWITHSERVER, (UINT_PTR)(&info));
 	}
 }
 

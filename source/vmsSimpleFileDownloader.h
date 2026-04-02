@@ -25,7 +25,7 @@ class vmsSimpleFileDownloader
 
   protected:
 	void CreateDownloader();
-	static DWORD _DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent ev, UINT uInfo, LPVOID lp);
+	static DWORD _DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent ev, UINT_PTR uInfo, LPVOID lp);
 	static void _DownloadMgrDescEvents(fsDownloadMgr*, fsDownloadMgr_EventDescType, LPCSTR pszDesc, LPVOID lp);
 	fsDownloadMgr* m_dldr;
 };

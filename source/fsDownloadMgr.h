@@ -47,7 +47,7 @@ enum fsDownloadMgr_EventDescType
 	EDT_RESPONSE_S2,
 };
 
-typedef DWORD (*fntDownloadMgrEventFunc)(class fsDownloadMgr* pMgr, fsDownloaderEvent, UINT, LPVOID);
+typedef DWORD (*fntDownloadMgrEventFunc)(class fsDownloadMgr* pMgr, fsDownloaderEvent, UINT_PTR, LPVOID);
 
 typedef void (*fntEventDescFunc)(fsDownloadMgr* pMgr, fsDownloadMgr_EventDescType enType, LPCSTR pszDesc, LPVOID lp);
 
@@ -199,7 +199,7 @@ class fsDownloadMgr : public vmsDownloaderWithNetworkUsageAdjustment, public vms
 
 	void Event(LPCSTR pszEvent, fsDownloadMgr_EventDescType enType = EDT_INQUIRY);
 
-	DWORD Event(fsDownloaderEvent ev, UINT uInfo);
+	DWORD Event(fsDownloaderEvent ev, UINT_PTR uInfo);
 
 	BOOL OpenFile(BOOL bFailIfDeleted = TRUE, BOOL bDisableEvents = FALSE);
 
@@ -221,7 +221,7 @@ class fsDownloadMgr : public vmsDownloaderWithNetworkUsageAdjustment, public vms
 
 	fsInternetResult StartDownload();
 
-	static DWORD _DownloaderEvents(fsDownloaderEvent enEvent, UINT uInfo, LPVOID lp);
+	static DWORD _DownloaderEvents(fsDownloaderEvent enEvent, UINT_PTR uInfo, LPVOID lp);
 	DWORD m_dwState;
 	vmsCriticalSection m_csState;
 	void setStateFlags(DWORD dwFlags);

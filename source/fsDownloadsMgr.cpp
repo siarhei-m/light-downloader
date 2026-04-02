@@ -162,7 +162,7 @@ vmsDownloadSmartPtr fsDownloadsMgr::GetDownloadByDownloadMgr(fsDownloadMgr* pMgr
 	return NULL;
 }
 
-DWORD fsDownloadsMgr::_DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent enEvent, UINT uInfo, LPVOID lp)
+DWORD fsDownloadsMgr::_DownloadMgrEvents(fsDownloadMgr* pMgr, fsDownloaderEvent enEvent, UINT_PTR uInfo, LPVOID lp)
 {
 	fsDownloadsMgr* pThis = (fsDownloadsMgr*)lp;
 

@@ -1019,7 +1019,7 @@ void fsScheduleMgr::Shutdown(fsSchedule* task)
 	Event(szEv[task->wts.shutdown.enShutdown]);
 
 	DWORD dw;
-	CloseHandle(CreateThread(NULL, 0, _threadShutdown, (LPVOID)uFlags, 0, &dw));
+	CloseHandle(CreateThread(NULL, 0, _threadShutdown, (LPVOID)(UINT_PTR)uFlags, 0, &dw));
 }
 
 void fsScheduleMgr::SetEventDescFunc(fntScheduleMgrEventDesc pfn, LPVOID lp)
@@ -1181,7 +1181,7 @@ void fsScheduleMgr::Stop()
 
 DWORD WINAPI fsScheduleMgr::_threadShutdown(LPVOID lp)
 {
-	UINT uFlags = (UINT)lp;
+	UINT uFlags = (UINT)(UINT_PTR)lp;
 
 	Sleep(1000);
 
